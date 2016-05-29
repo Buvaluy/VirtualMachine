@@ -35,3 +35,8 @@ QString Compiler::parseLabel(QString &strSource)
 
   return strSource;
 }
+
+void Compiler::checkCommand(QString &strSource)
+{
+
+}
