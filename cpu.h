@@ -2,11 +2,23 @@
 #define CPU_H
 
 #include "registerscpu.h"
+#include <QScopedPointer>
 
 class CPU : public RegistersCPU
 {
-public:
+protected:
     CPU();
+
+   static QScopedPointer<CPU> impl;
+public:
+
+   static CPU *getCpuImpl() {
+      if(! impl.isNull()) {
+         impl.reset(new CPU());
+      }
+
+      return impl.data();
+    }
 
     QString getACC() const;
     void setACC(const QString &value);

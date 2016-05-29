@@ -13,7 +13,7 @@ private:
 public:
   AbstactCommand();
 
-  virtual bool execute (QString strArg = "") = 0;
+  virtual bool execute (QString strArg = "", QString typeAddr = "") = 0;
 
   QString getName() const;
   void setName(const QString &value);

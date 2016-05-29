@@ -3,6 +3,7 @@
 
 #include <QMainWindow>
 #include "gui/hightlighter.h"
+#include "gui/cpuwidget.h"
 
 namespace Ui {
 class MainWindow;
@@ -20,6 +21,7 @@ private:
   Ui::MainWindow *ui;
 
   HightLighter *hightLighter;
+  CpuWidget *cpuWidget;
 };
 
 #endif // MAINWINDOW_H

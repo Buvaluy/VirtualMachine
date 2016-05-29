@@ -26,7 +26,21 @@ public:
             << "\\bDI\\b" << "\\bMOV\\b" << "\\bRD\\b"
             << "\\bWR\\b" << "\\bIN\\b" << "\\bOUT\\b"
             << "\\bRDI\\b" << "\\bADI\\b" << "\\bSBI\\b"
-            << "\\bMULI\\b" << "\\bDIVI\\b";
+            << "\\bMULI\\b" << "\\bDIVI\\b"
+
+            << "\\bnop\\b" << "\\bin\\b" << "\\bout\\b"
+            << "\\biret\\b" << "\\bwrrb\\b" << "\\bwrsp\\b"
+            << "\\bpush\\b" << "\\bpop\\b" << "\\bret\\b"
+            << "\\bhtl\\b" << "\\bjmp\\b" << "\\bjz\\b"
+            << "\\bjnz\\b" << "\\bjs\\b" << "\\bjns\\b"
+            << "\\bjo\\b" << "\\bjno\\b" << "\\bjrnz\\b"
+            << "\\bint\\b" << "\\bcall\\b" << "\\brd\\b"
+            << "\\bwr\\b" << "\\badd\\b" << "\\bsub\\b"
+            << "\\bmul\\b" << "\\bdiv\\b" << "\\bei\\b"
+            << "\\bdi\\b" << "\\bmov\\b" << "\\brd\\b"
+            << "\\bwr\\b" << "\\bin\\b" << "\\bout\\b"
+            << "\\brdi\\b" << "\\badi\\b" << "\\bsbi\\b"
+            << "\\bmuli\\b" << "\\bdivi\\b";
     }
 
     return rules;
