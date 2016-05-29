@@ -13,8 +13,12 @@ TEMPLATE = app
 
 
 SOURCES += main.cpp\
-        mainwindow.cpp
+        mainwindow.cpp \
+    cpu.cpp \
+    registerscpu.cpp
 
-HEADERS  += mainwindow.h
+HEADERS  += mainwindow.h \
+    cpu.h \
+    registerscpu.h
 
 FORMS    += mainwindow.ui
