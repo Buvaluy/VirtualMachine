@@ -16,11 +16,20 @@ SOURCES += main.cpp\
         mainwindow.cpp \
     cpu.cpp \
     registerscpu.cpp \
-    gui/hightlighter.cpp
+    gui/hightlighter.cpp \
+    gui/cpuwidget.cpp \
+    abstactcommand.cpp \
+    compiler.cpp \
+    commandsimpl.cpp
 
 HEADERS  += mainwindow.h \
     cpu.h \
     registerscpu.h \
-    gui/hightlighter.h
+    gui/hightlighter.h \
+    gui/cpuwidget.h \
+    abstactcommand.h \
+    compiler.h \
+    commandsimpl.h
 
-FORMS    += mainwindow.ui
+FORMS    += mainwindow.ui \
+    gui/cpuwidget.ui

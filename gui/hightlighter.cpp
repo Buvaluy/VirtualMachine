@@ -3,8 +3,11 @@
 HightLighter::HightLighter(QTextDocument *parent)
   : QSyntaxHighlighter(parent)
 {
-  keyWordFormat.setForeground(Qt::darkMagenta);
+  keyWordFormat.setForeground(Qt::darkBlue);
   keyWordFormat.setFontWeight(QFont::Bold);
+
+  labelFormat.setForeground(Qt::darkMagenta);
+  labelFormat.setFontWeight(QFont::Bold);
 
   QStringList pattern = generator.getRules();
 
@@ -14,6 +17,10 @@ HightLighter::HightLighter(QTextDocument *parent)
     rule.format = keyWordFormat;
     rules.append(rule);
   }
+
+  rule.pattern = QRegExp("\\b[A-Za-z0-9_]+:");
+  rule.format = labelFormat;
+  rules.append(rule);
 }
 
 void HightLighter::highlightBlock(const QString &text)

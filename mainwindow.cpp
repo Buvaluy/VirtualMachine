@@ -8,10 +8,14 @@ MainWindow::MainWindow(QWidget *parent) :
   ui->setupUi(this);
 
   hightLighter = new HightLighter(ui->textEdit->document());
+  cpuWidget = new CpuWidget();
+  ui->cpuWidgetLayout->addWidget(cpuWidget);
+  //cpuWidget->show();
 }
 
 MainWindow::~MainWindow()
 {
+  //delete cpuWidget;
   delete hightLighter;
   delete ui;
 }
