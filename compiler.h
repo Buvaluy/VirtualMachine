@@ -11,6 +11,7 @@ public:
 
   QString parseLabel(QString &strSource);
 
+  void checkCommand(QString &strSource);
 };
 
 #endif // COMPILER_H
