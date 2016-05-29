@@ -6,9 +6,12 @@ MainWindow::MainWindow(QWidget *parent) :
   ui(new Ui::MainWindow)
 {
   ui->setupUi(this);
+
+  hightLighter = new HightLighter(ui->textEdit->document());
 }
 
 MainWindow::~MainWindow()
 {
+  delete hightLighter;
   delete ui;
 }

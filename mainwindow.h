@@ -2,6 +2,7 @@
 #define MAINWINDOW_H
 
 #include <QMainWindow>
+#include "gui/hightlighter.h"
 
 namespace Ui {
 class MainWindow;
@@ -17,6 +18,8 @@ public:
 
 private:
   Ui::MainWindow *ui;
+
+  HightLighter *hightLighter;
 };
 
 #endif // MAINWINDOW_H

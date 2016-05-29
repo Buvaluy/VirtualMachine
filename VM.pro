@@ -15,10 +15,12 @@ TEMPLATE = app
 SOURCES += main.cpp\
         mainwindow.cpp \
     cpu.cpp \
-    registerscpu.cpp
+    registerscpu.cpp \
+    gui/hightlighter.cpp
 
 HEADERS  += mainwindow.h \
     cpu.h \
-    registerscpu.h
+    registerscpu.h \
+    gui/hightlighter.h
 
 FORMS    += mainwindow.ui
