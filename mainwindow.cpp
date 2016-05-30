@@ -7,8 +7,9 @@ MainWindow::MainWindow(QWidget *parent) :
 {
   ui->setupUi(this);
 
+  impl = new CPU();
   hightLighter = new HightLighter(ui->textEdit->document());
-  cpuWidget = new CpuWidget();
+  cpuWidget = new CpuWidget(impl);
   ui->cpuWidgetLayout->addWidget(cpuWidget);
   //cpuWidget->show();
 }

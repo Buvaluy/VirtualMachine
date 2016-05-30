@@ -25,6 +25,9 @@
   <property name="windowTitle">
    <string>Form</string>
   </property>
+  <property name="styleSheet">
+   <string notr="true">font: 10pt &quot;Consolas&quot;;</string>
+  </property>
   <layout class="QVBoxLayout" name="verticalLayout">
    <item>
     <layout class="QHBoxLayout" name="horizontalLayout_22">
@@ -62,7 +65,7 @@
            </widget>
           </item>
           <item>
-           <widget class="QLineEdit" name="lineEdit_2">
+           <widget class="QLineEdit" name="textBoxAcc">
             <property name="readOnly">
              <bool>true</bool>
             </property>
@@ -86,7 +89,7 @@
            </widget>
           </item>
           <item>
-           <widget class="QLineEdit" name="lineEdit_3">
+           <widget class="QLineEdit" name="textBoxDR">
             <property name="readOnly">
              <bool>true</bool>
             </property>
@@ -131,7 +134,7 @@
            </widget>
           </item>
           <item>
-           <widget class="QLineEdit" name="lineEdit_4">
+           <widget class="QLineEdit" name="textBoxRDR">
             <property name="readOnly">
              <bool>true</bool>
             </property>
@@ -155,7 +158,7 @@
            </widget>
           </item>
           <item>
-           <widget class="QLineEdit" name="lineEdit_5">
+           <widget class="QLineEdit" name="textBoxRAR">
             <property name="readOnly">
              <bool>true</bool>
             </property>
@@ -200,7 +203,7 @@
            </widget>
           </item>
           <item>
-           <widget class="QLineEdit" name="lineEdit_7">
+           <widget class="QLineEdit" name="textBoxMDR">
             <property name="readOnly">
              <bool>true</bool>
             </property>
@@ -224,7 +227,7 @@
            </widget>
           </item>
           <item>
-           <widget class="QLineEdit" name="lineEdit_6">
+           <widget class="QLineEdit" name="textBoxMAR">
             <property name="readOnly">
              <bool>true</bool>
             </property>
@@ -280,7 +283,7 @@
            </widget>
           </item>
           <item>
-           <widget class="QLineEdit" name="lineEdit_11">
+           <widget class="QLineEdit" name="textBoxSP">
             <property name="readOnly">
              <bool>true</bool>
             </property>
@@ -304,7 +307,7 @@
            </widget>
           </item>
           <item>
-           <widget class="QLineEdit" name="lineEdit_12">
+           <widget class="QLineEdit" name="textBoxPC">
             <property name="readOnly">
              <bool>true</bool>
             </property>
@@ -349,7 +352,7 @@
            </widget>
           </item>
           <item>
-           <widget class="QLineEdit" name="lineEdit_13">
+           <widget class="QLineEdit" name="textBoxRA">
             <property name="readOnly">
              <bool>true</bool>
             </property>
@@ -373,7 +376,7 @@
            </widget>
           </item>
           <item>
-           <widget class="QLineEdit" name="lineEdit_14">
+           <widget class="QLineEdit" name="textBoxRB">
             <property name="readOnly">
              <bool>true</bool>
             </property>
@@ -418,7 +421,7 @@
            </widget>
           </item>
           <item>
-           <widget class="QLineEdit" name="lineEdit_15">
+           <widget class="QLineEdit" name="textBoxIR">
             <property name="readOnly">
              <bool>true</bool>
             </property>
@@ -442,7 +445,7 @@
            </widget>
           </item>
           <item>
-           <widget class="QLineEdit" name="lineEdit_16">
+           <widget class="QLineEdit" name="textBoxOR">
             <property name="readOnly">
              <bool>true</bool>
             </property>
@@ -509,8 +512,14 @@
            <widget class="QLabel" name="label_10">
             <property name="minimumSize">
              <size>
-              <width>20</width>
+              <width>30</width>
               <height>0</height>
+             </size>
+            </property>
+            <property name="maximumSize">
+             <size>
+              <width>30</width>
+              <height>16777215</height>
              </size>
             </property>
             <property name="text">
@@ -519,7 +528,7 @@
            </widget>
           </item>
           <item>
-           <widget class="QLineEdit" name="lineEdit_10">
+           <widget class="QLineEdit" name="textBoxADR">
             <property name="readOnly">
              <bool>true</bool>
             </property>
@@ -533,8 +542,14 @@
            <widget class="QLabel" name="label_9">
             <property name="minimumSize">
              <size>
-              <width>20</width>
+              <width>30</width>
               <height>0</height>
+             </size>
+            </property>
+            <property name="maximumSize">
+             <size>
+              <width>30</width>
+              <height>16777215</height>
              </size>
             </property>
             <property name="text">
@@ -543,7 +558,7 @@
            </widget>
           </item>
           <item>
-           <widget class="QLineEdit" name="lineEdit_9">
+           <widget class="QLineEdit" name="textBoxTA">
             <property name="readOnly">
              <bool>true</bool>
             </property>
@@ -557,8 +572,14 @@
            <widget class="QLabel" name="label_8">
             <property name="minimumSize">
              <size>
-              <width>20</width>
+              <width>30</width>
               <height>0</height>
+             </size>
+            </property>
+            <property name="maximumSize">
+             <size>
+              <width>30</width>
+              <height>16777215</height>
              </size>
             </property>
             <property name="text">
@@ -567,7 +588,7 @@
            </widget>
           </item>
           <item>
-           <widget class="QLineEdit" name="lineEdit_8">
+           <widget class="QLineEdit" name="textBoxCOP">
             <property name="readOnly">
              <bool>true</bool>
             </property>
@@ -627,7 +648,7 @@
            </widget>
           </item>
           <item>
-           <widget class="QLineEdit" name="lineEdit_17">
+           <widget class="QLineEdit" name="textBoxI">
             <property name="minimumSize">
              <size>
               <width>30</width>
@@ -663,7 +684,7 @@
            </widget>
           </item>
           <item>
-           <widget class="QLineEdit" name="lineEdit_18">
+           <widget class="QLineEdit" name="textBoxOV">
             <property name="minimumSize">
              <size>
               <width>30</width>
@@ -699,7 +720,7 @@
            </widget>
           </item>
           <item>
-           <widget class="QLineEdit" name="lineEdit_19">
+           <widget class="QLineEdit" name="textBoxS">
             <property name="minimumSize">
              <size>
               <width>30</width>
@@ -738,7 +759,7 @@
            </widget>
           </item>
           <item>
-           <widget class="QLineEdit" name="lineEdit_20">
+           <widget class="QLineEdit" name="textBoxZ">
             <property name="minimumSize">
              <size>
               <width>30</width>
@@ -762,7 +783,7 @@
       </widget>
      </item>
      <item>
-      <widget class="QTableWidget" name="tableWidget">
+      <widget class="QTableWidget" name="tableRegisters">
        <property name="minimumSize">
         <size>
          <width>0</width>
@@ -774,6 +795,9 @@
          <width>16777215</width>
          <height>150</height>
         </size>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">font: 10pt &quot;Consolas&quot;;</string>
        </property>
        <property name="editTriggers">
         <set>QAbstractItemView::NoEditTriggers</set>
