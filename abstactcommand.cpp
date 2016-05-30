@@ -40,7 +40,17 @@ void AbstactCommand::setTypeAddr(const QString &value)
   typeAddr = value;
 }
 
+CPU *AbstactCommand::getCpu() const
+{
+    return mCpu;
+}
+
+void AbstactCommand::setCpu(CPU *cpu)
+{
+    mCpu = cpu;
+}
+
 AbstactCommand::AbstactCommand()
 {
-
+    
 }

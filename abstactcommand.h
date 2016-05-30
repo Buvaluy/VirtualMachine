@@ -2,6 +2,7 @@
 #define ABSTACTCOMMAND_H
 
 #include <QString>
+#include "cpu.h"
 
 class AbstactCommand
 {
@@ -10,6 +11,10 @@ private:
   QString code;
   QString arg;
   QString typeAddr;
+
+protected:
+  CPU *mCpu;
+
 public:
   AbstactCommand();
 
@@ -26,6 +31,9 @@ public:
 
   QString getTypeAddr() const;
   void setTypeAddr(const QString &value);
+
+  CPU *getCpu() const;
+  void setCpu(CPU *cpu);
 };
 
 #endif // ABSTACTCOMMAND_H

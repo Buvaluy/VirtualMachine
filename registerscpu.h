@@ -2,14 +2,16 @@
 #define REGISTERSCPU_H
 #include <QString>
 #include <assert.h>
+#include <QObject>
 
-class RegistersCPU
+class RegistersCPU : public QObject
 {
+  Q_OBJECT
+
 public:
     RegistersCPU();
 
-
-protected:
+public:
     QString getR0() const;
 
     void setR0(const QString &value);
