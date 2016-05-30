@@ -21,6 +21,7 @@ SOURCES += main.cpp\
     abstactcommand.cpp \
     compiler.cpp \
     commandsimpl.cpp \
+    commandfactory.cpp \
     cell.cpp \
     memory.cpp
 
@@ -32,6 +33,7 @@ HEADERS  += mainwindow.h \
     abstactcommand.h \
     compiler.h \
     commandsimpl.h \
+    commandfactory.h \
     cell.h \
     memory.h
 
