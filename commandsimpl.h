@@ -6,10 +6,14 @@
 
 class CommandImplAdd : public AbstactCommand
 {
+
 public:
 
-  bool execute(QString strArg) override {
-    CPU* impl = CPU.getCpuImpl();
+  CommandImplAdd(CPU *cpu) {
+    setCpu(cpu);
+  }
+
+  bool execute(QString strArg, QString addrType) override {
 
     return true;
   }

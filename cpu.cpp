@@ -23,6 +23,22 @@ CPU::CPU()
     Z = "1";
 }
 
+int CPU::convertRegToInt(QString regValue)
+{
+  QChar flg = regValue.at(0);
+  regValue = regValue.remove(0, 1);
+  int rVal = regValue.toInt();
+  if(flg == '1') {
+    rVal *= -1;
+  }
+  return rVal;
+}
+
+QString CPU::convertIntToReg(int value)
+{
+  // TODO impl method
+}
+
 QString CPU::getACC() const
 {
     return ACC;

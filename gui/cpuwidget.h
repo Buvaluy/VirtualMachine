@@ -2,6 +2,7 @@
 #define CPUWIDGET_H
 
 #include <QWidget>
+#include "cpu.h"
 
 namespace Ui {
 class CpuWidget;
