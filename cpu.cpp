@@ -27,6 +27,7 @@ void CPU::clearCPU()
   OV = "0";
   S = "0";
   Z = "1";
+  memory = new Memory();
 }
 
 int CPU::convertRegToInt(QString regValue)
@@ -42,8 +43,16 @@ int CPU::convertRegToInt(QString regValue)
 
 QString CPU::convertIntToReg(int value)
 {
-  // TODO impl method
-  return "";
+    QString tempNumb = QString::number(value);
+    QString result;
+    for(int i = 0; i < 6 - tempNumb.length(); i++){ //так как у нас 6 разрядов(из которых 1ый это знаковый)
+        result += "0";  //мы проверяем сколько цыфр в VALUE и дописыум перед ним '0'
+    }
+    result += tempNumb; //после нулй заносим само число
+    if(value < 0){
+        result.replace(0, 1, '1'); //и если VALUE отрицательное меняем знак разряда
+    }
+    return result;
 }
 
 QString CPU::getACC() const

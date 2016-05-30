@@ -2,9 +2,10 @@
 #define CPU_H
 
 #include "registerscpu.h"
+#include "memory.h"
 
 
-class CPU : public RegistersCPU
+class CPU : public RegistersCPU, public Memory
 {
   Q_OBJECT
 
@@ -73,7 +74,9 @@ public:
     QString getZ() const;
     void setZ(const QString &value);
 
+    Memory *memory;
 private:
+
     // ALU
     QString ACC; //аккамулятор
     QString DR; //регистр данных АЛУ ( второй операнд)
