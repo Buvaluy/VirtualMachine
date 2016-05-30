@@ -20,7 +20,9 @@ SOURCES += main.cpp\
     gui/cpuwidget.cpp \
     abstactcommand.cpp \
     compiler.cpp \
-    commandsimpl.cpp
+    commandsimpl.cpp \
+    cell.cpp \
+    memory.cpp
 
 HEADERS  += mainwindow.h \
     cpu.h \
@@ -29,7 +31,9 @@ HEADERS  += mainwindow.h \
     gui/cpuwidget.h \
     abstactcommand.h \
     compiler.h \
-    commandsimpl.h
+    commandsimpl.h \
+    cell.h \
+    memory.h
 
 FORMS    += mainwindow.ui \
     gui/cpuwidget.ui
