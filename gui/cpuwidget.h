@@ -13,11 +13,14 @@ class CpuWidget : public QWidget
   Q_OBJECT
 
 public:
-  explicit CpuWidget(QWidget *parent = 0);
+  explicit CpuWidget(CPU *cpu, QWidget *parent = 0);
   ~CpuWidget();
 
 private:
   Ui::CpuWidget *ui;
+  CPU *impl;
+public slots:
+  void updateGUI();
 };
 
 #endif // CPUWIDGET_H

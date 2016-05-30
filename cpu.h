@@ -3,11 +3,16 @@
 
 #include "registerscpu.h"
 
+
 class CPU : public RegistersCPU
 {
-protected:
-    CPU();
+  Q_OBJECT
+
 public:
+    CPU();
+
+    void clearCPU();
+
     int convertRegToInt(QString regValue);
     QString convertIntToReg(int value);
 
@@ -102,6 +107,9 @@ private:
     QString S; //флаг отрицательного значения Acc
     QString Z; //флаг нулевого значения Acc
 
+
+signals:
+    void updateGui();
 };
 
 #endif // CPU_H

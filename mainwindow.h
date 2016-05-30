@@ -4,6 +4,7 @@
 #include <QMainWindow>
 #include "gui/hightlighter.h"
 #include "gui/cpuwidget.h"
+#include "cpu.h"
 
 namespace Ui {
 class MainWindow;
@@ -19,7 +20,7 @@ public:
 
 private:
   Ui::MainWindow *ui;
-
+  CPU *impl;
   HightLighter *hightLighter;
   CpuWidget *cpuWidget;
 };
