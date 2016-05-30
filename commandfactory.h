@@ -3,17 +3,16 @@
 
 #include <QMap>
 #include "abstactcommand.h"
-#include "cpu.h"
 
 class FactoryItemInterface {
 public:
-  virtual AbstactCommand * create(CPU *cpu) = 0;
+  virtual AbstactCommand * create(CPU *cpu, Memory *memory) = 0;
 };
 
 template<typename TClass>
 class FactoryItem : public FactoryItemInterface {
-  AbstactCommand * create(CPU *cpu) override {
-    return new TClass(cpu);
+  AbstactCommand * create(CPU *cpu, Memory *memory) override {
+    return new TClass(cpu, memory);
   }
 };
 
@@ -21,10 +20,12 @@ class CommandFactory
 {
 private:
   CPU *impl;
+  Memory *mMemory;
   QMap<int, FactoryItemInterface *> mCommands;
 public:
-  CommandFactory(CPU *cpu);
+  CommandFactory(CPU *cpu, Memory *memory);
 
+  void addImpl(int code, FactoryItemInterface *impl);
   AbstactCommand *createCommand(int code);
 };
 

@@ -3,6 +3,7 @@
 
 #include <QString>
 #include "cpu.h"
+#include "memory.h"
 
 class AbstactCommand
 {
@@ -14,7 +15,7 @@ private:
 
 protected:
   CPU *mCpu;
-
+  Memory *mMemory;
 public:
   AbstactCommand();
 
@@ -34,6 +35,8 @@ public:
 
   CPU *getCpu() const;
   void setCpu(CPU *cpu);
+
+  void setMemory(Memory *memory);
 };
 
 #endif // ABSTACTCOMMAND_H

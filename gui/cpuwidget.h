@@ -19,7 +19,7 @@ public:
 private:
   Ui::CpuWidget *ui;
   CPU *impl;
-public slots:
+public:
   void updateGUI();
 };
 

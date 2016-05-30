@@ -1,11 +1,24 @@
 #include "commandfactory.h"
+#include "commandsimpl.h"
 
-CommandFactory::CommandFactory(CPU *cpu)
+CommandFactory::CommandFactory(CPU *cpu, Memory *memory)
 {
   this->impl = cpu;
+  this->mMemory = memory;
+
+  addImpl(21, new FactoryItem<CommandImplRead>());
+}
+
+void CommandFactory::addImpl(int code, FactoryItemInterface *impl)
+{
+  mCommands.insert(code, impl);
 }
 
 AbstactCommand *CommandFactory::createCommand(int code)
 {
-  return mCommands.value(code, NULL);
+  FactoryItemInterface *cmd = mCommands.value(code, NULL);
+  if(cmd) {
+    return cmd->create(this->impl, this->mMemory);
+  }
+  return NULL;
 }

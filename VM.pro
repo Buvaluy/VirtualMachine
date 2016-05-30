@@ -23,7 +23,10 @@ SOURCES += main.cpp\
     commandsimpl.cpp \
     commandfactory.cpp \
     cell.cpp \
-    memory.cpp
+    memory.cpp \
+    gui/memmorywidget.cpp \
+    codegenerator.cpp \
+    runer.cpp
 
 HEADERS  += mainwindow.h \
     cpu.h \
@@ -35,7 +38,12 @@ HEADERS  += mainwindow.h \
     commandsimpl.h \
     commandfactory.h \
     cell.h \
-    memory.h
+    memory.h \
+    gui/memmorywidget.h \
+    mtypes.h \
+    codegenerator.h \
+    runer.h
 
 FORMS    += mainwindow.ui \
-    gui/cpuwidget.ui
+    gui/cpuwidget.ui \
+    gui/memmorywidget.ui

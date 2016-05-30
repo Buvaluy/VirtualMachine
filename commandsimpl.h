@@ -9,12 +9,13 @@ class CommandImplAdd : public AbstactCommand
 
 public:
 
-    CommandImplAdd(CPU *cpu) {
+    CommandImplAdd(CPU *cpu, Memory *memory) {
         setCpu(cpu);
+        mMemory = memory;
     }
 
     bool execute(QString strArg, QString addrType) override {
-        bool isDigit;
+        /*bool isDigit;
         int intArg = strArg.toInt(&isDigit);
         int resulAdd;
         QString acc = mCpu->getACC();
@@ -61,13 +62,26 @@ public:
         }
 
         mCpu->setACC(mCpu->convertIntToReg(resulAdd));
-        //Тут искуственно вызывать update для граф части ?
+        //Тут искуственно вызывать update для граф части ?*/
         return true;
     }
 
 };
 
+class CommandImplRead : public AbstactCommand
+{
+public:
 
+    CommandImplRead(CPU *cpu, Memory *memory) {
+        setCpu(cpu);
+        setMemory(memory);
+    }
+
+    bool execute(QString strArg, QString addrType) override {
+        mCpu->setACC(strArg);
+        return true;
+    }
+};
 
 class CommandImplSub : public AbstactCommand
 {

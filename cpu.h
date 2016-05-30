@@ -2,15 +2,21 @@
 #define CPU_H
 
 #include "registerscpu.h"
-#include "memory.h"
 
+class CpuWidget;
 
-class CPU : public RegistersCPU, public Memory
+class CPU : public RegistersCPU
 {
   Q_OBJECT
+protected:
+  CpuWidget *mCpuWdgt;
 
 public:
-    CPU();
+    CPU(CpuWidget * cpuWdgt = 0);
+
+    void setCPUWidget(CpuWidget * cpuWdgt );
+
+    void updateGUI();
 
     void clearCPU();
 
@@ -74,7 +80,6 @@ public:
     QString getZ() const;
     void setZ(const QString &value);
 
-    Memory *memory;
 private:
 
     // ALU
@@ -110,9 +115,6 @@ private:
     QString S; //флаг отрицательного значения Acc
     QString Z; //флаг нулевого значения Acc
 
-
-signals:
-    void updateGui();
 };
 
 #endif // CPU_H
