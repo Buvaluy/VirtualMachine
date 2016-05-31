@@ -47,7 +47,12 @@ CPU *AbstactCommand::getCpu() const
 
 void AbstactCommand::setCpu(CPU *cpu)
 {
-    mCpu = cpu;
+  mCpu = cpu;
+}
+
+void AbstactCommand::setMemory(Memory *memory)
+{
+  this->mMemory = memory;
 }
 
 AbstactCommand::AbstactCommand()

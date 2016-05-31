@@ -38,13 +38,13 @@
      <widget class="QWidget" name="widget_2" native="true">
       <property name="minimumSize">
        <size>
-        <width>485</width>
+        <width>500</width>
         <height>0</height>
        </size>
       </property>
       <property name="maximumSize">
        <size>
-        <width>485</width>
+        <width>500</width>
         <height>16777215</height>
        </size>
       </property>
@@ -112,7 +112,32 @@
         </widget>
        </item>
        <item>
-        <widget class="QTableWidget" name="tableWidget_2"/>
+        <widget class="QWidget" name="widget_4" native="true">
+         <layout class="QVBoxLayout" name="verticalLayout_5">
+          <property name="spacing">
+           <number>0</number>
+          </property>
+          <property name="leftMargin">
+           <number>0</number>
+          </property>
+          <property name="topMargin">
+           <number>0</number>
+          </property>
+          <property name="rightMargin">
+           <number>0</number>
+          </property>
+          <property name="bottomMargin">
+           <number>0</number>
+          </property>
+          <item>
+           <layout class="QVBoxLayout" name="memLyt">
+            <property name="spacing">
+             <number>0</number>
+            </property>
+           </layout>
+          </item>
+         </layout>
+        </widget>
        </item>
       </layout>
      </widget>
@@ -157,11 +182,14 @@
     <property name="title">
      <string>Сборка</string>
     </property>
+    <addaction name="actionCompiler"/>
    </widget>
    <widget class="QMenu" name="menu_5">
     <property name="title">
      <string>Отладка</string>
     </property>
+    <addaction name="actionRun"/>
+    <addaction name="actionNext"/>
    </widget>
    <widget class="QMenu" name="menu_6">
     <property name="title">
@@ -230,6 +258,21 @@
     </layout>
    </widget>
   </widget>
+  <action name="actionCompiler">
+   <property name="text">
+    <string>Компилировать </string>
+   </property>
+  </action>
+  <action name="actionRun">
+   <property name="text">
+    <string>Запустить</string>
+   </property>
+  </action>
+  <action name="actionNext">
+   <property name="text">
+    <string>Следующий шаг</string>
+   </property>
+  </action>
  </widget>
  <layoutdefault spacing="6" margin="11"/>
  <resources/>

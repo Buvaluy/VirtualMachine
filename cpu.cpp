@@ -1,9 +1,21 @@
 #include "cpu.h"
+#include "gui/cpuwidget.h"
 
-CPU::CPU() : RegistersCPU()
+CPU::CPU(CpuWidget *cpuWdgt)
 {
   clearCPU();
   clearRegister();
+  mCpuWdgt = cpuWdgt;
+}
+
+void CPU::setCPUWidget(CpuWidget *cpuWdgt)
+{
+  mCpuWdgt = cpuWdgt;
+}
+
+void CPU::updateGUI()
+{
+  mCpuWdgt->updateGUI();
 }
 
 void CPU::clearCPU()
@@ -27,7 +39,6 @@ void CPU::clearCPU()
   OV = "0";
   S = "0";
   Z = "1";
-  memory = new Memory();
 }
 
 int CPU::convertRegToInt(QString regValue)
