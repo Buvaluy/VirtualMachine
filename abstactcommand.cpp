@@ -1,5 +1,7 @@
 #include "abstactcommand.h"
 
+#include <QDebug>
+
 QString AbstactCommand::getName() const
 {
   return name;
@@ -57,5 +59,66 @@ void AbstactCommand::setMemory(Memory *memory)
 
 AbstactCommand::AbstactCommand()
 {
-    
+
+}
+
+bool AbstactCommand::execute(QString strArg, QString typeAddr)
+{
+  if(typeAddr == "6") {// -@
+    indexWithPreddekrementomRegister(strArg);
+  } else if(typeAddr == "1") { //#
+    direct(strArg);
+  } else if(typeAddr == "2") { //@
+    indirect(strArg);
+    indirectRegister(strArg);
+  } else if(typeAddr == "3") { // []
+    relative(strArg);
+  } else if(typeAddr == "4") {// @
+    indexWithPostincrementRegister(strArg);
+  } else { //
+    straight(strArg);
+    straightRegister(strArg);
+  }
+
+  return true;
+}
+
+void AbstactCommand::straight(QString strArg)
+{
+  qDebug() << strArg;
+}
+
+void AbstactCommand::straightRegister(QString strArg)
+{
+  qDebug() << strArg;
+}
+
+void AbstactCommand::direct(QString strArg)
+{
+  qDebug() << strArg;
+}
+
+void AbstactCommand::indirect(QString strArg)
+{
+  qDebug() << strArg;
+}
+
+void AbstactCommand::relative(QString strArg)
+{
+  qDebug() << strArg;
+}
+
+void AbstactCommand::indirectRegister(QString strArg)
+{
+  qDebug() << strArg;
+}
+
+void AbstactCommand::indexWithPostincrementRegister(QString strArg)
+{
+  qDebug() << strArg;
+}
+
+void AbstactCommand::indexWithPreddekrementomRegister(QString strArg)
+{
+  qDebug() << strArg;
 }

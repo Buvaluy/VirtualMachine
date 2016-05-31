@@ -19,7 +19,16 @@ protected:
 public:
   AbstactCommand();
 
-  virtual bool execute (QString strArg = "", QString typeAddr = "") = 0;
+  virtual bool execute (QString strArg = "", QString typeAddr = "");
+
+  virtual void straight(QString strArg); // Прямая
+  virtual void straightRegister(QString strArg);// Прямая регистровая
+  virtual void direct(QString strArg); //Непосредственная
+  virtual void indirect(QString strArg);// Косвенная
+  virtual void relative(QString strArg); //Относительная
+  virtual void indirectRegister(QString strArg);//Косвенно-регистровая
+  virtual void indexWithPostincrementRegister(QString strArg);//Индексная с постинкрементом
+  virtual void indexWithPreddekrementomRegister(QString strArg);//Индексная с преддекрементом
 
   QString getName() const;
   void setName(const QString &value);
