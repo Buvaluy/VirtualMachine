@@ -28,7 +28,7 @@ void Runer::nextStep()
 
   QString code = QString(cmd[0]) + QString(cmd[1]);
   int ncode = code.toInt();
-  QString typeAdr = cmd[2];
+  QString typeAdr = QString(cmd[2]);
   QString arg = cmd.remove(0, 3);
 
   AbstactCommand *cmdImpl = mFactory->createCommand(ncode);
