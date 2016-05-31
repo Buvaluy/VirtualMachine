@@ -8,8 +8,8 @@ CodeGenerator::CodeGenerator()
   mCode.insert("iret", "03");
   mCode.insert("wrrb", "04");
   mCode.insert("wrsp", "05");
-  mCode.insert("push", "06");
-  mCode.insert("pop", "07");
+  mCode.insert("push", "06"); // работает с регистрами. регистр меняют POH.
+  mCode.insert("pop", "07");  // SP указатель на верхушку стека
   mCode.insert("ret", "08");
   mCode.insert("htl", "09");
   mCode.insert("jmp", "10");
@@ -30,7 +30,13 @@ CodeGenerator::CodeGenerator()
   mCode.insert("div", "26");
   mCode.insert("ei", "28");
   mCode.insert("di", "29");
-  mCode.insert("mov", "30");
+  mCode.insert("movR", "30");//регистр
+  mCode.insert("rdR", "31");//регистр
+  mCode.insert("wrR", "32");//регистр
+  mCode.insert("addR", "33");//регистр
+  mCode.insert("subR", "34");//регистр
+  mCode.insert("mulR", "35");//регистр
+  mCode.insert("divR", "36");//регистр
   mCode.insert("in", "37");
   mCode.insert("out", "38");
   mCode.insert("rdi", "41");
