@@ -19,7 +19,7 @@ protected:
 public:
   AbstactCommand();
 
-  virtual bool execute (QString strArg = "", QString typeAddr = "");
+  bool execute (QString strArg = "", QString typeAddr = "");
 
   virtual void straight(QString strArg); // Прямая
   virtual void straightRegister(QString strArg);// Прямая регистровая
