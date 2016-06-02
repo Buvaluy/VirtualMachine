@@ -1,6 +1,8 @@
 #include "cpuwidget.h"
 #include "ui_cpuwidget.h"
 
+#include <QDebug>
+
 CpuWidget::CpuWidget(CPU *cpu, QWidget *parent) :
   QWidget(parent),
   ui(new Ui::CpuWidget)
@@ -38,26 +40,33 @@ void CpuWidget::updateGUI()
   ui->textBoxZ->setText(impl->getZ());
 
   ui->tableRegisters->clear();
-  ui->tableRegisters->setColumnCount(4);
-  ui->tableRegisters->setRowCount(5);
+  ui->tableRegisters->setColumnCount(10);
+  ui->tableRegisters->setRowCount(2);
 
   ui->tableRegisters->horizontalHeader()->setVisible(false);
   ui->tableRegisters->verticalHeader()->setVisible(false);
 
-  ui->tableRegisters->setColumnWidth(0, 30);
-  ui->tableRegisters->setColumnWidth(1, 80);
-  ui->tableRegisters->setColumnWidth(2, 30);
-  ui->tableRegisters->setColumnWidth(3, 80);
+  for(int k = 0; k < 10; k ++) {
+    if(k % 2 == 0) {
+      ui->tableRegisters->setColumnWidth(k, 30);
+    } else {
+      ui->tableRegisters->setColumnWidth(k, 60);
+    }
+  }
 
   int colmn = 0;
   int rNum = 0;
-  for(int k = 0; k < 2; k ++) {
-    for(int i = 0; i < 5; i ++) {
-      ui->tableRegisters->setRowHeight(i, 29);
-      ui->tableRegisters->setItem(i, colmn, new QTableWidgetItem("R" + QString::number(rNum)));
-      ui->tableRegisters->setItem(i, colmn + 1, new QTableWidgetItem(impl->getRegisterValue(rNum)));
-      rNum ++;
-    }
+  for(int k = 0; k < 10; k ++) {
+      ui->tableRegisters->setRowHeight(0, 30);
+      ui->tableRegisters->setRowHeight(1, 30);
+      if(k % 2 == 0) {
+        ui->tableRegisters->setItem(0, k, new QTableWidgetItem("R" + QString::number(rNum)));
+        ui->tableRegisters->setItem(1, k, new QTableWidgetItem("R" + QString::number(rNum + 1)));
+      } else {
+        ui->tableRegisters->setItem(0, k, new QTableWidgetItem(impl->getRegisterValue(rNum)));
+        ui->tableRegisters->setItem(1, k, new QTableWidgetItem(impl->getRegisterValue(rNum + 1)));
+        rNum += 2;
+      }
     colmn += 2;
   }
 }

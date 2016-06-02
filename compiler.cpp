@@ -3,15 +3,24 @@
 #include <QStringList>
 #include <QDebug>
 
+#include <QTime>
+#include <cmath>
+
 Compiler::Compiler(Memory *mem)
 {
     this->mMemory = mem;
     this->mGenCode = new CodeGenerator();
+    this->out = NULL;
 }
 
 Compiler::~Compiler()
 {
-    delete mGenCode;
+  delete mGenCode;
+}
+
+void Compiler::setOutPutConsole(QTextEdit *ptr)
+{
+  this->out = ptr;
 }
 
 QString Compiler::parseLabel(QString &strSource)
@@ -50,7 +59,9 @@ void Compiler::checkCommand(QString &strSource)
 
 void Compiler::exec(QString &strSource)
 {
-    strSource = strSource.replace("\n", " ");
+    QTime startTime = QTime::currentTime();
+    strSource = parseLabel(strSource);
+    //strSource = strSource.replace("\n", " ");
     QStringList slCommandPair = strSource.split(" ");
     QString isRegistr, strCode, strCmd, strArg = "000", typeAdrr = "0";
     int indexCmd = 0;
@@ -106,8 +117,18 @@ void Compiler::exec(QString &strSource)
             mMemory->set(indexCmd, cmd);
             indexCmd ++;
         } else {
-            // exeption
+
         }
+    }
+    QTime endTime = QTime::currentTime();
+    if(out) {
+      out->clear();
+      QString secnd = QString::number(abs(endTime.second() - startTime.second()));
+      QString min = QString::number(abs(endTime.minute() - startTime.minute()));
+      QString msecnd = QString::number(abs(endTime.msec() - startTime.msec()));
+      QString outPutMsg = "Компиляция прошла успешно время: " +
+          formatTime(min, 2) + ":" + formatTime(secnd, 2) + ':' + formatTime(msecnd, 3) ;
+      out->append(outPutMsg);
     }
 }
 
@@ -126,4 +147,12 @@ QString Compiler::getAddresType(QString str)
     }
 //адресация "5" проверяется после вызова этой функции в exec()
     return "0";
+}
+
+QString Compiler::formatTime(QString str, int cnt)
+{
+ while(str.size() < cnt) {
+   str.push_front("0");
+ }
+ return str;
 }

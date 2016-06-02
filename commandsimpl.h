@@ -13,73 +13,41 @@ public:
         setMemory(memory);
     }
 
-    bool execute(QString strArg, QString addrType) override;
+    void direct(QString arg) override;
+
+    void indirect(QString arg) override;
+
+    void straight(QString arg) override;
 };
 
-
-class CommandImplWrite : public AbstactCommand
+class CommandImplReadRegister : public AbstactCommand
 {
 public:
 
-    CommandImplWrite(CPU *cpu, Memory *memory) {
+    CommandImplReadRegister(CPU *cpu, Memory *memory) {
         setCpu(cpu);
         setMemory(memory);
     }
+    // Все методы дял регистров
 
-    bool execute(QString strArg, QString addrType) override;
-};
+    void indirectRegister(QString arg) override {
 
-
-class CommandImplAdd : public AbstactCommand
-{
-public:
-
-    CommandImplAdd(CPU *cpu, Memory *memory) {
-        setCpu(cpu);
-        setMemory(memory);
     }
 
-    bool execute(QString strArg, QString addrType) override;
-};
+    void straightRegister(QString arg) override {
 
-
-class CommandImplSub : public AbstactCommand
-{
-public:
-
-    CommandImplSub(CPU *cpu, Memory *memory) {
-        setCpu(cpu);
-        setMemory(memory);
     }
 
-    bool execute(QString strArg, QString addrType) override;
-};
+    void indexWithPostincrementRegister(QString arg) override {
 
-
-class CommandImplMul : public AbstactCommand
-{
-public:
-
-    CommandImplMul(CPU *cpu, Memory *memory) {
-        setCpu(cpu);
-        setMemory(memory);
     }
 
-    bool execute(QString strArg, QString addrType) override;
-};
+    void indexWithPreddekrementomRegister(QString arg) override {
 
-
-class CommandImplDiv : public AbstactCommand
-{
-public:
-
-    CommandImplDiv(CPU *cpu, Memory *memory) {
-        setCpu(cpu);
-        setMemory(memory);
     }
-
-    bool execute(QString strArg, QString addrType) override;
 };
+
+
 
 
 

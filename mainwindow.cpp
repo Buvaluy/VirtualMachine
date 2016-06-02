@@ -29,10 +29,12 @@ MainWindow::~MainWindow()
 
 void MainWindow::on_actionCompiler_triggered()
 {
+  ui->tabWidget->setCurrentIndex(1);
   QString strSourse = ui->textEdit->document()->toPlainText();
   impl->clearCPU();
   impl->updateGUI();
   Compiler mComp(mMemory);
+  mComp.setOutPutConsole(ui->consoleOut);
   mComp.exec(strSourse);
 }
 

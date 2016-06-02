@@ -46,14 +46,14 @@
        <widget class="QWidget" name="widget_2" native="true">
         <property name="minimumSize">
          <size>
-          <width>500</width>
-          <height>0</height>
+          <width>510</width>
+          <height>280</height>
          </size>
         </property>
         <property name="maximumSize">
          <size>
-          <width>500</width>
-          <height>16777215</height>
+          <width>510</width>
+          <height>280</height>
          </size>
         </property>
         <layout class="QVBoxLayout" name="verticalLayout_2">
@@ -76,14 +76,14 @@
           <widget class="QWidget" name="widget" native="true">
            <property name="minimumSize">
             <size>
-             <width>500</width>
-             <height>360</height>
+             <width>510</width>
+             <height>280</height>
             </size>
            </property>
            <property name="maximumSize">
             <size>
-             <width>500</width>
-             <height>360</height>
+             <width>510</width>
+             <height>280</height>
             </size>
            </property>
            <layout class="QVBoxLayout" name="verticalLayout_4">
@@ -123,8 +123,14 @@
           <height>0</height>
          </size>
         </property>
+        <property name="maximumSize">
+         <size>
+          <width>510</width>
+          <height>16777215</height>
+         </size>
+        </property>
         <property name="currentIndex">
-         <number>0</number>
+         <number>1</number>
         </property>
         <widget class="QWidget" name="tab">
          <attribute name="title">
@@ -180,6 +186,11 @@
          <attribute name="title">
           <string>Консоль</string>
          </attribute>
+         <layout class="QVBoxLayout" name="verticalLayout_7">
+          <item>
+           <widget class="QTextEdit" name="consoleOut"/>
+          </item>
+         </layout>
         </widget>
        </widget>
       </item>
