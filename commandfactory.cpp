@@ -1,5 +1,6 @@
 #include "commandfactory.h"
 #include "commandsimpl.h"
+#include <QDebug>
 
 CommandFactory::CommandFactory(CPU *cpu, Memory *memory)
 {

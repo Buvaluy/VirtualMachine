@@ -64,7 +64,7 @@ AbstactCommand::AbstactCommand()
 
 bool AbstactCommand::execute(QString strArg, QString typeAddr)
 {
-  if(typeAddr == "6") {// -@
+  if(typeAddr == "6") {// -@R
     indexWithPreddekrementomRegister(strArg);
   } else if(typeAddr == "1") { //#
     direct(strArg);
@@ -73,11 +73,12 @@ bool AbstactCommand::execute(QString strArg, QString typeAddr)
     indirectRegister(strArg);
   } else if(typeAddr == "3") { // []
     relative(strArg);
-  } else if(typeAddr == "4") {// @
+  } else if(typeAddr == "5") {// @R+
     indexWithPostincrementRegister(strArg);
-  } else { //
-    straight(strArg);
+  } else if(typeAddr == "4"){ // @R
     straightRegister(strArg);
+  } else {
+    straight(strArg);
   }
 
   return true;

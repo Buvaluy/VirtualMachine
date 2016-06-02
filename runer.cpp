@@ -30,7 +30,6 @@ void Runer::nextStep()
   int ncode = code.toInt();
   QString typeAdr = QString(cmd[2]);
   QString arg = cmd.remove(0, 3);
-
   AbstactCommand *cmdImpl = mFactory->createCommand(ncode);
   if(cmdImpl) {
     cmdImpl->execute(arg, typeAdr);

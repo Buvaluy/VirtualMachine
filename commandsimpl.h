@@ -30,21 +30,13 @@ public:
     }
     // Все методы дял регистров
 
-    void indirectRegister(QString arg) override {
+    void indirectRegister(QString arg) override;
 
-    }
+    void straightRegister(QString arg) override;
 
-    void straightRegister(QString arg) override {
+    void indexWithPostincrementRegister(QString arg) override;
 
-    }
-
-    void indexWithPostincrementRegister(QString arg) override {
-
-    }
-
-    void indexWithPreddekrementomRegister(QString arg) override {
-
-    }
+    void indexWithPreddekrementomRegister(QString arg) override;
 };
 
 
