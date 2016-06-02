@@ -1,6 +1,9 @@
 #include "memmorywidget.h"
 #include "ui_memmorywidget.h"
 
+#include <QDebug>
+
+
 MemmoryWidget::MemmoryWidget(Memory *memory, QWidget *parent) :
   QWidget(parent),
   ui(new Ui::MemmoryWidget)
@@ -39,4 +42,14 @@ void MemmoryWidget::updateGUI()
   }
 
   ui->tableMemory->blockSignals(false);
+}
+
+void MemmoryWidget::on_tableMemory_itemChanged(QTableWidgetItem *item)
+{
+  QString strArg = item->text();
+  while (strArg.size() < 6) {
+   strArg.push_front("0");
+  }
+  int adr = item->column() * 10 + item->row();
+  memory->set(adr, strArg);
 }

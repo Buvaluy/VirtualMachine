@@ -14,7 +14,7 @@ void CommandImplRead::indirect(QString arg)
   // Действие если коственная
     QString mem = mMemory->get(arg.toInt());
     QString operand = mMemory->get(mem.toInt());
-    while(arg.operand() < 6){
+    while(operand.size() < 6){
         arg.push_front('0');
     }
     mCpu->setACC(operand);
@@ -24,7 +24,7 @@ void CommandImplRead::straight(QString arg)
 {
   // если обыная
     QString operand = mMemory->get(arg.toInt());
-    while(arg.operand() < 6){
+    while(operand.size() < 6){
         arg.push_front('0');
     }
     mCpu->setACC(operand);
