@@ -130,7 +130,7 @@
          </size>
         </property>
         <property name="currentIndex">
-         <number>1</number>
+         <number>0</number>
         </property>
         <widget class="QWidget" name="tab">
          <attribute name="title">
@@ -228,6 +228,8 @@
     <property name="title">
      <string>Файл</string>
     </property>
+    <addaction name="actionOpen"/>
+    <addaction name="actionSave"/>
    </widget>
    <widget class="QMenu" name="menu_2">
     <property name="title">
@@ -332,6 +334,16 @@
   <action name="actionNext">
    <property name="text">
     <string>Следующий шаг</string>
+   </property>
+  </action>
+  <action name="actionOpen">
+   <property name="text">
+    <string>Открыть ...</string>
+   </property>
+  </action>
+  <action name="actionSave">
+   <property name="text">
+    <string>Сохранить ...</string>
    </property>
   </action>
  </widget>

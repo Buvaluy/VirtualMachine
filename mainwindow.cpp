@@ -1,6 +1,10 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 
+#include <QFile>
+#include <QTextStream>
+#include <QFileDialog>
+
 MainWindow::MainWindow(QWidget *parent) :
   QMainWindow(parent),
   ui(new Ui::MainWindow)
@@ -41,4 +45,36 @@ void MainWindow::on_actionCompiler_triggered()
 void MainWindow::on_actionNext_triggered()
 {
   mRuner->nextStep();
+}
+
+void MainWindow::on_actionOpen_triggered()
+{
+  QString fileName = QFileDialog::getOpenFileName(this, tr("Open File"),
+                                                   QDir::currentPath(),
+                                                   tr("Code (*.asm)"));
+  if(!fileName.isEmpty()) {
+    QFile file(fileName);
+    if(file.open(QIODevice::ReadOnly | QIODevice::Text)) {
+      QTextStream stream(&file);
+      ui->textEdit->clear();
+      ui->textEdit->append(stream.readAll());
+    }
+    file.close();
+  }
+}
+
+void MainWindow::on_actionSave_triggered()
+{
+
+  QString fileName = QFileDialog::getSaveFileName(this, tr("Save File"),
+                             QDir::currentPath(),
+                             tr("Code (*.asm)"));
+  if(!fileName.isEmpty()) {
+    QFile file(fileName);
+    if(file.open(QIODevice::WriteOnly | QIODevice::Text)) {
+      QTextStream stream(&file);
+      stream << ui->textEdit->document()->toPlainText();
+    }
+    file.close();
+  }
 }

@@ -31,6 +31,10 @@ private slots:
 
   void on_actionNext_triggered();
 
+  void on_actionOpen_triggered();
+
+  void on_actionSave_triggered();
+
 private:
   Ui::MainWindow *ui;
   Memory *mMemory;

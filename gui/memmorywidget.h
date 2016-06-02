@@ -4,6 +4,8 @@
 #include <QWidget>
 #include "memory.h"
 
+#include <QTableWidgetItem>
+
 namespace Ui {
 class MemmoryWidget;
 }
@@ -17,6 +19,9 @@ public:
   ~MemmoryWidget();
 
   void updateGUI();
+private slots:
+  void on_tableMemory_itemChanged(QTableWidgetItem *item);
+
 private:
   Memory *memory;
   Ui::MemmoryWidget *ui;
