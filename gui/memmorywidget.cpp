@@ -34,6 +34,10 @@ void MemmoryWidget::updateGUI()
     ui->tableMemory->setHorizontalHeaderItem(k, new QTableWidgetItem(QString::number(k)));
   }
 
+  for(int k = 0; k < 100; k ++) {
+    ui->tableMemory->setVerticalHeaderItem(k, new QTableWidgetItem(QString::number(k)));
+  }
+
   int index = 0;
   for(int r = 0; r < 100; r ++) {
     for(int k = 0; k < 10; k ++, index ++) {
