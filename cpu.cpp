@@ -124,15 +124,7 @@ QString CPU::getMDR() const
 
 void CPU::setMDR(const QString &value)
 {
-  //разбиение MDR на регитры для CR
   MDR = value;
-  int str = value.at(0).digitValue() + value.at(1).digitValue();
-  setCOP(QString::number(str));
-  setTA(value.at(2));
-  str = value.at(3).digitValue() + value.at(4).digitValue() + value.at(5).digitValue();
-  setADR(QString::number(str));
-  //установим MAR
-  setMAR(ADR);
 }
 
 QString CPU::getMAR() const
@@ -286,6 +278,23 @@ void CPU::setZ(const QString &value)
 {
   assert(value.toInt() <= 1);
   Z = value;
+}
+
+void CPU::setCR(const QString &value)
+{
+    //qDebug() << "setCR " << value;
+    setCOP((QString)value.at(0) + (QString)value.at(1));
+    setTA(value.at(2));
+    setADR((QString)value.at(3) + (QString)value.at(4) + (QString)value.at(5));
+}
+
+void CPU::incrPC()
+{
+    PC = QString::number( PC.toInt() + 1 );
+    while(PC.size() < 3){
+        PC.push_front('0');
+    }
+    qDebug() << PC;
 }
 
 QString CPU::getDR() const
