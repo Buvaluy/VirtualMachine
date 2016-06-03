@@ -44,6 +44,8 @@ private:
   MemmoryWidget *mWdgt;
   CommandFactory *mFactory;
   Runer *mRuner;
+
+  void initializeGui();
 };
 
 #endif // MAINWINDOW_H
