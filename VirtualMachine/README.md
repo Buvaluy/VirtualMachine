@@ -1,2 +1,0 @@
-# VirtualMachine
-arh comp
