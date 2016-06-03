@@ -1,0 +1,479 @@
+SmartGit 7.1.3 (2016-04-25)
+===========================
+New Features, Improvements
+--------------------------
+- Hosting provider configuration: when pasting the token, leading and trailing
+  whitespace characters are ignored
+- Linux: debian bundle can work with JRE 1.8 now
+
+Fixed Bugs
+----------
+- Preferences, Tools, Edit: "Handles: ( ) Files ( ) Directories (*) Both" was
+  always selected
+- Repositories view: drag and drop of directories did not work (OS X)
+- http(s) authentication: user names with backslash were incorrectly parsed
+
+
+SmartGit 7.1.2 (2016-03-11)
+===========================
+Fixed Bugs
+----------
+- Git:
+  - Branches: excessively long multi-line tag message could cause freeze
+  - BitBucket: fetching pull requests from different repository might fail
+  - Commit:
+    - possible internal error in file completion
+    - Commit Message view: caret reset to first char upon refresh
+  - Compare: for external compare the title values were not set correctly
+  - JIRA:
+    - Push did not succeed if JIRA authentication was cancelled
+    - Select dialog: misleading instructions
+    - was not available for commercial demo license
+  - Log:
+    - Compare: might produce an internal error for added/removed files
+    - Details view: "on branches" did not show correct branches for file logs
+  - Refresh:
+    - possible internal error related to "unexpectedly" modified files
+    - possible internal error when using .gitattributes with "!filter"
+      configuration
+- Mercurial:
+  - version 3.6.* was rejected though it works
+
+
+SmartGit 7.1.1 (2016-02-17)
+===========================
+New Features, Improvements
+--------------------------
+- JIRA: added VM option "smartgit.jira.resolveOnPush": set to false to disable
+  this feature
+- Refresh: shows notification on Linux if ignored directories will be excluded
+  from file monitoring
+
+Fixed Bugs
+----------
+- Git:
+  - Bitbucket, GitHub: possible OAuth authentication problems if repository URL
+    contained user@
+  - Branches view: current-branch character was rendered ugly on Windows < v8
+  - error "Environment variable smartgit.logDir undefined" on some systems
+    under special conditions
+  - Log:
+    - Branches: toggling remote develop may not work
+    - Compare: no helpful temporary file names were used
+  - Refresh: .git might have been excluded from file monitoring on Linux
+- Hg:
+  - Pull/Push failed for http(s) repository access
+  - Refresh: possible internal error for invalid tags
+  - strange errors if Hg executable was incompatible
+
+
+SmartGit 7.1.0 (2016-02-08)
+===========================
+no changes
+
+
+SmartGit 7.1 RC 3 (2016-02-05)
+==============================
+Fixed Bugs
+----------
+- Log (File): did show GitHub icon though integration is not expected to work
+  for non-repository logs
+- Debian: error "Environment variable smartgit.port undefined"
+
+
+SmartGit 7.1 RC 2 (2016-02-01)
+==============================
+New Features, Improvements
+--------------------------
+- JIRA integration:
+  - more specific error messages
+  - support for non-classic workflows
+- Proxy: added VM option smartgit.proxy.configureForGit to avoid setting Git
+  proxy but have the https proxy in SmartGit configured to access, e.g.
+  autoupdate
+
+Fixed Bugs
+----------
+- Git-Flow: hotfixes were not tagged on master
+- JIRA:
+  - possible endless loop when trying to access http server using https
+  - Push:
+    - master password was requested while the dialog was showing
+    - did suggest to resolve issue which were already pushed to non-feature
+      branch
+    - resolve dialog did not occur on Commit & Push
+- Index Editor: odd connector display on HiDPI monitors
+- GitHub, Git-LFS: various operations might fail to connect to GitHub
+
+
+SmartGit 7.1 RC 1 (2016-01-25)
+==============================
+New Features, Improvements
+--------------------------
+- Log, Changes view: shows file change state in title (modified, added,
+  removed)
+
+Fixed Bugs
+----------
+- Log: possible internal errror displaying meta refs
+- Setup: did not preselect "license" file from "default" directory
+- Windows: "Open in SmartGit" (context menu of directories) did not work when
+  invoked from Explorer "background"
+
+
+SmartGit 7.1 preview 12 (2016-01-21)
+====================================
+New Features, Improvements
+--------------------------
+- Git:
+  - Clone: when cloning only a single branch, "forced" refspec (+) is created
+  - Fetch More: remote.<name>.fetch refspec is adjusted for newly fetched
+    branches
+  - JIRA:
+    - shows a reasonable warning in case of too-old JIRA version
+    - only available in commercial edition
+- SVN:
+  - VM option "smartgit.svn.defaultCommitMessage" to customize, e.g. tag
+    creation message
+- Log (Commits view):
+  - only multiple refs are truncated, not single refs
+- Updater:
+  - VM option "smartgit.updater.directory" to customize updater's working
+    directory (e.g. if launching executables is not allowed in all directories)
+
+Fixed Bugs
+----------
+- Logging: commands with lot of parameters and output lines cause
+  ~current-log.*.tmp to grow excessively
+
+
+SmartGit 7.1 preview 11 (2016-01-18)
+====================================
+Fixed Bugs
+----------
+- Git:
+  - Changes view:
+    - "Error: object must not be null" when having core.autocrlf=input and
+      selecting a binary file
+    - erroneous display of expected line separators with core.autocrlf=input
+      or if file is considered binary by Git, e.g. UTF-16 encoded ones
+    - Push: possible internal error when having multiple remotes defined
+- GitHub, BitBucket: integrations don't work when using uppercase hostnames
+- Updater:
+  - on startup an update check is forced if beta is too old
+  - OS X: *.pyc files may remain
+
+
+SmartGit 7.1 preview 10 (2016-01-14)
+====================================
+New Features, Improvements
+--------------------------
+- Git:
+  - .gitconfig: support for branch.<name>.pushRemote and remote.pushDefault
+  - JIRA:
+    - commit message selection support added to Squash, Edit Commit Message,
+      Edit Last Commit Message
+    - ability to resolve issues has been moved from commit to push
+  - Outgoing: shows pushed feature commits only if they are allowed to be
+    changed by the user (preferences option)
+  - Refresh:
+    - warn in case of non-relative submodule configuration
+    - Linux, OS X: detect problematic configurations related to symlinks
+      which will make refreshing fail
+  - SSH: reports error instead of hangs if Git requires input
+  - Submodules: notification if correct but absolute path is used instead of
+    relative path (which would cause problems renaming/moving the repository)
+- Hg:
+  - Discard: uses "hg update --clean ." to abort grafting state
+- SVN: uses SmartGit's proxy configuration
+- Check for New Version: notifications about major upgrades can be postponed
+  by 7 days
+- Conflict Solver: ability to pass speaking names
+- External Compare, Conflict Solver: better names for temporary files
+- Windows, OS X: updated Git to version 2.6
+
+Fixed Bugs
+----------
+- Git:
+  - Changes view: autocrlf=input not handled properly
+  - Commit: if the commit.template file contained a comment, empty lines were
+    stripped from the commit message
+  - Git 2.5 worktree-related fixes
+  - Git-Flow: releases should be tagged on master
+- Hg:
+  - Commit: re-added files that were marked for removal (but available locally)
+  - Deleting bookmark: checked out bookmark got lost
+- External tools (Windows): environment variable HOME was changed
+- Out of memory error: misleading pointer to smartsvn.vmoptions
+- File monitor (OS X): problems with repository paths containing umlauts
+- GUI:
+  - some dialogs did not show / or \ but treated them as markup
+  - some horizontal checkboxes were misaligned with their label on Linux
+- Linux (64-bit): warning "../linux-x86/libjnidispatch.so which might have
+  disabled stack guard"
+
+
+SmartGit 7.1 preview 9 (2015-12-15)
+===================================
+New Features, Improvements
+--------------------------
+- Git:
+  - Sync: added preferences option to change order of pull and push
+  - Commit, JIRA integration:
+    - Get Issue From JIRA remembers now the sort order
+    - allow to resolve in multiple versions
+    - support for Git's commit.template
+    - ~/ in commit.template works now also on Windows
+  - Cherry Pick: replaced preferences option "Append source SHA" with option
+    for each cherry-pick dialog (except for dragging commits in the Log)
+  - "Allow modifying pushed commits": if unselected, "Undo Last Commit" and
+    "Edit Last Commit Message" will reject to operate on pushed commits
+- File Monitor: honors ignores to avoid overflows
+- GUI:
+  - About dialog, Licensee page: ability to Register
+  - Repository window:
+    - simplified moving to other groups using the context menu
+    - if all repositories of a group are opened, the group name is shown in
+      the window title
+
+Fixed Bugs
+----------
+- Git:
+  - Branches: possible internal error when refreshing
+  - Distributed Reviews: possible internal error when creating pull request
+  - JIRA integration: archived versions broke sorting
+  - Log:
+    - possible internal error when opening
+    - anchored commits always shows up as pushed
+  - Refresh: possible update problem because file monitor events were collected
+    too late
+- Hg:
+  - Clone: internal error having run through wizard before for Git repository
+    and stepping back
+  - Log: closing an arbitrary branch head did not restore the checked out
+    bookmark
+- GitHub: authentication problem "remote: Repository not found"
+- GitLab: possible internal error
+- Linux:
+  - File monitor: /tmp/com.syntevo.sc* directories did not got removed
+  - could not restart automatically after applying an update
+  - some hooks did not work with LANG_C, setting LC_MESSAGES now instead
+- OS X:
+  - File Monitor: problems detecting change after directory rename
+  - odd-looking notification icon
+  - updater has no dock icon
+  - fsNotifier was considered as changed
+- Windows, smartgit.exe: bin\smartgit.vmoptions was included 2 times
+- GUI:
+  - a full toolbar caused the window to not be made smaller
+  - Register dialog on startup: possible internal error when it closed
+    automatically
+  - Moved to Trash on directory: showed error though successful
+  - sometimes ugly wrapped error dialogs
+
+Other Changes
+-------------
+- at least Git 1.8.2 is required
+
+
+SmartGit 7.1 preview 8 (2015-11-30)
+===================================
+New Features, Improvements
+--------------------------
+- Git:
+  - Refresh: support .gitattributes "ident" keyword expansion ("$Id$")
+- Hg:
+  - Compare: allow to invoke for conflict file
+- automatically create the user's smartgit.vmoptions file
+- Subscription: allows to register valid, but outdated license fetching latest
+  one
+- Windows:
+  - Installer: option to run SmartGit after installation
+  - Uninstaller:
+    - should ensure SmartGit process is quit before starting to uninstall
+    - bin\smartgit.vmoption is not created any more allowing complete uninstall
+
+Fixed Bugs
+----------
+- Hg
+  - Resolve dialog: files were not preselected
+- External tool: possible assertion showing a directory chooser while window
+  has been closed while tool still running
+- Windows:
+  - Updater fails to launch for subst-ed drives
+
+
+SmartGit 7.1 preview 7 (2015-11-19)
+===================================
+New Features, Improvements
+--------------------------
+- Git:
+  - Outgoing, Push Commits: show ID instead of time
+  - Log: added VM property smartgit.log.branchPriorities to specify order of
+    Git-Flow branches
+- Linux: uses trash-put command line utility
+- improved startup time of the registered commercial edition
+- Setup/Register: allows to register outdated, but still active subscription
+  license
+
+Fixed Bugs
+----------
+- Hg:
+  - Commit, Select Commit Message: message was truncated
+- GUI:
+  - Setup: possible internal error related to Mercurial configuration
+  - Startup: Git and Hg windows might occur though just the Hg repository has
+    been opened
+- Linux: launcher in .deb bundle missed StartupWMClass
+- Updater: might fail on Windows if profile directory contained non-US-ASCII
+  characters
+
+
+SmartGit 7.1 preview 6 (2015-11-06)
+===================================
+New Features, Improvements
+--------------------------
+- Support for high resolution graphics (HiRes, HiDPI)
+- smartgit.vmoptions (Linux, Mac): support for "path=" property
+
+Fixed Bugs
+----------
+- Refresh: internal error if .git link file contains CRLF
+- View|Show Staged Files: if unselected, certain conflict files
+  were not shown
+
+
+SmartGit 7.1 preview 5 (2015-10-30)
+===================================
+New Features, Improvements
+--------------------------
+- Git:
+  - Branches:
+    - tracked remote features should show up in Features category
+      (not in remote)
+    - denote tracked remote branches (by gray name)
+  - bugtraq: support for multiple "projects" per issue tracker (entry)
+  - Log, Files: when invoking Show Changes on an added/removed file
+    pair, compare them against each other
+  - Refresh: smudge/clean filters (from .gitattributes) should be
+    honored (necessary for Git LFS)
+- Distributes Reviews: pull requests should show "Last Updated By"
+  information (in tooltip)
+
+Fixed Bugs
+----------
+- BitBucket: refresh should be tolerant in case parent repository can't
+  be accessed
+- Git:
+  - Git Flow: for Finish Feature, remote branch isn't removed even when
+    selected
+  - Worktrees: repository might not work anymore after upgrading to
+    Git 2.6
+  - Outgoing View, Stage Hunks: "Invalid boolean value:
+    core.autocrlf=input" error
+- Restart: possible internal error
+
+
+SmartGit 7.1 preview 4 (2015-10-08)
+===================================
+New Features, Improvements
+--------------------------
+- BitBucket Server:
+  - BitBucket Server 4.0 support
+  - the SSL client certificate is hidden by default
+- Git:
+  - Fetch More dialog: added speed-search
+  - Log:
+    - Branches: new "Commits" category for revealed/anchor commits
+    - Push: allow to push with selection in Graph view (if the selected commit
+      has exactly one pushable ref)
+- GitHub:
+  - improved username/password selection for relative submodules
+  - request API token using OAuth without requiring password
+  - option to use OAuth token directly without creating additional credentials
+  - SSH option also present in non-commercial edition
+- GUI: table/tree rows on Windows/Linux were too high
+
+Fixed Bugs
+----------
+- Git:
+  - Branches: Stashes only show up if .git/refs/stash file is existing
+  - Log, Branches: toggling stash on already "lost" head did not show up the
+    stash until refreshed
+- GUI: dialog "SmartGit requires a restart" too narrow after sleep
+
+
+SmartGit 7.1 preview 3 (2015-09-30)
+===================================
+New Features, Improvements
+--------------------------
+- Bitbucket: OAuth authentication
+- Git:
+  - Background processes don't show process-hanging dialog, but silently kill
+  - Commit dialog, JIRA integration: show warning in case of slightly invalid
+    bugtraq URL
+- KDE:
+  - /usr/bin/konsole is used as terminal for default external tool
+  - if oxygen-gtk theme is detected, the launcher script aborts with an error
+    message
+
+Fixed Bugs
+----------
+- Git:
+  - Clone/Init (OS X): warning "template not found in
+    /usr/local/git/share/git-core/template" was shown because GIT_TEMPLATE_DIR
+    was not set
+  - Refresh: internal error opening bare repository
+  - Stage Lines: CRLF was not preserved in repository (special core.autocrlf
+    handling)
+- Changes preview: if single modified file is committed (or discarded), the
+  next modified file was selected but it was not scrolled to 1st change
+- Repositories: the tooltip of a cloning repository showed "Repository is
+  missing"
+
+
+SmartGit 7.1 preview 2 (2015-09-18)
+===================================
+New Features, Improvements
+--------------------------
+- GitLab: show namespace instead of owner
+
+Fixed Bugs
+----------
+- Git
+  - External tools: some Git specific tools were not added on fresh install
+  - hanging background processes if no master password had been entered
+- BitBucket: enhanced authentication broken
+- GitLab: only showed 20 repositories
+- updated SWT to hopefully fixing
+  https://bugs.eclipse.org/bugs/show_bug.cgi?id=452141
+- Windows: incomplete JRE
+
+
+SmartGit 7.1 preview 1 (2015-09-16)
+===================================
+New Features, Improvements
+--------------------------
+- Git:
+  - Commit: JIRA integration
+  - Windows: reliable way to kill Git process including sub-processes
+  - Worktree support for Git 2.5
+- added Repository | Search Repositories to search repositories checked out
+  outside SmartGit
+- startup: check for new version to prepare rolling release
+
+Fixed Bugs
+----------
+- Git:
+  - various commands: possible problems with refs/remotes/git-svn and similar
+    branches
+- Hg: strange versions like 3.0+3 were not detected as too old
+- GUI:
+  - Compare connector: scrolled 2 positions on Windows 10
+  - a notification could cause the layout to "jump"
+- Setup wizard: did not check correctly hg version the 2nd time (after having
+  replaced the hg binary)
+
+Other Changes
+-------------
+- Windows: updated JRE to 8u60 to correctly detect Windows 10
