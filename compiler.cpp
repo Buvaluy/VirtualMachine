@@ -74,6 +74,18 @@ void Compiler::exec(QString &strSource)
       mMemory->set(indexCmd, "000000");
       indexCmd ++;
       continue;
+    }else if(strCmd == "in"){
+        mMemory->set(indexCmd, "010000");
+        indexCmd ++;
+        continue;
+    }else if(strCmd == "out"){
+        mMemory->set(indexCmd, "020000");
+        indexCmd ++;
+        continue;
+    }else if(strCmd == "htl"){
+        mMemory->set(indexCmd, "090000");
+        indexCmd ++;
+        continue;
     }
     isRegistr = slCommandPair.at(i + 1);
     if( isRegistr.contains('r') || isRegistr.contains('R')) //проверка операнда на регистр или число

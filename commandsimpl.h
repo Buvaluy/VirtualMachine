@@ -4,6 +4,32 @@
 #include "cpu.h"
 #include "abstactcommand.h"
 
+class CommandImplIn : public AbstactCommand
+{
+public:
+
+    CommandImplIn(CPU *cpu, Memory *memory) {
+        setCpu(cpu);
+        setMemory(memory);
+    }
+
+    void straight(QString arg) override;
+};
+
+class CommandImplOut : public AbstactCommand
+{
+public:
+
+    CommandImplOut(CPU *cpu, Memory *memory) {
+        setCpu(cpu);
+        setMemory(memory);
+    }
+
+    void straight(QString arg) override;
+};
+
+
+
 class CommandImplRead : public AbstactCommand
 {
 public:
@@ -66,6 +92,38 @@ public:
     void straight(QString arg) override;
 };
 
+class CommandImplMul : public AbstactCommand
+{
+public:
+
+    CommandImplMul(CPU *cpu, Memory *memory) {
+        setCpu(cpu);
+        setMemory(memory);
+    }
+
+    void direct(QString arg) override;
+
+    void indirect(QString arg) override;
+
+    void straight(QString arg) override;
+};
+
+class CommandImplDiv : public AbstactCommand
+{
+public:
+
+    CommandImplDiv(CPU *cpu, Memory *memory) {
+        setCpu(cpu);
+        setMemory(memory);
+    }
+
+    void direct(QString arg) override;
+
+    void indirect(QString arg) override;
+
+    void straight(QString arg) override;
+};
+
 class CommandImplReadRegister : public AbstactCommand
 {
 public:
@@ -74,7 +132,6 @@ public:
         setCpu(cpu);
         setMemory(memory);
     }
-    // Все методы дял регистров
 
     void indirectRegister(QString arg) override;
 
