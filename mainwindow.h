@@ -11,6 +11,7 @@
 #include "compiler.h"
 #include "commandfactory.h"
 #include "runer.h"
+#include "gui/debugpanel.h"
 
 #include <QScopedPointer>
 
@@ -35,6 +36,10 @@ private slots:
 
   void on_actionSave_triggered();
 
+  void on_actionRun_triggered();
+
+  void on_actionReset_triggered();
+
 private:
   Ui::MainWindow *ui;
   Memory *mMemory;
@@ -44,7 +49,7 @@ private:
   MemmoryWidget *mWdgt;
   CommandFactory *mFactory;
   Runer *mRuner;
-
+  DebugPanel *mDpanel;
   void initializeGui();
 };
 

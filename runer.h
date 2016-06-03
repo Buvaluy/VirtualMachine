@@ -6,14 +6,17 @@
 #include "commandfactory.h"
 #include "commandsimpl.h"
 
+#include "gui/debugpanel.h"
+
 class Runer
 {
 protected:
   CPU *mCpu;
   Memory *mMemory;
   CommandFactory *mFactory;
+  DebugPanel *mDpanel;
 public:
-  Runer(CPU *cpu, Memory *memory, CommandFactory *factory);
+  Runer(CPU *cpu, Memory *memory, CommandFactory *factory, DebugPanel* panel);
   ~Runer();
 
   void run();

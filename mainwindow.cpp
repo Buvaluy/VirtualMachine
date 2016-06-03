@@ -19,7 +19,9 @@ MainWindow::MainWindow(QWidget *parent) :
   mWdgt = new MemmoryWidget(mMemory);
   ui->memLyt->addWidget(mWdgt);
   mFactory = new CommandFactory(impl, mMemory);
-  mRuner = new Runer(impl, mMemory, mFactory);
+  mDpanel = new DebugPanel();
+  mRuner = new Runer(impl, mMemory, mFactory, mDpanel);
+  ui->vlDebug->addWidget(mDpanel);
   initializeGui();
 }
 
@@ -38,7 +40,7 @@ void MainWindow::on_actionCompiler_triggered()
   QString strSourse = ui->textEdit->document()->toPlainText();
   impl->clearCPU();
   impl->updateGUI();
-  Compiler mComp(mMemory);
+  Compiler mComp(mMemory, mDpanel);
   mComp.setOutPutConsole(ui->consoleOut);
   mComp.exec(strSourse);
 }
@@ -85,4 +87,15 @@ void MainWindow::initializeGui()
   ui->tabDevise->setTabText(0, "устройства");
   ui->tabDevise->setTabText(1, "микрокоманд");
   ui->tabDevise->setTabText(2, "кеш");
+}
+
+void MainWindow::on_actionRun_triggered()
+{
+    mDpanel->resetCurrentCommand();
+}
+
+void MainWindow::on_actionReset_triggered()
+{
+  mDpanel->resetCurrentCommand();
+  impl->clearCPU();
 }

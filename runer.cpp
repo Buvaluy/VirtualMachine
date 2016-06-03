@@ -2,11 +2,13 @@
 
 #include <QDebug>
 
-Runer::Runer(CPU *cpu, Memory *memory, CommandFactory *factory)
+Runer::Runer(CPU *cpu, Memory *memory, CommandFactory *factory, DebugPanel *panel)
 {
   mCpu = cpu;
   mMemory = memory;
   mFactory = factory;
+  mDpanel = panel;
+  mDpanel->resetCurrentCommand();
 }
 
 Runer::~Runer()
@@ -35,6 +37,7 @@ void Runer::nextStep()
     cmdImpl->execute(arg, typeAdr);
     indx ++;
     mCpu->setPC(QString::number(indx));
+    mDpanel->nextStep();
     mCpu->updateGUI();
   }
 }

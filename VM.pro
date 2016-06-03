@@ -26,7 +26,8 @@ SOURCES += main.cpp\
     memory.cpp \
     gui/memmorywidget.cpp \
     codegenerator.cpp \
-    runer.cpp
+    runer.cpp \
+    gui/debugpanel.cpp
 
 HEADERS  += mainwindow.h \
     cpu.h \
@@ -42,8 +43,12 @@ HEADERS  += mainwindow.h \
     gui/memmorywidget.h \
     mtypes.h \
     codegenerator.h \
-    runer.h
+    runer.h \
+    gui/debugpanel.h
 
 FORMS    += mainwindow.ui \
     gui/cpuwidget.ui \
-    gui/memmorywidget.ui
+    gui/memmorywidget.ui \
+    gui/debugpanel.ui
+
+QMAKE_LFLAGS_RELEASE += -static -static-libgcc
