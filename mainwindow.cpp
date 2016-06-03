@@ -20,6 +20,7 @@ MainWindow::MainWindow(QWidget *parent) :
   ui->memLyt->addWidget(mWdgt);
   mFactory = new CommandFactory(impl, mMemory);
   mRuner = new Runer(impl, mMemory, mFactory);
+  initializeGui();
 }
 
 MainWindow::~MainWindow()
@@ -33,7 +34,7 @@ MainWindow::~MainWindow()
 
 void MainWindow::on_actionCompiler_triggered()
 {
-  ui->tabWidget->setCurrentIndex(1);
+  ui->tabRamConsole->setCurrentIndex(1);
   QString strSourse = ui->textEdit->document()->toPlainText();
   impl->clearCPU();
   impl->updateGUI();
@@ -77,4 +78,11 @@ void MainWindow::on_actionSave_triggered()
     }
     file.close();
   }
+}
+
+void MainWindow::initializeGui()
+{
+  ui->tabDevise->setTabText(0, "устройства");
+  ui->tabDevise->setTabText(1, "микрокоманд");
+  ui->tabDevise->setTabText(2, "кеш");
 }

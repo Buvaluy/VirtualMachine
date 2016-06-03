@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>991</width>
-    <height>660</height>
+    <width>1100</width>
+    <height>600</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -39,9 +39,6 @@
     </item>
     <item>
      <layout class="QVBoxLayout" name="verticalLayout_6">
-      <property name="spacing">
-       <number>0</number>
-      </property>
       <item>
        <widget class="QWidget" name="widget_2" native="true">
         <property name="minimumSize">
@@ -116,7 +113,7 @@
        </widget>
       </item>
       <item>
-       <widget class="QTabWidget" name="tabWidget">
+       <widget class="QTabWidget" name="tabRamConsole">
         <property name="minimumSize">
          <size>
           <width>510</width>
@@ -204,13 +201,31 @@
      </widget>
     </item>
     <item>
-     <widget class="QWidget" name="widget_3" native="true">
-      <property name="sizePolicy">
-       <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
-        <horstretch>0</horstretch>
-        <verstretch>0</verstretch>
-       </sizepolicy>
+     <widget class="QTabWidget" name="tabDevise">
+      <property name="currentIndex">
+       <number>0</number>
       </property>
+      <property name="iconSize">
+       <size>
+        <width>36</width>
+        <height>36</height>
+       </size>
+      </property>
+      <widget class="QWidget" name="tab_6">
+       <attribute name="title">
+        <string>Tab 1</string>
+       </attribute>
+      </widget>
+      <widget class="QWidget" name="tab_8">
+       <attribute name="title">
+        <string>Page</string>
+       </attribute>
+      </widget>
+      <widget class="QWidget" name="tab_7">
+       <attribute name="title">
+        <string>Tab 2</string>
+       </attribute>
+      </widget>
      </widget>
     </item>
    </layout>
@@ -220,7 +235,7 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>991</width>
+     <width>1100</width>
      <height>20</height>
     </rect>
    </property>

@@ -50,6 +50,6 @@ void MemmoryWidget::on_tableMemory_itemChanged(QTableWidgetItem *item)
   while (strArg.size() < 6) {
    strArg.push_front("0");
   }
-  int adr = item->column() * 10 + item->row();
+  int adr = item->row() * 10 + item->column();
   memory->set(adr, strArg);
 }
