@@ -70,14 +70,14 @@ bool AbstactCommand::execute(QString strArg, QString typeAddr)
     direct(strArg);
   } else if(typeAddr == "2") { //@
     indirect(strArg);
-    indirectRegister(strArg);
   } else if(typeAddr == "3") { // []
     relative(strArg);
   } else if(typeAddr == "5") {// @R+
     indexWithPostincrementRegister(strArg);
   } else if(typeAddr == "4"){ // @R
-    straightRegister(strArg);
+    indirectRegister(strArg);
   } else {
+    straightRegister(strArg);
     straight(strArg);
   }
 
