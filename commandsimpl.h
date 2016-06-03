@@ -20,6 +20,52 @@ public:
     void straight(QString arg) override;
 };
 
+class CommandImplWrite : public AbstactCommand
+{
+public:
+
+    CommandImplWrite(CPU *cpu, Memory *memory) {
+        setCpu(cpu);
+        setMemory(memory);
+    }
+
+    void indirect(QString arg) override;
+
+    void straight(QString arg) override;
+};
+
+class CommandImplAdd : public AbstactCommand
+{
+public:
+
+    CommandImplAdd(CPU *cpu, Memory *memory) {
+        setCpu(cpu);
+        setMemory(memory);
+    }
+
+    void direct(QString arg) override;
+
+    void indirect(QString arg) override;
+
+    void straight(QString arg) override;
+};
+
+class CommandImplSub : public AbstactCommand
+{
+public:
+
+    CommandImplSub(CPU *cpu, Memory *memory) {
+        setCpu(cpu);
+        setMemory(memory);
+    }
+
+    void direct(QString arg) override;
+
+    void indirect(QString arg) override;
+
+    void straight(QString arg) override;
+};
+
 class CommandImplReadRegister : public AbstactCommand
 {
 public:
