@@ -2,6 +2,7 @@
 #define CPU_H
 
 #include "registerscpu.h"
+#include <QDebug>
 
 class CpuWidget;
 
@@ -79,6 +80,10 @@ public:
 
     QString getZ() const;
     void setZ(const QString &value);
+
+    void setCR(const QString &value);
+
+    void incrPC();
 
 private:
 
