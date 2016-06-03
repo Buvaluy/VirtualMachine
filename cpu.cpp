@@ -3,9 +3,9 @@
 
 CPU::CPU(CpuWidget *cpuWdgt)
 {
+  mCpuWdgt = cpuWdgt;
   clearCPU();
   clearRegister();
-  mCpuWdgt = cpuWdgt;
 }
 
 void CPU::setCPUWidget(CpuWidget *cpuWdgt)
@@ -39,6 +39,9 @@ void CPU::clearCPU()
   OV = "0";
   S = "0";
   Z = "1";
+  if(mCpuWdgt) {
+    mCpuWdgt->updateGUI();
+  }
 }
 
 int CPU::convertRegToInt(QString regValue)

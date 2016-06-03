@@ -250,6 +250,7 @@
     <property name="title">
      <string>Процессор</string>
     </property>
+    <addaction name="actionReset"/>
    </widget>
    <widget class="QMenu" name="menu_3">
     <property name="title">
@@ -297,6 +298,9 @@
   </widget>
   <widget class="QStatusBar" name="statusBar"/>
   <widget class="QDockWidget" name="dockWidget">
+   <property name="floating">
+    <bool>false</bool>
+   </property>
    <property name="features">
     <set>QDockWidget::NoDockWidgetFeatures</set>
    </property>
@@ -304,7 +308,7 @@
     <set>Qt::LeftDockWidgetArea</set>
    </property>
    <property name="windowTitle">
-    <string comment="Editor" extracomment="Editor">Редактор кода</string>
+    <string notr="true">Отладка</string>
    </property>
    <attribute name="dockWidgetArea">
     <number>1</number>
@@ -315,7 +319,7 @@
       <number>0</number>
      </property>
      <property name="leftMargin">
-      <number>2</number>
+      <number>0</number>
      </property>
      <property name="topMargin">
       <number>0</number>
@@ -327,10 +331,68 @@
       <number>0</number>
      </property>
      <item>
-      <widget class="QTextEdit" name="textEdit">
-       <property name="styleSheet">
-        <string notr="true">font: 12pt &quot;Consolas&quot;;</string>
+      <widget class="QTabWidget" name="tabWidget">
+       <property name="currentIndex">
+        <number>1</number>
        </property>
+       <widget class="QWidget" name="tab_3">
+        <attribute name="title">
+         <string>Редактор кода</string>
+        </attribute>
+        <layout class="QVBoxLayout" name="verticalLayout_8">
+         <property name="spacing">
+          <number>0</number>
+         </property>
+         <property name="leftMargin">
+          <number>0</number>
+         </property>
+         <property name="topMargin">
+          <number>0</number>
+         </property>
+         <property name="rightMargin">
+          <number>0</number>
+         </property>
+         <property name="bottomMargin">
+          <number>0</number>
+         </property>
+         <item>
+          <widget class="QTextEdit" name="textEdit">
+           <property name="styleSheet">
+            <string notr="true">font: 12pt &quot;Consolas&quot;;</string>
+           </property>
+          </widget>
+         </item>
+        </layout>
+       </widget>
+       <widget class="QWidget" name="tab_4">
+        <attribute name="title">
+         <string>Панель отладки</string>
+        </attribute>
+        <layout class="QVBoxLayout" name="verticalLayout_10">
+         <property name="spacing">
+          <number>0</number>
+         </property>
+         <property name="leftMargin">
+          <number>0</number>
+         </property>
+         <property name="topMargin">
+          <number>0</number>
+         </property>
+         <property name="rightMargin">
+          <number>0</number>
+         </property>
+         <property name="bottomMargin">
+          <number>0</number>
+         </property>
+         <item>
+          <layout class="QVBoxLayout" name="vlDebug">
+           <property name="spacing">
+            <number>0</number>
+           </property>
+          </layout>
+         </item>
+        </layout>
+       </widget>
       </widget>
      </item>
     </layout>
@@ -359,6 +421,11 @@
   <action name="actionSave">
    <property name="text">
     <string>Сохранить ...</string>
+   </property>
+  </action>
+  <action name="actionReset">
+   <property name="text">
+    <string>Сбросить</string>
    </property>
   </action>
  </widget>
