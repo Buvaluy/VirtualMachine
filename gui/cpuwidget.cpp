@@ -70,3 +70,13 @@ void CpuWidget::updateGUI()
     colmn += 2;
   }
 }
+
+void CpuWidget::on_textBoxIR_editingFinished()
+{
+  QString arg = ui->textBoxIR->text();
+  while (arg.size() < 6) {
+    arg.push_front("0");
+  }
+  impl->setIR(arg);
+  updateGUI();
+}

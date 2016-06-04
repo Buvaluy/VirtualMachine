@@ -21,6 +21,8 @@ private:
   CPU *impl;
 public:
   void updateGUI();
+private slots:
+  void on_textBoxIR_editingFinished();
 };
 
 #endif // CPUWIDGET_H
