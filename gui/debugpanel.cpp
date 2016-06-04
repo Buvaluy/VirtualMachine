@@ -1,12 +1,13 @@
 #include "debugpanel.h"
 #include "ui_debugpanel.h"
 
-DebugPanel::DebugPanel(QWidget *parent) :
+DebugPanel::DebugPanel(CPU *cpu, QWidget *parent) :
   QWidget(parent),
   ui(new Ui::DebugPanel)
 {
   ui->setupUi(this);
   ui->tableWidget->clear();
+  this->mCpu = cpu;
 }
 
 DebugPanel::~DebugPanel()
@@ -17,6 +18,7 @@ DebugPanel::~DebugPanel()
 void DebugPanel::updateCode(QStringList lCommand)
 {
   if(lCommand.size() == 0) return;
+  currentCommand = mCpu->getPC().toInt();
   mComands = lCommand;
   ui->tableWidget->blockSignals(true);
   initializeHeadr(lCommand.size());
@@ -39,7 +41,6 @@ void DebugPanel::resetCurrentCommand()
 
 void DebugPanel::nextStep()
 {
-  currentCommand ++;
   updateCode(mComands);
 }
 

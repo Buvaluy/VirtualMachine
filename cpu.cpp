@@ -151,7 +151,6 @@ QString CPU::getIR() const
 
 void CPU::setIR(const QString &value)
 {
-  setACC(value);//все проверки в ACC уже есть
   IR = value;//или же прировнять IR = ACC
 }
 

@@ -19,7 +19,7 @@ MainWindow::MainWindow(QWidget *parent) :
   mWdgt = new MemmoryWidget(mMemory);
   ui->memLyt->addWidget(mWdgt);
   mFactory = new CommandFactory(impl, mMemory);
-  mDpanel = new DebugPanel();
+  mDpanel = new DebugPanel(impl);
   mRuner = new Runer(impl, mMemory, mFactory, mDpanel);
   ui->vlDebug->addWidget(mDpanel);
   initializeGui();
@@ -36,7 +36,7 @@ MainWindow::~MainWindow()
 
 void MainWindow::on_actionCompiler_triggered()
 {
-  ui->tabRamConsole->setCurrentIndex(1);
+  ui->tabWidget->setCurrentIndex(1);
   QString strSourse = ui->textEdit->document()->toPlainText();
   impl->clearCPU();
   impl->updateGUI();
