@@ -143,6 +143,97 @@ public:
 };
 
 
+class CommandImplWriteRegister : public AbstactCommand
+{
+public:
+
+    CommandImplWriteRegister(CPU *cpu, Memory *memory) {
+        setCpu(cpu);
+        setMemory(memory);
+    }
+
+    void indirectRegister(QString arg) override;
+
+    void straightRegister(QString arg) override;
+
+    void indexWithPostincrementRegister(QString arg) override;
+
+    void indexWithPreddekrementomRegister(QString arg) override;
+};
+
+class CommandImplAddRegister : public AbstactCommand
+{
+public:
+
+    CommandImplAddRegister(CPU *cpu, Memory *memory) {
+        setCpu(cpu);
+        setMemory(memory);
+    }
+
+    void indirectRegister(QString arg) override;
+
+    void straightRegister(QString arg) override;
+
+    void indexWithPostincrementRegister(QString arg) override;
+
+    void indexWithPreddekrementomRegister(QString arg) override;
+};
+
+class CommandImplSubRegister : public AbstactCommand
+{
+public:
+
+    CommandImplSubRegister(CPU *cpu, Memory *memory) {
+        setCpu(cpu);
+        setMemory(memory);
+    }
+
+    void indirectRegister(QString arg) override;
+
+    void straightRegister(QString arg) override;
+
+    void indexWithPostincrementRegister(QString arg) override;
+
+    void indexWithPreddekrementomRegister(QString arg) override;
+};
+
+class CommandImplMulRegister : public AbstactCommand
+{
+public:
+
+    CommandImplMulRegister(CPU *cpu, Memory *memory) {
+        setCpu(cpu);
+        setMemory(memory);
+    }
+
+    void indirectRegister(QString arg) override;
+
+    void straightRegister(QString arg) override;
+
+    void indexWithPostincrementRegister(QString arg) override;
+
+    void indexWithPreddekrementomRegister(QString arg) override;
+};
+
+class CommandImplDivRegister : public AbstactCommand
+{
+public:
+
+    CommandImplDivRegister(CPU *cpu, Memory *memory) {
+        setCpu(cpu);
+        setMemory(memory);
+    }
+
+    void indirectRegister(QString arg) override;
+
+    void straightRegister(QString arg) override;
+
+    void indexWithPostincrementRegister(QString arg) override;
+
+    void indexWithPreddekrementomRegister(QString arg) override;
+};
+
+
 
 
 

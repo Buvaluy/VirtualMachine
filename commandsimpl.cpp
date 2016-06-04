@@ -319,13 +319,14 @@ void CommandImplReadRegister::indirectRegister(QString arg)
     QString currentComm = mMemory->get(mCpu->getPC().toInt());
     mCpu->setCR(currentComm);
     QString reg = mCpu->getRegisterValue( arg.toInt() );
-    QString operand = (QString)reg.at(3) + (QString)mem.at(4) + (QString)mem.at(5);
+    QString operand = (QString)reg.at(3) + (QString)reg.at(4) + (QString)reg.at(5);
     mCpu->setMAR(operand);
     mCpu->setRA(operand);
     QString op2 = mMemory->get(operand.toInt());
     while(op2.size() < 6){
         op2.push_front('0');
     }
+    mCpu->setRAR( arg );
     mCpu->setMDR( op2 );
     mCpu->setACC( op2 );
     mCpu->setRDR( reg );
@@ -334,17 +335,441 @@ void CommandImplReadRegister::indirectRegister(QString arg)
 
 void CommandImplReadRegister::straightRegister(QString arg)
 {//'0'
-
+    mCpu->setMDR( mMemory->get( mCpu->getPC().toInt() ) );
+    mCpu->setCR( mCpu->getMDR() );
+    mCpu->setRAR( arg );
+    QString operand = mCpu->getRegisterValue( arg.toInt() );//19
+    QString mar = mCpu->getPC();
+    while(mar.size() < 3){
+        mar.push_front('0');
+    }
+    mCpu->setMAR( mar );
+    mCpu->setACC( operand );
+    mCpu->setRDR( operand );
+    mCpu->incrPC();
 }
 
 void CommandImplReadRegister::indexWithPostincrementRegister(QString arg)
 {//@R+
-
+    QString currentComm = mMemory->get(mCpu->getPC().toInt());
+    mCpu->setCR(currentComm);
+    QString reg = mCpu->getRegisterValue( arg.toInt() );
+    QString incrReg = mCpu->convertIntToReg( mCpu->convertRegToInt( reg ) + 1 );
+    mCpu->setRegisterValue( arg.toInt(), incrReg);
+    QString operand = (QString)reg.at(3) + (QString)reg.at(4) + (QString)reg.at(5);
+    mCpu->setMAR(operand);
+    mCpu->setRA(operand);
+    QString op2 = mMemory->get(operand.toInt());
+    while(op2.size() < 6){
+        op2.push_front('0');
+    }
+    mCpu->setRAR( arg );
+    mCpu->setMDR( op2 );
+    mCpu->setACC( op2 );
+    mCpu->setRDR( reg );
+    mCpu->incrPC();
 }
 
 void CommandImplReadRegister::indexWithPreddekrementomRegister(QString arg)
 {//-@R
-
+    QString currentComm = mMemory->get(mCpu->getPC().toInt());
+    mCpu->setCR(currentComm);
+    QString reg = mCpu->getRegisterValue( arg.toInt() );
+    QString decrReg = mCpu->convertIntToReg( mCpu->convertRegToInt( reg ) - 1 );
+    mCpu->setRegisterValue( arg.toInt(), decrReg);
+    QString operand = (QString)decrReg.at(3) + (QString)decrReg.at(4) + (QString)decrReg.at(5);
+    mCpu->setMAR(operand);
+    mCpu->setRA(operand);
+    QString op2 = mMemory->get(operand.toInt());
+    while(op2.size() < 6){
+        op2.push_front('0');
+    }
+    mCpu->setRAR( arg );
+    mCpu->setMDR( op2 );
+    mCpu->setACC( op2 );
+    mCpu->setRDR( decrReg );
+    mCpu->incrPC();
 }
 
 
+
+void CommandImplWriteRegister::indirectRegister(QString arg)
+{//@r
+    QString currentComm = mMemory->get(mCpu->getPC().toInt());
+    mCpu->setCR(currentComm);
+    QString reg = mCpu->getRegisterValue( arg.toInt() );
+    QString operand = (QString)reg.at(3) + (QString)reg.at(4) + (QString)reg.at(5);
+    mCpu->setMAR(operand);
+    mCpu->setRA(operand);
+    QString acc = mCpu->getACC();
+    mMemory->set( operand.toInt(), acc );
+    mCpu->setRAR( arg );
+    mCpu->setMDR( acc );
+    mCpu->setRDR( reg );
+    mCpu->incrPC();
+}
+
+void CommandImplWriteRegister::straightRegister(QString arg)
+{//'0'
+    mCpu->setMDR( mMemory->get( mCpu->getPC().toInt() ) );
+    mCpu->setCR( mCpu->getMDR() );
+    mCpu->setRAR( arg );
+    QString acc = mCpu->getACC();
+    QString mar = mCpu->getPC();
+    mCpu->setRegisterValue( arg.toInt(), acc);
+    while(mar.size() < 3){
+        mar.push_front('0');
+    }
+    mCpu->setMAR( mar );
+    mCpu->setRDR( acc );
+    mCpu->incrPC();
+}
+
+void CommandImplWriteRegister::indexWithPostincrementRegister(QString arg)
+{//@r+
+    QString currentComm = mMemory->get(mCpu->getPC().toInt());
+    mCpu->setCR(currentComm);
+    QString reg = mCpu->getRegisterValue( arg.toInt() );
+    QString incrReg = mCpu->convertIntToReg( mCpu->convertRegToInt( reg ) + 1 );
+    mCpu->setRegisterValue( arg.toInt(), incrReg);
+    QString operand = (QString)reg.at(3) + (QString)reg.at(4) + (QString)reg.at(5);
+    mCpu->setMAR(operand);
+    mCpu->setRA(operand);
+    QString acc = mCpu->getACC();
+    mMemory->set( operand.toInt(), acc );
+    mCpu->setRAR( arg );
+    mCpu->setMDR( acc );
+    mCpu->setRDR( reg );
+    mCpu->incrPC();
+}
+
+void CommandImplWriteRegister::indexWithPreddekrementomRegister(QString arg)
+{//-@r
+    QString currentComm = mMemory->get(mCpu->getPC().toInt());
+    mCpu->setCR(currentComm);
+    QString reg = mCpu->getRegisterValue( arg.toInt() );
+    QString incrReg = mCpu->convertIntToReg( mCpu->convertRegToInt( reg ) - 1 );
+    mCpu->setRegisterValue( arg.toInt(), incrReg);
+    QString operand = (QString)incrReg.at(3) + (QString)incrReg.at(4) + (QString)incrReg.at(5);
+    mCpu->setMAR(operand);
+    mCpu->setRA(operand);
+    QString acc = mCpu->getACC();
+    mMemory->set( operand.toInt(), acc );
+    mCpu->setRAR( arg );
+    mCpu->setMDR( acc );
+    mCpu->setRDR( incrReg );
+    mCpu->incrPC();
+}
+
+void CommandImplAddRegister::indirectRegister(QString arg)
+{//@r
+    QString reg = mCpu->getRegisterValue( arg.toInt() );
+    QString adrMem = (QString)reg[3] + (QString)reg[4] + (QString)reg[5];
+    QString memory = mMemory->get( adrMem.toInt() );
+    QString result = mCpu->convertIntToReg( mCpu->convertRegToInt( memory ) + mCpu->convertRegToInt( mCpu->getACC() ) );
+    mCpu->setACC( result );
+    mCpu->setDR( memory );
+    mCpu->setRDR( reg );
+    mCpu->setRAR( arg );
+    mCpu->setMDR( memory );
+    mCpu->setMAR( adrMem );
+    mCpu->setCR( mMemory->get( mCpu->getPC().toInt() ) );
+    mCpu->setRA( adrMem );
+    mCpu->incrPC();
+}
+
+void CommandImplAddRegister::straightRegister(QString arg)
+{//'0'
+    QString reg = mCpu->getRegisterValue( arg.toInt() );
+    QString result = mCpu->convertIntToReg( mCpu->convertRegToInt( reg ) + mCpu->convertRegToInt( mCpu->getACC() ) );
+    QString mar = mCpu->getPC();
+    while(mar.size() < 3)
+        mar.push_front( '0' );
+
+    mCpu->setACC( result );
+    mCpu->setDR( reg );
+    mCpu->setRDR( reg );
+    mCpu->setRAR( arg );
+    mCpu->setMDR( mMemory->get( mCpu->getPC().toInt() ) );
+    mCpu->setMAR( mar );
+    mCpu->setCR( mCpu->getMDR() );
+    mCpu->incrPC();
+}
+
+void CommandImplAddRegister::indexWithPostincrementRegister(QString arg)
+{//@r+
+    QString reg = mCpu->getRegisterValue( arg.toInt() );
+    QString incrReg = mCpu->convertIntToReg( mCpu->convertRegToInt( reg ) + 1 );
+    QString adrMem = (QString)reg[3] + (QString)reg[4] + (QString)reg[5];
+    QString memory = mMemory->get( adrMem.toInt() );
+    QString result = mCpu->convertIntToReg( mCpu->convertRegToInt( memory ) + mCpu->convertRegToInt( mCpu->getACC() ) );
+    mCpu->setRegisterValue( arg.toInt(), incrReg);
+    mCpu->setACC( result );
+    mCpu->setDR( memory );
+    mCpu->setRDR( reg );
+    mCpu->setRAR( arg );
+    mCpu->setMDR( memory );
+    mCpu->setMAR( adrMem );
+    mCpu->setCR( mMemory->get( mCpu->getPC().toInt() ) );
+    mCpu->setRA( adrMem );
+    mCpu->incrPC();
+}
+
+void CommandImplAddRegister::indexWithPreddekrementomRegister(QString arg)
+{//-@r
+    QString reg = mCpu->getRegisterValue( arg.toInt() );
+    QString decrReg = mCpu->convertIntToReg( mCpu->convertRegToInt( reg ) - 1 );
+    QString adrMem = (QString)decrReg[3] + (QString)decrReg[4] + (QString)decrReg[5];
+    QString memory = mMemory->get( adrMem.toInt() );
+    QString result = mCpu->convertIntToReg( mCpu->convertRegToInt( memory ) + mCpu->convertRegToInt( mCpu->getACC() ) );
+    mCpu->setRegisterValue( arg.toInt(), decrReg);
+    mCpu->setACC( result );
+    mCpu->setDR( memory );
+    mCpu->setRDR( reg );
+    mCpu->setRAR( arg );
+    mCpu->setMDR( memory );
+    mCpu->setMAR( adrMem );
+    mCpu->setCR( mMemory->get( mCpu->getPC().toInt() ) );
+    mCpu->setRA( adrMem );
+    mCpu->incrPC();
+}
+
+void CommandImplSubRegister::indirectRegister(QString arg)
+{//@
+    QString reg = mCpu->getRegisterValue( arg.toInt() );
+    QString adrMem = (QString)reg[3] + (QString)reg[4] + (QString)reg[5];
+    QString memory = mMemory->get( adrMem.toInt() );
+    int regInt = mCpu->convertRegToInt( memory );
+    QString result = "0";
+    if(regInt < 0)
+        result = mCpu->convertIntToReg( mCpu->convertRegToInt( mCpu->getACC() ) + regInt  );
+    else
+        result = mCpu->convertIntToReg( mCpu->convertRegToInt( mCpu->getACC() ) - regInt  );
+    mCpu->setACC( result );
+    mCpu->setDR( memory );
+    mCpu->setRDR( reg );
+    mCpu->setRAR( arg );
+    mCpu->setMDR( memory );
+    mCpu->setMAR( adrMem );
+    mCpu->setCR( mMemory->get( mCpu->getPC().toInt() ) );
+    mCpu->setRA( adrMem );
+    mCpu->incrPC();
+}
+
+void CommandImplSubRegister::straightRegister(QString arg)
+{//'0'
+    QString reg = mCpu->getRegisterValue( arg.toInt() );
+    int regInt = mCpu->convertRegToInt( reg );
+    QString result = "0";
+    if(regInt < 0)
+        result = mCpu->convertIntToReg( mCpu->convertRegToInt( mCpu->getACC() ) + regInt  );
+    else
+        result = mCpu->convertIntToReg( mCpu->convertRegToInt( mCpu->getACC() ) - regInt  );
+    QString mar = mCpu->getPC();
+    while(mar.size() < 3)
+        mar.push_front( '0' );
+    mCpu->setACC( result );
+    mCpu->setDR( reg );
+    mCpu->setRDR( reg );
+    mCpu->setRAR( arg );
+    mCpu->setMDR( mMemory->get( mCpu->getPC().toInt() ) );
+    mCpu->setMAR( mar );
+    mCpu->setCR( mCpu->getMDR() );
+    mCpu->incrPC();
+}
+
+void CommandImplSubRegister::indexWithPostincrementRegister(QString arg)
+{//@r+
+    QString reg = mCpu->getRegisterValue( arg.toInt() );
+    QString incrReg = mCpu->convertIntToReg( mCpu->convertRegToInt( reg ) + 1 );
+    QString adrMem = (QString)reg[3] + (QString)reg[4] + (QString)reg[5];
+    QString memory = mMemory->get( adrMem.toInt() );
+    int regInt = mCpu->convertRegToInt( memory );
+    QString result = "0";
+    if(regInt < 0)
+        result = mCpu->convertIntToReg( mCpu->convertRegToInt( mCpu->getACC() ) + regInt  );
+    else
+        result = mCpu->convertIntToReg( mCpu->convertRegToInt( mCpu->getACC() ) - regInt  );
+    mCpu->setRegisterValue( arg.toInt(), incrReg);
+    mCpu->setACC( result );
+    mCpu->setDR( memory );
+    mCpu->setRDR( reg );
+    mCpu->setRAR( arg );
+    mCpu->setMDR( memory );
+    mCpu->setMAR( adrMem );
+    mCpu->setCR( mMemory->get( mCpu->getPC().toInt() ) );
+    mCpu->setRA( adrMem );
+    mCpu->incrPC();
+}
+
+void CommandImplSubRegister::indexWithPreddekrementomRegister(QString arg)
+{//-@r
+    QString reg = mCpu->getRegisterValue( arg.toInt() );
+    QString decrReg = mCpu->convertIntToReg( mCpu->convertRegToInt( reg ) - 1 );
+    QString adrMem = (QString)decrReg[3] + (QString)decrReg[4] + (QString)decrReg[5];
+    QString memory = mMemory->get( adrMem.toInt() );
+    int regInt = mCpu->convertRegToInt( memory );
+    QString result = "0";
+    if(regInt < 0)
+        result = mCpu->convertIntToReg( mCpu->convertRegToInt( mCpu->getACC() ) + regInt  );
+    else
+        result = mCpu->convertIntToReg( mCpu->convertRegToInt( mCpu->getACC() ) - regInt  );
+    mCpu->setRegisterValue( arg.toInt(), decrReg);
+    mCpu->setACC( result );
+    mCpu->setDR( memory );
+    mCpu->setRDR( reg );
+    mCpu->setRAR( arg );
+    mCpu->setMDR( memory );
+    mCpu->setMAR( adrMem );
+    mCpu->setCR( mMemory->get( mCpu->getPC().toInt() ) );
+    mCpu->setRA( adrMem );
+    mCpu->incrPC();
+}
+
+void CommandImplMulRegister::indirectRegister(QString arg)
+{//@r
+    QString reg = mCpu->getRegisterValue( arg.toInt() );
+    QString adrMem = (QString)reg[3] + (QString)reg[4] + (QString)reg[5];
+    QString memory = mMemory->get( adrMem.toInt() );
+    QString result = mCpu->convertIntToReg( mCpu->convertRegToInt( memory ) * mCpu->convertRegToInt( mCpu->getACC() ) );
+    mCpu->setACC( result );
+    mCpu->setDR( memory );
+    mCpu->setRDR( reg );
+    mCpu->setRAR( arg );
+    mCpu->setMDR( memory );
+    mCpu->setMAR( adrMem );
+    mCpu->setCR( mMemory->get( mCpu->getPC().toInt() ) );
+    mCpu->setRA( adrMem );
+    mCpu->incrPC();
+}
+
+void CommandImplMulRegister::straightRegister(QString arg)
+{//'0'
+    QString reg = mCpu->getRegisterValue( arg.toInt() );
+    QString result = mCpu->convertIntToReg( mCpu->convertRegToInt( reg ) * mCpu->convertRegToInt( mCpu->getACC() ) );
+    QString mar = mCpu->getPC();
+    while(mar.size() < 3)
+        mar.push_front( '0' );
+
+    mCpu->setACC( result );
+    mCpu->setDR( reg );
+    mCpu->setRDR( reg );
+    mCpu->setRAR( arg );
+    mCpu->setMDR( mMemory->get( mCpu->getPC().toInt() ) );
+    mCpu->setMAR( mar );
+    mCpu->setCR( mCpu->getMDR() );
+    mCpu->incrPC();
+}
+
+void CommandImplMulRegister::indexWithPostincrementRegister(QString arg)
+{//@r+
+    QString reg = mCpu->getRegisterValue( arg.toInt() );
+    QString incrReg = mCpu->convertIntToReg( mCpu->convertRegToInt( reg ) + 1 );
+    QString adrMem = (QString)reg[3] + (QString)reg[4] + (QString)reg[5];
+    QString memory = mMemory->get( adrMem.toInt() );
+    QString result = mCpu->convertIntToReg( mCpu->convertRegToInt( memory ) * mCpu->convertRegToInt( mCpu->getACC() ) );
+    mCpu->setRegisterValue( arg.toInt(), incrReg);
+    mCpu->setACC( result );
+    mCpu->setDR( memory );
+    mCpu->setRDR( reg );
+    mCpu->setRAR( arg );
+    mCpu->setMDR( memory );
+    mCpu->setMAR( adrMem );
+    mCpu->setCR( mMemory->get( mCpu->getPC().toInt() ) );
+    mCpu->setRA( adrMem );
+    mCpu->incrPC();
+}
+
+void CommandImplMulRegister::indexWithPreddekrementomRegister(QString arg)
+{//-@r
+    QString reg = mCpu->getRegisterValue( arg.toInt() );
+    QString decrReg = mCpu->convertIntToReg( mCpu->convertRegToInt( reg ) - 1 );
+    QString adrMem = (QString)decrReg[3] + (QString)decrReg[4] + (QString)decrReg[5];
+    QString memory = mMemory->get( adrMem.toInt() );
+    QString result = mCpu->convertIntToReg( mCpu->convertRegToInt( memory ) * mCpu->convertRegToInt( mCpu->getACC() ) );
+    mCpu->setRegisterValue( arg.toInt(), decrReg);
+    mCpu->setACC( result );
+    mCpu->setDR( memory );
+    mCpu->setRDR( reg );
+    mCpu->setRAR( arg );
+    mCpu->setMDR( memory );
+    mCpu->setMAR( adrMem );
+    mCpu->setCR( mMemory->get( mCpu->getPC().toInt() ) );
+    mCpu->setRA( adrMem );
+    mCpu->incrPC();
+}
+
+
+
+void CommandImplDivRegister::indirectRegister(QString arg)
+{//@r
+    QString reg = mCpu->getRegisterValue( arg.toInt() );
+    QString adrMem = (QString)reg[3] + (QString)reg[4] + (QString)reg[5];
+    QString memory = mMemory->get( adrMem.toInt() );
+    QString result = mCpu->convertIntToReg( mCpu->convertRegToInt( mCpu->getACC() ) / mCpu->convertRegToInt( memory ) );
+    mCpu->setACC( result );
+    mCpu->setDR( memory );
+    mCpu->setRDR( reg );
+    mCpu->setRAR( arg );
+    mCpu->setMDR( memory );
+    mCpu->setMAR( adrMem );
+    mCpu->setCR( mMemory->get( mCpu->getPC().toInt() ) );
+    mCpu->setRA( adrMem );
+    mCpu->incrPC();
+}
+
+void CommandImplDivRegister::straightRegister(QString arg)
+{//'0'
+    QString reg = mCpu->getRegisterValue( arg.toInt() );
+    QString result = mCpu->convertIntToReg( mCpu->convertRegToInt( mCpu->getACC() ) / mCpu->convertRegToInt( reg ) );
+    QString mar = mCpu->getPC();
+    while(mar.size() < 3)
+        mar.push_front( '0' );
+
+    mCpu->setACC( result );
+    mCpu->setDR( reg );
+    mCpu->setRDR( reg );
+    mCpu->setRAR( arg );
+    mCpu->setMDR( mMemory->get( mCpu->getPC().toInt() ) );
+    mCpu->setMAR( mar );
+    mCpu->setCR( mCpu->getMDR() );
+    mCpu->incrPC();
+}
+
+void CommandImplDivRegister::indexWithPostincrementRegister(QString arg)
+{//@r+
+    QString reg = mCpu->getRegisterValue( arg.toInt() );
+    QString incrReg = mCpu->convertIntToReg( mCpu->convertRegToInt( reg ) + 1 );
+    QString adrMem = (QString)reg[3] + (QString)reg[4] + (QString)reg[5];
+    QString memory = mMemory->get( adrMem.toInt() );
+    QString result = mCpu->convertIntToReg( mCpu->convertRegToInt( mCpu->getACC() ) / mCpu->convertRegToInt( memory ) );
+    mCpu->setRegisterValue( arg.toInt(), incrReg);
+    mCpu->setACC( result );
+    mCpu->setDR( memory );
+    mCpu->setRDR( reg );
+    mCpu->setRAR( arg );
+    mCpu->setMDR( memory );
+    mCpu->setMAR( adrMem );
+    mCpu->setCR( mMemory->get( mCpu->getPC().toInt() ) );
+    mCpu->setRA( adrMem );
+    mCpu->incrPC();
+}
+
+void CommandImplDivRegister::indexWithPreddekrementomRegister(QString arg)
+{//-@r
+    QString reg = mCpu->getRegisterValue( arg.toInt() );
+    QString decrReg = mCpu->convertIntToReg( mCpu->convertRegToInt( reg ) - 1 );
+    QString adrMem = (QString)decrReg[3] + (QString)decrReg[4] + (QString)decrReg[5];
+    QString memory = mMemory->get( adrMem.toInt() );
+    QString result = mCpu->convertIntToReg( mCpu->convertRegToInt( mCpu->getACC() ) / mCpu->convertRegToInt( memory ) );
+    mCpu->setRegisterValue( arg.toInt(), decrReg);
+    mCpu->setACC( result );
+    mCpu->setDR( memory );
+    mCpu->setRDR( reg );
+    mCpu->setRAR( arg );
+    mCpu->setMDR( memory );
+    mCpu->setMAR( adrMem );
+    mCpu->setCR( mMemory->get( mCpu->getPC().toInt() ) );
+    mCpu->setRA( adrMem );
+    mCpu->incrPC();
+}
