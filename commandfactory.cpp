@@ -9,6 +9,16 @@ CommandFactory::CommandFactory(CPU *cpu, Memory *memory)
 
   addImpl(01, new FactoryItem<CommandImplIn>());
   addImpl(02, new FactoryItem<CommandImplOut>());
+
+  addImpl(10, new FactoryItem<CommandImplJmp>());
+  addImpl(11, new FactoryItem<CommandImplJz>());
+  addImpl(12, new FactoryItem<CommandImplJnz>());
+  addImpl(13, new FactoryItem<CommandImplJs>());
+  addImpl(14, new FactoryItem<CommandImplJns>());
+  addImpl(15, new FactoryItem<CommandImplJo>());
+  addImpl(16, new FactoryItem<CommandImplJno>());
+  addImpl(17, new FactoryItem<CommandImplJrnz>());
+
   addImpl(21, new FactoryItem<CommandImplRead>());
   addImpl(22, new FactoryItem<CommandImplWrite>());
   addImpl(23, new FactoryItem<CommandImplAdd>());

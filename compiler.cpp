@@ -97,7 +97,7 @@ void Compiler::exec(QString &strSource)
       strCode = mGenCode->getCode(strCmd + "R");
     else
       strCode = mGenCode->getCode(strCmd);
-    qDebug() << "CODE:" << strCode;
+    //qDebug() << "CODE:" << strCode;
     if(strCode != "-1") {
       if((i + 1) < slCommandPair.size() ) {
         if(mGenCode->getCode(slCommandPair.at(i + 1)) == "-1") {

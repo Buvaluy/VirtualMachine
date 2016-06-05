@@ -86,40 +86,40 @@ bool AbstactCommand::execute(QString strArg, QString typeAddr)
 
 void AbstactCommand::straight(QString strArg)
 {
-  qDebug() << strArg;
+  qDebug() << "Не использованная адресация" << strArg;
 }
 
 void AbstactCommand::straightRegister(QString strArg)
 {
-  qDebug() << strArg;
+  qDebug() << "Не использованная адресация" << strArg;
 }
 
 void AbstactCommand::direct(QString strArg)
 {
-  qDebug() << strArg;
+  qDebug() << "Не использованная адресация" << strArg;
 }
 
 void AbstactCommand::indirect(QString strArg)
 {
-  qDebug() << strArg;
+  qDebug() << "Не использованная адресация" << strArg;
 }
 
 void AbstactCommand::relative(QString strArg)
 {
-  qDebug() << strArg;
+  qDebug() << "Не использованная адресация" << strArg;
 }
 
 void AbstactCommand::indirectRegister(QString strArg)
 {
-  qDebug() << strArg;
+  qDebug() << "Не использованная адресация" << strArg;
 }
 
 void AbstactCommand::indexWithPostincrementRegister(QString strArg)
 {
-  qDebug() << strArg;
+  qDebug() << "Не использованная адресация" << strArg;
 }
 
 void AbstactCommand::indexWithPreddekrementomRegister(QString strArg)
 {
-  qDebug() << strArg;
+  qDebug() << "Не использованная адресация" << strArg;
 }
