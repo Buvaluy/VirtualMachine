@@ -30,12 +30,10 @@ MainWindow::MainWindow(QWidget *parent) :
   ui->vlDebug->addWidget(mDpanel);
   mProgressBar = new QProgressBar();
   mProgressBar->setMaximumSize(250, 20);
+  mProgressBar->setMinimumSize(250, 20);
   mProgressBar->setFormat("");
   ui->statusBar->addWidget(mProgressBar);
-
   initializeGui();
-
-
 }
 
 MainWindow::~MainWindow()

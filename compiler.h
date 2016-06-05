@@ -32,6 +32,8 @@ public:
 
   QString getAddresType(QString str);
 
+  void fireError(QString str, int line);
+
 private:
   QString formatTime(QString str, int cnt);
 };

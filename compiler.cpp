@@ -69,7 +69,8 @@ void Compiler::exec(QString &strSource)
   qDebug() << "After parse:" << slCommandPair;
   mBar->setMaximum(slCommandPair.size());
   mBar->setValue(0);
-  QString isRegistr, strCode, strCmd, strArg = "000", typeAdrr = "0", debugArg = " ", debugCmd = " ";
+  QString isRegistr, strCode, strCmd, strArg = "000",
+          typeAdrr = "0", debugArg = " ", debugCmd = " ";
   int indexCmd = 0;
   for(int i = 0; i < slCommandPair.size(); i ++, mBar->setValue(i)) {
     strCmd = slCommandPair.at(i);
@@ -93,39 +94,38 @@ void Compiler::exec(QString &strSource)
         continue;
     }
     else if(strCmd == "jrnz"){
-        //команда выглядит как JRNZ R,M
-        //где R номер регистра, M - метка
-        //в память пишется в одну ячейку
-        // ccRmmm
-        // где cc код команды, R номер регистр, mmm номер PC
-        // в коде я сам по вызову команды для JRNZ
-        // я сам с ячейки памяти возьму Rmmm, в параметры можно при вызове функции не передавать
-        // но надо распарсить и записать это в память
-        qDebug() << "JRNZ еще не готов. return из компилятора";
-        return;
+      // fire error
+        if(i + 1 < slCommandPair.size()) {
+          QString argJRNZ = slCommandPair.at(i + 1);
+          QStringList argsJRNZ = argJRNZ.split(",");
+          if(argsJRNZ.size() < 2)
+            fireError("неверный агрумент (формат R,MMM)", indexCmd);
+          mMemory->set(indexCmd, "17" + argsJRNZ.at(0) + argsJRNZ.at(1));
+          indexCmd ++;
+        }
+        continue;
     }
     isRegistr = slCommandPair.at(i + 1);
-    if( isRegistr.contains('r') || isRegistr.contains('R')) //проверка операнда на регистр или число
+    if( isRegistr.contains('r') || isRegistr.contains('R'))
       strCode = mGenCode->getCode(strCmd + "R");
     else
       strCode = mGenCode->getCode(strCmd);
-    //qDebug() << "CODE:" << strCode;
     if(strCode != "-1") {
       if((i + 1) < slCommandPair.size() ) {
         if(mGenCode->getCode(slCommandPair.at(i + 1)) == "-1") {
           i ++;
           strArg = slCommandPair.at(i);
           debugArg = strArg;
-          typeAdrr = getAddresType((QString)strArg[0] + (QString)strArg[1]);//переделал для Косвенно-регистровой
-          if(typeAdrr == "3"){ //в относительной адресации у нас число стоит между скобками
-            strArg = strArg.remove(0,1); //по этому надо удалить их но оставить число [xxx]
+          typeAdrr = getAddresType((QString)strArg[0] + (QString)strArg[1]);
+          if(typeAdrr == "3"){
+            strArg = strArg.remove(0,1);
             for(int n = 0; n < strArg.size(); n++){
               if(strArg[n] == ']'){
                 strArg.remove(n, 1);
                 break;
               }
             }
-          }else if(typeAdrr == "4" && strArg[3] == '+'){ //проверка на алресацию Индексная с постинкрементом
+          }else if(typeAdrr == "4" && strArg[3] == '+'){
             typeAdrr = "5";
             strArg.remove(3, 1);
             strArg.remove(0, 1);
@@ -138,10 +138,10 @@ void Compiler::exec(QString &strSource)
         }
       }
 
-      if(strArg.size() < 2) { //два if что бы если размер 1 то + 00
+      if(strArg.size() < 2) {
         strArg.push_front("0");
       }
-      if(strArg.size() < 3) { // если размер 2 то только + 0
+      if(strArg.size() < 3) {
         strArg.push_front("0");
       }
       strArg.replace('r', '0');
@@ -151,10 +151,7 @@ void Compiler::exec(QString &strSource)
       indexCmd ++;
     } else {
       if(out) {
-        QString outPutMsg = "Ошибка компиляции в строке: " + QString::number(indexCmd);
-        mBar->setStyleSheet("QProgressBar::chunk {background-color: rgb(255, 0, 0);}");
-        mBar->setValue(mBar->maximum());
-        out->append(outPutMsg);
+        fireError("не верная команда", indexCmd);
         return;
       }
     }
@@ -163,10 +160,12 @@ void Compiler::exec(QString &strSource)
   if(out) {
     out->clear();
     QString secnd = QString::number(abs(endTime.second() - startTime.second()));
-    QString min = QString::number(abs(endTime.minute() - startTime.minute()));
+    QString min   = QString::number(abs(endTime.minute() - startTime.minute()));
     QString msecnd = QString::number(abs(endTime.msec() - startTime.msec()));
     QString outPutMsg = "Компиляция прошла успешно время: " +
-        formatTime(min, 2) + ":" + formatTime(secnd, 2) + ':' + formatTime(msecnd, 3) ;
+        formatTime(min, 2) + ":" +
+        formatTime(secnd, 2) + ':' +
+        formatTime(msecnd, 3) ;
     out->append(outPutMsg);
   }
   mDpanel->updateCode(debugList);
@@ -185,8 +184,16 @@ QString Compiler::getAddresType(QString str)
   } else if(str[0] == '-' && str.contains('@')){
     return "6";
   }
-  //адресация "5" проверяется после вызова этой функции в exec()
   return "0";
+}
+
+void Compiler::fireError(QString str, int line)
+{
+  QString outPutMsg = "Ошибка компиляции" + str +
+                      " в строке: " + QString::number(line);
+  mBar->setStyleSheet("QProgressBar::chunk {background-color: rgb(255, 0, 0);}");
+  mBar->setValue(mBar->maximum());
+  out->append(outPutMsg);
 }
 
 QString Compiler::formatTime(QString str, int cnt)

@@ -871,7 +871,7 @@ void CommandImplJno::straight(QString arg)
 }
 
 void CommandImplJrnz::straight(QString arg)
-{// jrnz r,m ; ccRmmm
+{
     QString mar = mCpu->getPC();
     QString memory = mMemory->get( mCpu->getPC().toInt() );
     QString numberRegistr = (QString)memory[2];
