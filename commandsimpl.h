@@ -233,8 +233,101 @@ public:
     void indexWithPreddekrementomRegister(QString arg) override;
 };
 
+class CommandImplJmp : public AbstactCommand
+{
+public:
 
+    CommandImplJmp(CPU *cpu, Memory *memory) {
+        setCpu(cpu);
+        setMemory(memory);
+    }
 
+    void straight(QString arg) override;
+};
+
+class CommandImplJz : public AbstactCommand
+{
+public:
+
+    CommandImplJz(CPU *cpu, Memory *memory) {
+        setCpu(cpu);
+        setMemory(memory);
+    }
+
+    void straight(QString arg) override;
+};
+
+class CommandImplJnz : public AbstactCommand
+{
+public:
+
+    CommandImplJnz(CPU *cpu, Memory *memory) {
+        setCpu(cpu);
+        setMemory(memory);
+    }
+
+    void straight(QString arg) override;
+};
+
+class CommandImplJs : public AbstactCommand
+{
+public:
+
+    CommandImplJs(CPU *cpu, Memory *memory) {
+        setCpu(cpu);
+        setMemory(memory);
+    }
+
+    void straight(QString arg) override;
+};
+
+class CommandImplJns : public AbstactCommand
+{
+public:
+
+    CommandImplJns(CPU *cpu, Memory *memory) {
+        setCpu(cpu);
+        setMemory(memory);
+    }
+
+    void straight(QString arg) override;
+};
+
+class CommandImplJo : public AbstactCommand
+{
+public:
+
+    CommandImplJo(CPU *cpu, Memory *memory) {
+        setCpu(cpu);
+        setMemory(memory);
+    }
+
+    void straight(QString arg) override;
+};
+
+class CommandImplJno : public AbstactCommand
+{
+public:
+
+    CommandImplJno(CPU *cpu, Memory *memory) {
+        setCpu(cpu);
+        setMemory(memory);
+    }
+
+    void straight(QString arg) override;
+};
+
+class CommandImplJrnz : public AbstactCommand
+{
+public:
+
+    CommandImplJrnz(CPU *cpu, Memory *memory) {
+        setCpu(cpu);
+        setMemory(memory);
+    }
+
+    void straight(QString arg) override;
+};
 
 
 #endif // COMMANDSIMPL_H

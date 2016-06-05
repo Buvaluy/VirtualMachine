@@ -35,8 +35,9 @@ void Runer::nextStep()
   AbstactCommand *cmdImpl = mFactory->createCommand(ncode);
   if(cmdImpl) {
     cmdImpl->execute(arg, typeAdr);
-    indx ++;
-    mCpu->setPC(QString::number(indx));
+    // Во всех методах я сам увеличиваю PC
+    //indx ++;
+    //mCpu->setPC(QString::number(indx));
     mDpanel->nextStep();
     mCpu->updateGUI();
   }

@@ -92,12 +92,24 @@ void Compiler::exec(QString &strSource)
         indexCmd ++;
         continue;
     }
+    else if(strCmd == "jrnz"){
+        //команда выглядит как JRNZ R,M
+        //где R номер регистра, M - метка
+        //в память пишется в одну ячейку
+        // ccRmmm
+        // где cc код команды, R номер регистр, mmm номер PC
+        // в коде я сам по вызову команды для JRNZ
+        // я сам с ячейки памяти возьму Rmmm, в параметры можно при вызове функции не передавать
+        // но надо распарсить и записать это в память
+        qDebug() << "JRNZ еще не готов. return из компилятора";
+        return;
+    }
     isRegistr = slCommandPair.at(i + 1);
     if( isRegistr.contains('r') || isRegistr.contains('R')) //проверка операнда на регистр или число
       strCode = mGenCode->getCode(strCmd + "R");
     else
       strCode = mGenCode->getCode(strCmd);
-    qDebug() << "CODE:" << strCode;
+    //qDebug() << "CODE:" << strCode;
     if(strCode != "-1") {
       if((i + 1) < slCommandPair.size() ) {
         if(mGenCode->getCode(slCommandPair.at(i + 1)) == "-1") {
