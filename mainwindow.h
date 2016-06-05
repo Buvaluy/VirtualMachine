@@ -43,6 +43,16 @@ private slots:
 
   void on_actionReset_triggered();
 
+  void on_actionResetMemmory_triggered();
+
+  void on_actionSaveMemory_triggered();
+
+  void on_actionLoadMemory_triggered();
+
+  void on_actionDeveloper_triggered();
+
+  void on_actionVersion_triggered();
+
 protected:
   Ui::MainWindow *ui;
   Memory *mMemory;
