@@ -7,6 +7,7 @@
 #include <QString>
 #include <QMap>
 #include <QTextEdit>
+#include <QProgressBar>
 #include "gui/debugpanel.h"
 
 class Compiler
@@ -16,8 +17,9 @@ protected:
   CodeGenerator *mGenCode;
   QTextEdit *out;
   DebugPanel *mDpanel;
+  QProgressBar *mBar;
 public:
-  Compiler(Memory *mem, DebugPanel *panel);
+  Compiler(Memory *mem, DebugPanel *panel, QProgressBar *mBar);
   ~Compiler();
 
   void setOutPutConsole(QTextEdit *ptr);

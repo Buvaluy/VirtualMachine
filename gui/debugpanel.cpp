@@ -35,7 +35,6 @@ void DebugPanel::updateCode(QStringList lCommand)
 
 void DebugPanel::resetCurrentCommand()
 {
-  currentCommand = 0;
   updateCode(mComands);
 }
 

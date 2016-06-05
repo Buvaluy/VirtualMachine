@@ -6,12 +6,13 @@
 #include <QTime>
 #include <cmath>
 
-Compiler::Compiler(Memory *mem, DebugPanel *panel)
+Compiler::Compiler(Memory *mem, DebugPanel *panel, QProgressBar *mBar)
 {
   this->mMemory = mem;
   this->mGenCode = new CodeGenerator();
   this->out = NULL;
   this->mDpanel = panel;
+  this->mBar = mBar;
 }
 
 Compiler::~Compiler()
@@ -33,7 +34,7 @@ QString Compiler::parseLabel(QString &strSource)
   for(int i = 0; i < slCommandPair.size(); i ++) {
     QString var = slCommandPair.at(i);
     if(var.indexOf(":") > 0) {
-      QString lbl = var;
+      QString lbl = var.remove(var.length() - 1, 1);
       int line = i / 2;
       slCommandPair.removeAt(i);
       mapLabel.insert(lbl, line);
@@ -60,13 +61,17 @@ void Compiler::checkCommand(QString &strSource)
 
 void Compiler::exec(QString &strSource)
 {
+  mBar->setStyleSheet("QProgressBar::chunk {background-color: rgb(0, 255, 0);}");
   QStringList debugList;
   QTime startTime = QTime::currentTime();
   strSource = parseLabel(strSource);
+  qDebug() << "After parse:" << strSource;
   QStringList slCommandPair = strSource.split(" ");
+  mBar->setMaximum(slCommandPair.size());
+  mBar->setValue(0);
   QString isRegistr, strCode, strCmd, strArg = "000", typeAdrr = "0", debugArg = " ", debugCmd = " ";
   int indexCmd = 0;
-  for(int i = 0; i < slCommandPair.size(); i ++) {
+  for(int i = 0; i < slCommandPair.size(); i ++, mBar->setValue(i)) {
     strCmd = slCommandPair.at(i);
     debugCmd = slCommandPair.at(i);
     strCmd = strCmd.toLower();
@@ -135,6 +140,8 @@ void Compiler::exec(QString &strSource)
     } else {
       if(out) {
         QString outPutMsg = "Ошибка компиляции в строке: " + QString::number(indexCmd);
+        mBar->setStyleSheet("QProgressBar::chunk {background-color: rgb(255, 0, 0);}");
+        mBar->setValue(mBar->maximum());
         out->append(outPutMsg);
         return;
       }
