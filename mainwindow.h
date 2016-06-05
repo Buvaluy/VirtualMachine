@@ -12,8 +12,11 @@
 #include "commandfactory.h"
 #include "runer.h"
 #include "gui/debugpanel.h"
+#include "gui/codeeditor.h"
 
 #include <QScopedPointer>
+#include <QProgressBar>
+
 
 namespace Ui {
 class MainWindow;
@@ -40,16 +43,19 @@ private slots:
 
   void on_actionReset_triggered();
 
-private:
+protected:
   Ui::MainWindow *ui;
   Memory *mMemory;
-  CPU *impl;
-  HightLighter *hightLighter;
-  CpuWidget *cpuWidget;
+  CPU *mCpu;
+  HightLighter *mHightLighter;
+  CpuWidget *mCpuWidget;
   MemmoryWidget *mWdgt;
   CommandFactory *mFactory;
   Runer *mRuner;
   DebugPanel *mDpanel;
+  QProgressBar *mProgressBar;
+  CodeEditor *mCodeEdit;
+protected:
   void initializeGui();
 };
 

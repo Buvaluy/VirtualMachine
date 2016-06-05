@@ -236,7 +236,7 @@
      <x>0</x>
      <y>0</y>
      <width>1100</width>
-     <height>20</height>
+     <height>21</height>
     </rect>
    </property>
    <widget class="QMenu" name="menu">
@@ -308,7 +308,7 @@
     <set>Qt::LeftDockWidgetArea</set>
    </property>
    <property name="windowTitle">
-    <string notr="true">Отладка</string>
+    <string notr="true">Рабочая панель</string>
    </property>
    <attribute name="dockWidgetArea">
     <number>1</number>
@@ -333,7 +333,7 @@
      <item>
       <widget class="QTabWidget" name="tabWidget">
        <property name="currentIndex">
-        <number>1</number>
+        <number>0</number>
        </property>
        <widget class="QWidget" name="tab_3">
         <attribute name="title">
@@ -356,11 +356,11 @@
           <number>0</number>
          </property>
          <item>
-          <widget class="QTextEdit" name="textEdit">
-           <property name="styleSheet">
-            <string notr="true">font: 12pt &quot;Consolas&quot;;</string>
+          <layout class="QVBoxLayout" name="vltextEdit">
+           <property name="spacing">
+            <number>0</number>
            </property>
-          </widget>
+          </layout>
          </item>
         </layout>
        </widget>

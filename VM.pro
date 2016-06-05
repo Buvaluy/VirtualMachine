@@ -27,7 +27,8 @@ SOURCES += main.cpp\
     gui/memmorywidget.cpp \
     codegenerator.cpp \
     runer.cpp \
-    gui/debugpanel.cpp
+    gui/debugpanel.cpp \
+    gui/codeeditor.cpp
 
 HEADERS  += mainwindow.h \
     cpu.h \
@@ -44,7 +45,8 @@ HEADERS  += mainwindow.h \
     mtypes.h \
     codegenerator.h \
     runer.h \
-    gui/debugpanel.h
+    gui/debugpanel.h \
+    gui/codeeditor.h
 
 FORMS    += mainwindow.ui \
     gui/cpuwidget.ui \
