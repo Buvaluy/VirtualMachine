@@ -78,18 +78,28 @@ void Compiler::exec(QString &strSource)
     if(strCmd == "nop"){
       mMemory->set(indexCmd, "000000");
       indexCmd ++;
+      debugList.append(debugCmd + " " + debugArg);
       continue;
     }else if(strCmd == "in"){
         mMemory->set(indexCmd, "010000");
         indexCmd ++;
+        debugList.append(debugCmd + " " + debugArg);
         continue;
     }else if(strCmd == "out"){
         mMemory->set(indexCmd, "020000");
         indexCmd ++;
+        debugList.append(debugCmd + " " + debugArg);
         continue;
     }else if(strCmd == "htl"){
         mMemory->set(indexCmd, "090000");
         indexCmd ++;
+        debugList.append(debugCmd + " " + debugArg);
+        continue;
+    }
+    else if(strCmd == "ret"){
+        mMemory->set(indexCmd, "080000");
+        indexCmd ++;
+        debugList.append(debugCmd);
         continue;
     }
     else if(strCmd == "jrnz"){
@@ -151,7 +161,7 @@ void Compiler::exec(QString &strSource)
       indexCmd ++;
     } else {
       if(out) {
-        QString outPutMsg = "Ошибка компиляции в строке: " + QString::number(indexCmd);
+        QString outPutMsg = "Ошибка компиляции в строке: " + QString::number(indexCmd + 1);
         mBar->setStyleSheet("QProgressBar::chunk {background-color: rgb(255, 0, 0);}");
         mBar->setValue(mBar->maximum());
         out->append(outPutMsg);

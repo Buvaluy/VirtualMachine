@@ -329,5 +329,53 @@ public:
     void straight(QString arg) override;
 };
 
+class CommandImplPush : public AbstactCommand
+{
+public:
+
+    CommandImplPush(CPU *cpu, Memory *memory) {
+        setCpu(cpu);
+        setMemory(memory);
+    }
+
+    void straight(QString arg) override;
+};
+
+class CommandImplPop : public AbstactCommand
+{
+public:
+
+    CommandImplPop(CPU *cpu, Memory *memory) {
+        setCpu(cpu);
+        setMemory(memory);
+    }
+
+    void straight(QString arg) override;
+};
+
+class CommandImplCall : public AbstactCommand
+{
+public:
+
+    CommandImplCall(CPU *cpu, Memory *memory) {
+        setCpu(cpu);
+        setMemory(memory);
+    }
+
+    void straight(QString arg) override;
+};
+
+class CommandImplRet : public AbstactCommand
+{
+public:
+
+    CommandImplRet(CPU *cpu, Memory *memory) {
+        setCpu(cpu);
+        setMemory(memory);
+    }
+
+    void straight(QString arg) override;
+};
+
 
 #endif // COMMANDSIMPL_H

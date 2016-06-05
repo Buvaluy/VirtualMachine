@@ -10,6 +10,12 @@ CommandFactory::CommandFactory(CPU *cpu, Memory *memory)
   addImpl(01, new FactoryItem<CommandImplIn>());
   addImpl(02, new FactoryItem<CommandImplOut>());
 
+  addImpl(06, new FactoryItem<CommandImplPush>());
+  addImpl(07, new FactoryItem<CommandImplPop>());
+
+  addImpl(8, new FactoryItem<CommandImplRet>());
+  addImpl(19, new FactoryItem<CommandImplCall>());
+
   addImpl(10, new FactoryItem<CommandImplJmp>());
   addImpl(11, new FactoryItem<CommandImplJz>());
   addImpl(12, new FactoryItem<CommandImplJnz>());
