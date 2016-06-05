@@ -6,12 +6,22 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1100</width>
-    <height>600</height>
+    <width>1057</width>
+    <height>688</height>
    </rect>
   </property>
   <property name="windowTitle">
    <string>Виртуальная ЭВМ</string>
+  </property>
+  <property name="windowIcon">
+   <iconset resource="res.qrc">
+    <normaloff>:/Icon.ico</normaloff>:/Icon.ico</iconset>
+  </property>
+  <property name="iconSize">
+   <size>
+    <width>36</width>
+    <height>36</height>
+   </size>
   </property>
   <widget class="QWidget" name="centralWidget">
    <layout class="QHBoxLayout" name="horizontalLayout">
@@ -31,6 +41,83 @@
      <number>0</number>
     </property>
     <item>
+     <widget class="QTabWidget" name="tabWidget">
+      <property name="minimumSize">
+       <size>
+        <width>250</width>
+        <height>0</height>
+       </size>
+      </property>
+      <property name="maximumSize">
+       <size>
+        <width>250</width>
+        <height>16777215</height>
+       </size>
+      </property>
+      <property name="currentIndex">
+       <number>0</number>
+      </property>
+      <widget class="QWidget" name="tab_3">
+       <attribute name="title">
+        <string>Редактор кода</string>
+       </attribute>
+       <layout class="QVBoxLayout" name="verticalLayout_8">
+        <property name="spacing">
+         <number>0</number>
+        </property>
+        <property name="leftMargin">
+         <number>0</number>
+        </property>
+        <property name="topMargin">
+         <number>0</number>
+        </property>
+        <property name="rightMargin">
+         <number>0</number>
+        </property>
+        <property name="bottomMargin">
+         <number>0</number>
+        </property>
+        <item>
+         <layout class="QVBoxLayout" name="vltextEdit">
+          <property name="spacing">
+           <number>0</number>
+          </property>
+         </layout>
+        </item>
+       </layout>
+      </widget>
+      <widget class="QWidget" name="tab_4">
+       <attribute name="title">
+        <string>Панель отладки</string>
+       </attribute>
+       <layout class="QVBoxLayout" name="verticalLayout_10">
+        <property name="spacing">
+         <number>0</number>
+        </property>
+        <property name="leftMargin">
+         <number>0</number>
+        </property>
+        <property name="topMargin">
+         <number>0</number>
+        </property>
+        <property name="rightMargin">
+         <number>0</number>
+        </property>
+        <property name="bottomMargin">
+         <number>0</number>
+        </property>
+        <item>
+         <layout class="QVBoxLayout" name="vlDebug">
+          <property name="spacing">
+           <number>0</number>
+          </property>
+         </layout>
+        </item>
+       </layout>
+      </widget>
+     </widget>
+    </item>
+    <item>
      <widget class="Line" name="line_2">
       <property name="orientation">
        <enum>Qt::Vertical</enum>
@@ -39,6 +126,9 @@
     </item>
     <item>
      <layout class="QVBoxLayout" name="verticalLayout_6">
+      <property name="spacing">
+       <number>0</number>
+      </property>
       <item>
        <widget class="QWidget" name="widget_2" native="true">
         <property name="minimumSize">
@@ -229,13 +319,18 @@
      </widget>
     </item>
    </layout>
+   <zorder>line_2</zorder>
+   <zorder>line_3</zorder>
+   <zorder>tabDevise</zorder>
+   <zorder></zorder>
+   <zorder>tabWidget</zorder>
   </widget>
   <widget class="QMenuBar" name="menuBar">
    <property name="geometry">
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>1100</width>
+     <width>1057</width>
      <height>21</height>
     </rect>
    </property>
@@ -256,6 +351,9 @@
     <property name="title">
      <string>ОЗУ</string>
     </property>
+    <addaction name="actionResetMemmory"/>
+    <addaction name="actionSaveMemory"/>
+    <addaction name="actionLoadMemory"/>
    </widget>
    <widget class="QMenu" name="menu_4">
     <property name="title">
@@ -279,6 +377,8 @@
     <property name="title">
      <string>О программе</string>
     </property>
+    <addaction name="actionDeveloper"/>
+    <addaction name="actionVersion"/>
    </widget>
    <addaction name="menu"/>
    <addaction name="menu_2"/>
@@ -295,109 +395,15 @@
    <attribute name="toolBarBreak">
     <bool>false</bool>
    </attribute>
+   <addaction name="actionOpen"/>
+   <addaction name="actionSave"/>
+   <addaction name="separator"/>
+   <addaction name="actionCompiler"/>
+   <addaction name="separator"/>
+   <addaction name="actionNext"/>
+   <addaction name="actionRun"/>
   </widget>
   <widget class="QStatusBar" name="statusBar"/>
-  <widget class="QDockWidget" name="dockWidget">
-   <property name="floating">
-    <bool>false</bool>
-   </property>
-   <property name="features">
-    <set>QDockWidget::NoDockWidgetFeatures</set>
-   </property>
-   <property name="allowedAreas">
-    <set>Qt::LeftDockWidgetArea</set>
-   </property>
-   <property name="windowTitle">
-    <string notr="true">Рабочая панель</string>
-   </property>
-   <attribute name="dockWidgetArea">
-    <number>1</number>
-   </attribute>
-   <widget class="QWidget" name="dockWidgetContents">
-    <layout class="QVBoxLayout" name="verticalLayout">
-     <property name="spacing">
-      <number>0</number>
-     </property>
-     <property name="leftMargin">
-      <number>0</number>
-     </property>
-     <property name="topMargin">
-      <number>0</number>
-     </property>
-     <property name="rightMargin">
-      <number>0</number>
-     </property>
-     <property name="bottomMargin">
-      <number>0</number>
-     </property>
-     <item>
-      <widget class="QTabWidget" name="tabWidget">
-       <property name="currentIndex">
-        <number>0</number>
-       </property>
-       <widget class="QWidget" name="tab_3">
-        <attribute name="title">
-         <string>Редактор кода</string>
-        </attribute>
-        <layout class="QVBoxLayout" name="verticalLayout_8">
-         <property name="spacing">
-          <number>0</number>
-         </property>
-         <property name="leftMargin">
-          <number>0</number>
-         </property>
-         <property name="topMargin">
-          <number>0</number>
-         </property>
-         <property name="rightMargin">
-          <number>0</number>
-         </property>
-         <property name="bottomMargin">
-          <number>0</number>
-         </property>
-         <item>
-          <layout class="QVBoxLayout" name="vltextEdit">
-           <property name="spacing">
-            <number>0</number>
-           </property>
-          </layout>
-         </item>
-        </layout>
-       </widget>
-       <widget class="QWidget" name="tab_4">
-        <attribute name="title">
-         <string>Панель отладки</string>
-        </attribute>
-        <layout class="QVBoxLayout" name="verticalLayout_10">
-         <property name="spacing">
-          <number>0</number>
-         </property>
-         <property name="leftMargin">
-          <number>0</number>
-         </property>
-         <property name="topMargin">
-          <number>0</number>
-         </property>
-         <property name="rightMargin">
-          <number>0</number>
-         </property>
-         <property name="bottomMargin">
-          <number>0</number>
-         </property>
-         <item>
-          <layout class="QVBoxLayout" name="vlDebug">
-           <property name="spacing">
-            <number>0</number>
-           </property>
-          </layout>
-         </item>
-        </layout>
-       </widget>
-      </widget>
-     </item>
-    </layout>
-   </widget>
-  </widget>
   <action name="actionCompiler">
    <property name="text">
     <string>Компилировать </string>
@@ -428,8 +434,35 @@
     <string>Сбросить</string>
    </property>
   </action>
+  <action name="actionResetMemmory">
+   <property name="text">
+    <string>Сбросить</string>
+   </property>
+  </action>
+  <action name="actionSaveMemory">
+   <property name="text">
+    <string>Сохранить в файл ...</string>
+   </property>
+  </action>
+  <action name="actionLoadMemory">
+   <property name="text">
+    <string>Загрузить из файла ...</string>
+   </property>
+  </action>
+  <action name="actionDeveloper">
+   <property name="text">
+    <string>Разработчики </string>
+   </property>
+  </action>
+  <action name="actionVersion">
+   <property name="text">
+    <string>Версия</string>
+   </property>
+  </action>
  </widget>
  <layoutdefault spacing="6" margin="11"/>
- <resources/>
+ <resources>
+  <include location="res.qrc"/>
+ </resources>
  <connections/>
 </ui>

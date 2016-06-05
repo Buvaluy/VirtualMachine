@@ -65,8 +65,8 @@ void Compiler::exec(QString &strSource)
   QStringList debugList;
   QTime startTime = QTime::currentTime();
   strSource = parseLabel(strSource);
-  qDebug() << "After parse:" << strSource;
   QStringList slCommandPair = strSource.split(" ");
+  qDebug() << "After parse:" << slCommandPair;
   mBar->setMaximum(slCommandPair.size());
   mBar->setValue(0);
   QString isRegistr, strCode, strCmd, strArg = "000", typeAdrr = "0", debugArg = " ", debugCmd = " ";

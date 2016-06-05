@@ -26,7 +26,14 @@
    <string>Form</string>
   </property>
   <property name="styleSheet">
-   <string notr="true">font: 10pt &quot;Consolas&quot;;</string>
+   <string notr="true">
+QLineEdit {
+    border: 1px solid gray;
+    border-radius: 2px;
+    background: white;
+    selection-background-color: darkgray;
+	font: 10pt &quot;Consolas&quot;;
+}</string>
   </property>
   <layout class="QVBoxLayout" name="verticalLayout_10">
    <item>

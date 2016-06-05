@@ -54,3 +54,11 @@ FORMS    += mainwindow.ui \
     gui/debugpanel.ui
 
 QMAKE_LFLAGS_RELEASE += -static -static-libgcc
+
+win32 {
+    RC_FILE += file.rc
+    OTHER_FILES += file.rc
+}
+
+RESOURCES += \
+    res.qrc
