@@ -76,6 +76,32 @@ void CommandImplRead::straight(QString arg)
     mCpu->incrPC();
 }
 
+bool CommandImplRead::check(QString arg)
+{
+    bool isDigit = false;
+    int adr = arg.toInt(&isDigit);
+    if(isDigit &&  adr >=0 && adr <=999)
+        return true;
+    if(arg[0] == '#' || arg[0] == '@'){
+        QString temp = "";
+        for(int i = 1; i < arg.size() ; i++){
+                temp += (QString)arg[i];
+        }
+        if(temp.toInt() >= 0 && temp.toInt() <= 999)
+            return true;
+    }
+    if(arg[0] == '['){
+        QString temp = "";
+        for(int i = 1; i < arg.size() ; i++){
+            if(arg[i] != ']')
+                temp += (QString)arg[i];
+        }
+        if(temp.toInt() >= 0 && temp.toInt() <= 999 && arg[arg.size() - 1] == ']')
+            return true;
+    }
+    return false;
+}
+
 void CommandImplWrite::indirect(QString arg)
 {//@
     QString acc = mCpu->getACC();
@@ -872,6 +898,7 @@ void CommandImplJno::straight(QString arg)
 
 void CommandImplJrnz::straight(QString arg)
 {// jrnz r,m ; ccRmmm
+    arg = arg;
     QString mar = mCpu->getPC();
     QString memory = mMemory->get( mCpu->getPC().toInt() );
     QString numberRegistr = (QString)memory[2];
