@@ -935,16 +935,19 @@ void CommandImplCall::straight(QString arg)
 {
     QString mdr = mMemory->get( mCpu->getPC().toInt() );
     QString sp = mCpu->getSP();
+    QString pc = mCpu->getPC();
     if( sp.toInt() == 0)
         sp = "999";
     else
         sp = QString::number( sp.toInt() - 1 );
     while( arg.size() < 6)
         arg.push_front( '0' );
+    while( pc.size() < 6)
+        pc.push_front( '0' );
     mCpu->setMDR( arg );
     mCpu->setMAR( sp );
     mCpu->setCR( mdr );
-    mMemory->set( sp.toInt(), mCpu->getPC() );
+    mMemory->set( sp.toInt(), pc);
     mCpu->setSP( sp );
     mCpu->setPC( arg );
 }

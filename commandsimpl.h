@@ -397,7 +397,7 @@ public:
         setMemory(memory);
     }
 
-    void straight(QString arg) override;
+    void straight(QString arg = "") override;
 };
 
 #endif // COMMANDSIMPL_H

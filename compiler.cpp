@@ -186,6 +186,8 @@ QString Compiler::parseSpecialCommand(const QString &strCmd, QString args, QStri
     return "020000";
   }else if(strCmd == "htl"){
     return "090000";
+  }else if(strCmd == "ret"){
+    return "080000";
   }
   else if(strCmd == "jrnz"){
     QStringList argsJRNZ = args.split(",");
