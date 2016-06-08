@@ -352,4 +352,52 @@ public:
 };
 
 
+class CommandImplPush : public AbstactCommand
+{
+public:
+    ~CommandImplPush() override {}
+    CommandImplPush(CPU *cpu, Memory *memory) {
+        setCpu(cpu);
+        setMemory(memory);
+    }
+
+    void straight(QString arg) override;
+};
+
+class CommandImplPop : public AbstactCommand
+{
+public:
+    ~CommandImplPop() override {}
+    CommandImplPop(CPU *cpu, Memory *memory) {
+        setCpu(cpu);
+        setMemory(memory);
+    }
+
+    void straight(QString arg) override;
+};
+
+class CommandImplCall : public AbstactCommand
+{
+public:
+    ~CommandImplCall() override {}
+    CommandImplCall(CPU *cpu, Memory *memory) {
+        setCpu(cpu);
+        setMemory(memory);
+    }
+
+    void straight(QString arg) override;
+};
+
+class CommandImplRet : public AbstactCommand
+{
+public:
+    ~CommandImplRet() override {}
+    CommandImplRet(CPU *cpu, Memory *memory) {
+        setCpu(cpu);
+        setMemory(memory);
+    }
+
+    void straight(QString arg) override;
+};
+
 #endif // COMMANDSIMPL_H
