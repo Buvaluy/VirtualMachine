@@ -1,5 +1,24 @@
 <RCC>
     <qresource prefix="/">
         <file>Icon.ico</file>
+        <file>images/authors.png</file>
+        <file>images/clear.png</file>
+        <file>images/compile.png</file>
+        <file>images/go.png</file>
+        <file>images/help.png</file>
+        <file>images/new.png</file>
+        <file>images/open.png</file>
+        <file>images/reset.png</file>
+        <file>images/save.png</file>
+        <file>images/settings.png</file>
+        <file>images/step.png</file>
+        <file>images/stop.png</file>
+        <file>images/binary.png</file>
+        <file>images/debug.png</file>
+        <file>images/device.png</file>
+        <file>images/mem.png</file>
+        <file>images/сoding.png</file>
+        <file>images/сonsole.png</file>
+        <file>images/cache.png</file>
     </qresource>
 </RCC>

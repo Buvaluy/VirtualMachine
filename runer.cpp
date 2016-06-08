@@ -18,15 +18,15 @@ Runer::~Runer()
 
 void Runer::run()
 {
-
+  while(nextStep()) {}
 }
 
-void Runer::nextStep()
+bool Runer::nextStep()
 {
   int indx = mCpu->getPC().toInt();
-  qDebug() << "PC: " << indx;
-  if(indx > 1000) return;
+  if(indx > 1000) return false;
   QString cmd = mMemory->get(indx);
+  if(cmd == "090000") return false;
 
   QString code = QString(cmd[0]) + QString(cmd[1]);
   int ncode = code.toInt();
@@ -35,11 +35,10 @@ void Runer::nextStep()
   AbstactCommand *cmdImpl = mFactory->createCommand(ncode);
   if(cmdImpl) {
     cmdImpl->execute(arg, typeAdr);
-    // Во всех методах я сам увеличиваю PC
-    //indx ++;
-    //mCpu->setPC(QString::number(indx));
     mDpanel->nextStep();
     mCpu->updateGUI();
   }
+  delete cmdImpl;
+  return true;
 }
 

@@ -53,6 +53,16 @@ private slots:
 
   void on_actionVersion_triggered();
 
+  void on_btnCode_clicked();
+
+  void on_btnDebug_clicked();
+
+  void on_btnCompile_clicked();
+
+  void on_btnRun_clicked();
+
+  void on_btnNext_clicked();
+
 protected:
   Ui::MainWindow *ui;
   Memory *mMemory;

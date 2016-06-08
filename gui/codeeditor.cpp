@@ -73,7 +73,7 @@ void CodeEditor::highlightCurrentLine()
 void CodeEditor::lineNumberAreaPaintEvent(QPaintEvent *event)
 {
     QPainter painter(lineNumberArea);
-    painter.fillRect(event->rect(), Qt::white);
+    painter.fillRect(event->rect(), QColor(240, 240, 240));
 
 
     QTextBlock block = firstVisibleBlock();
