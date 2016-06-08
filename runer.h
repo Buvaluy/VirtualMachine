@@ -20,7 +20,7 @@ public:
   ~Runer();
 
   void run();
-  void nextStep();
+  bool nextStep();
 
 };
 

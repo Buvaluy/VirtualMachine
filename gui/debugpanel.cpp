@@ -53,7 +53,7 @@ void DebugPanel::initializeHeadr(int rowCount)
 
   ui->tableWidget->setColumnWidth(0, 20);
   ui->tableWidget->setColumnWidth(1, 50);
-  ui->tableWidget->setColumnWidth(2, (ui->tableWidget->width() - 100));
+  ui->tableWidget->setColumnWidth(2, 160);
 
   ui->tableWidget->setHorizontalHeaderItem(0, new QTableWidgetItem("IP"));
   ui->tableWidget->setHorizontalHeaderItem(1, new QTableWidgetItem("Адрес"));
