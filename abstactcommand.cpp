@@ -84,6 +84,12 @@ bool AbstactCommand::execute(QString strArg, QString typeAddr)
   return true;
 }
 
+bool AbstactCommand::check(QString arg)
+{
+    qDebug() << "Нету check(QString) для команды " + this->getName();
+    return false;
+}
+
 void AbstactCommand::straight(QString strArg)
 {
   qDebug() << "Не использованная адресация" << strArg;

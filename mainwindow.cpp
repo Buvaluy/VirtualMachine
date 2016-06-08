@@ -53,7 +53,7 @@ void MainWindow::on_actionCompiler_triggered()
   mCpu->clearRegister();
   mCpu->updateGUI();
   try{
-    Compiler mComp(mMemory, mDpanel, mProgressBar);
+    Compiler mComp(mMemory, mDpanel, mProgressBar, mFactory);
     mComp.setOutPutConsole(ui->consoleOut);
     mComp.exec(strSourse);
     ui->stackedWidget->setCurrentIndex(1);
