@@ -30,12 +30,10 @@ MainWindow::MainWindow(QWidget *parent) :
   ui->vlDebug->addWidget(mDpanel);
   mProgressBar = new QProgressBar();
   mProgressBar->setMaximumSize(250, 20);
+  mProgressBar->setMinimumSize(250, 20);
   mProgressBar->setFormat("");
   ui->statusBar->addWidget(mProgressBar);
-
   initializeGui();
-
-
 }
 
 MainWindow::~MainWindow()
@@ -50,7 +48,6 @@ MainWindow::~MainWindow()
 
 void MainWindow::on_actionCompiler_triggered()
 {
-  ui->tabWidget->setCurrentIndex(1);
   QString strSourse = mCodeEdit->document()->toPlainText();
   mCpu->clearCPU();
   mCpu->clearRegister();
@@ -59,6 +56,7 @@ void MainWindow::on_actionCompiler_triggered()
     Compiler mComp(mMemory, mDpanel, mProgressBar);
     mComp.setOutPutConsole(ui->consoleOut);
     mComp.exec(strSourse);
+    ui->stackedWidget->setCurrentIndex(1);
   } catch(QException &exp) {
     qDebug() << exp.what();
   }
@@ -103,9 +101,6 @@ void MainWindow::on_actionSave_triggered()
 
 void MainWindow::initializeGui()
 {
-  ui->tabDevise->setTabText(0, "устройства");
-  ui->tabDevise->setTabText(1, "микрокоманд");
-  ui->tabDevise->setTabText(2, "кеш");
 }
 
 void MainWindow::on_actionRun_triggered()
@@ -169,4 +164,29 @@ void MainWindow::on_actionDeveloper_triggered()
 void MainWindow::on_actionVersion_triggered()
 {
   QMessageBox::about(NULL, "Версия", "Альфа версия 1.00.\n build 122");
+}
+
+void MainWindow::on_btnCode_clicked()
+{
+  ui->stackedWidget->setCurrentIndex(0);
+}
+
+void MainWindow::on_btnDebug_clicked()
+{
+  ui->stackedWidget->setCurrentIndex(1);
+}
+
+void MainWindow::on_btnCompile_clicked()
+{
+  on_actionCompiler_triggered();
+}
+
+void MainWindow::on_btnRun_clicked()
+{
+  mRuner->run();
+}
+
+void MainWindow::on_btnNext_clicked()
+{
+  mRuner->nextStep();
 }

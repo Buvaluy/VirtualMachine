@@ -26,12 +26,17 @@ public:
 
   QString parseLabel(QString &strSource);
 
-  void checkCommand(QString &strSource);
-
   void exec(QString &strSource);
 
   QString getAddresType(QString str);
 
+  void fireError(QString str, int line);
+
+  void parseArguments(QString &arg, QString &typeAddr);
+
+  QString parseSpecialCommand(const QString &strCmd, QString args, QString &error);
+
+  void updateLog(QTime &startTime);
 private:
   QString formatTime(QString str, int cnt);
 };

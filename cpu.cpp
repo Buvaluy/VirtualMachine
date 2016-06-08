@@ -57,15 +57,15 @@ int CPU::convertRegToInt(QString regValue)
 
 QString CPU::convertIntToReg(int value)
 {
-    QString tempNumb = QString::number(value);//если число -12, хапиешт как "-12"
+    QString tempNumb = QString::number(value);
     if(value < 0){
-        tempNumb.replace('-', '0'); //меняем знак QChar '-' на '0'
+        tempNumb.replace('-', '0');
     }
     QString result;
-    for(int i = 0; i < 6 - tempNumb.length(); i++){ //так как у нас 6 разрядов(из которых 1ый это знаковый)
-        result += "0";  //мы проверяем сколько цыфр в VALUE и дописыум перед ним '0'
+    for(int i = 0; i < 6 - tempNumb.length(); i++){
+        result += "0";
     }
-    result += tempNumb; //после нулй заносим само число
+    result += tempNumb;
     if(value < 0){
         result[0] = '1';
     }

@@ -871,7 +871,7 @@ void CommandImplJno::straight(QString arg)
 }
 
 void CommandImplJrnz::straight(QString arg)
-{// jrnz r,m ; ccRmmm
+{
     QString mar = mCpu->getPC();
     QString memory = mMemory->get( mCpu->getPC().toInt() );
     QString numberRegistr = (QString)memory[2];
@@ -889,83 +889,4 @@ void CommandImplJrnz::straight(QString arg)
         mCpu->setPC( goToPC );
     else
         mCpu->incrPC();
-}
-
-void CommandImplPush::straight(QString arg)
-{
-    QString sp = mCpu->getSP();
-    QString reg = mCpu->getRegisterValue( arg.toInt() );
-    if(sp.toInt() == 0)
-        sp = "999";
-    else
-        sp = QString::number( sp.toInt() - 1 );
-    mCpu->setRDR( reg );
-    mCpu->setRAR( arg );
-    mCpu->setMDR( reg );
-    mCpu->setMAR( sp );
-    mCpu->setSP( sp );
-    mCpu->setCR( mMemory->get( mCpu->getPC().toInt() ) );
-    mMemory->set( sp.toInt(), reg );
-    mCpu->incrPC();
-}
-
-void CommandImplPop::straight(QString arg)
-{
-    QString sp = mCpu->getSP();
-    if( sp.toInt() == 0 ){
-        mCpu->incrPC();
-        return;
-    }
-    QString mem = mMemory->get( sp.toInt() );
-    mCpu->setRDR( mem );
-    mCpu->setRAR( arg );
-    mCpu->setMDR( mem );
-    mCpu->setMAR( sp );
-    mCpu->setCR( mMemory->get( mCpu->getPC().toInt() ) );
-    mCpu->setRegisterValue( arg.toInt(), mem);
-    sp = QString::number( sp.toInt() + 1 );
-    if(sp.toInt() == 1000)
-        sp = "000";
-    mCpu->setSP( sp );
-    mCpu->incrPC();
-}
-
-void CommandImplCall::straight(QString arg)
-{
-    QString mdr = mMemory->get( mCpu->getPC().toInt() );
-    QString sp = mCpu->getSP();
-    if( sp.toInt() == 0)
-        sp = "999";
-    else
-        sp = QString::number( sp.toInt() - 1 );
-    while( arg.size() < 6)
-        arg.push_front( '0' );
-    mCpu->setMDR( arg );
-    mCpu->setMAR( sp );
-    mCpu->setCR( mdr );
-    mMemory->set( sp.toInt(), mCpu->getPC() );
-    mCpu->setSP( sp );
-    mCpu->setPC( arg );
-}
-
-void CommandImplRet::straight(QString arg)
-{
-    QString mdr = mMemory->get( mCpu->getPC().toInt() );
-    QString sp = mCpu->getSP();
-    if( sp.toInt() == 0 ){
-        mCpu->incrPC();
-        return;
-    }
-    QString pc = mMemory->get( sp.toInt() );
-    while( arg.size() < 6)
-        arg.push_front( '0' );
-    mCpu->setMDR( arg );
-    mCpu->setMAR( sp );
-    mCpu->setCR( mdr );
-    //mMemory->set( sp.toInt(), mCpu->getPC() );
-    sp = QString::number( sp.toInt() + 1 );
-    if(sp.toInt() == 1000)
-        sp = "000";
-    mCpu->setSP( sp );
-    mCpu->setPC( QString::number( pc.toInt() + 1 ) );
 }
