@@ -14,7 +14,6 @@ public:
     }
 
     void straight(QString arg) override;
-
 };
 
 class CommandImplOut : public AbstactCommand
@@ -45,8 +44,6 @@ public:
     void indirect(QString arg) override;
 
     void straight(QString arg) override;
-
-    bool check(QString arg) override;
 };
 
 class CommandImplWrite : public AbstactCommand

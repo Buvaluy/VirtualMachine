@@ -8,9 +8,7 @@
 #include <QMap>
 #include <QTextEdit>
 #include <QProgressBar>
-#include "abstactcommand.h"
 #include "gui/debugpanel.h"
-#include "commandfactory.h"
 
 class Compiler
 {
@@ -20,26 +18,22 @@ protected:
   QTextEdit *out;
   DebugPanel *mDpanel;
   QProgressBar *mBar;
-  CommandFactory *mFactory;
 public:
-  Compiler(Memory *mem, DebugPanel *panel, QProgressBar *mBar, CommandFactory *factory);
+  Compiler(Memory *mem, DebugPanel *panel, QProgressBar *mBar);
   ~Compiler();
 
   void setOutPutConsole(QTextEdit *ptr);
 
   QString parseLabel(QString &strSource);
 
-  bool checkCommand(QString &strSource);
+  void checkCommand(QString &strSource);
 
   void exec(QString &strSource);
 
   QString getAddresType(QString str);
 
-  void getAddresCode(QString &strArg, QString &typeAdrr);
-
 private:
   QString formatTime(QString str, int cnt);
-  int indexCheckCommand;
 };
 
 #endif // COMPILER_H
