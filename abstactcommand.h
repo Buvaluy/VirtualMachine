@@ -22,7 +22,6 @@ public:
   virtual ~AbstactCommand() {}
 
   bool execute (QString strArg = "", QString typeAddr = "");
-  virtual bool check (QString arg);
 
   virtual void straight(QString strArg); // Прямая
   virtual void straightRegister(QString strArg);// Прямая регистровая
