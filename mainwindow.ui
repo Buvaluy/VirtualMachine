@@ -17,6 +17,12 @@
    <iconset resource="res.qrc">
     <normaloff>:/Icon.ico</normaloff>:/Icon.ico</iconset>
   </property>
+  <property name="styleSheet">
+   <string notr="true">QWidget {
+	
+	background-color: rgb(255, 255, 255);
+}</string>
+  </property>
   <property name="iconSize">
    <size>
     <width>36</width>
@@ -24,6 +30,14 @@
    </size>
   </property>
   <widget class="QWidget" name="centralWidget">
+   <property name="styleSheet">
+    <string notr="true">QWidget {
+	border: 0px;
+	color: rgb(236, 236, 236);
+	background-color: rgb(64, 66, 68);
+	font: 14pt &quot;Consolas&quot;;
+}</string>
+   </property>
    <layout class="QHBoxLayout" name="horizontalLayout">
     <property name="spacing">
      <number>0</number>
@@ -44,20 +58,19 @@
      <widget class="QWidget" name="widget_3" native="true">
       <property name="minimumSize">
        <size>
-        <width>40</width>
+        <width>50</width>
         <height>0</height>
        </size>
       </property>
       <property name="maximumSize">
        <size>
-        <width>40</width>
+        <width>50</width>
         <height>16777215</height>
        </size>
       </property>
       <property name="styleSheet">
        <string notr="true">QWidget {
-	
-	background-color: rgb(235, 235, 235);
+background-color: qlineargradient(spread:reflect, x1:0, y1:0, x2:0.517045, y2:0, stop:0 rgba(67, 69, 72, 255), stop:1 rgba(62, 64, 66, 255));
 }</string>
       </property>
       <layout class="QVBoxLayout" name="verticalLayout_9">
@@ -80,13 +93,13 @@
         <widget class="QPushButton" name="btnCode">
          <property name="minimumSize">
           <size>
-           <width>40</width>
+           <width>50</width>
            <height>40</height>
           </size>
          </property>
          <property name="maximumSize">
           <size>
-           <width>40</width>
+           <width>50</width>
            <height>40</height>
           </size>
          </property>
@@ -95,20 +108,15 @@
          </property>
          <property name="styleSheet">
           <string notr="true">QPushButton {
-    border: 1px solid #8f8f91;
-    border-radius: 6px;
-    background-color: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,
-                                      stop: 0 #f6f7fa, stop: 1 #dadbde);
+	border: 1px solid rgb(64, 66, 69);
 }
 
 QPushButton:pressed {
-    background-color: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,
-                                      stop: 0 #dadbde, stop: 1 #f6f7fa);
+		background-color: qlineargradient(spread:reflect, x1:0, y1:0, x2:0.488636, 				y2:0, stop:0 rgba(38, 40, 41, 255), stop:1 rgba(38, 40, 41, 255));
 }
 
 QPushButton:hover{
-    background-color: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,
-                                      stop: 0 #dadbde, stop: 1 #f6f7fa);
+	background-color: qlineargradient(spread:reflect, x1:0, y1:0, x2:0.517045, y2:0, stop:0 rgba(127, 131, 135, 255), stop:1 rgba(96, 99, 102, 255));
 }</string>
          </property>
          <property name="text">
@@ -136,13 +144,13 @@ QPushButton:hover{
         <widget class="QPushButton" name="btnDebug">
          <property name="minimumSize">
           <size>
-           <width>40</width>
+           <width>50</width>
            <height>40</height>
           </size>
          </property>
          <property name="maximumSize">
           <size>
-           <width>40</width>
+           <width>50</width>
            <height>40</height>
           </size>
          </property>
@@ -151,20 +159,15 @@ QPushButton:hover{
          </property>
          <property name="styleSheet">
           <string notr="true">QPushButton {
-    border: 1px solid #8f8f91;
-    border-radius: 6px;
-    background-color: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,
-                                      stop: 0 #f6f7fa, stop: 1 #dadbde);
+	border: 1px solid rgb(64, 66, 69);
 }
 
 QPushButton:pressed {
-    background-color: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,
-                                      stop: 0 #dadbde, stop: 1 #f6f7fa);
+		background-color: qlineargradient(spread:reflect, x1:0, y1:0, x2:0.488636, 				y2:0, stop:0 rgba(38, 40, 41, 255), stop:1 rgba(38, 40, 41, 255));
 }
 
 QPushButton:hover{
-    background-color: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,
-                                      stop: 0 #dadbde, stop: 1 #f6f7fa);
+	background-color: qlineargradient(spread:reflect, x1:0, y1:0, x2:0.517045, y2:0, stop:0 rgba(127, 131, 135, 255), stop:1 rgba(96, 99, 102, 255));
 }</string>
          </property>
          <property name="text">
@@ -205,23 +208,16 @@ QPushButton:hover{
         </spacer>
        </item>
        <item>
-        <widget class="Line" name="line">
-         <property name="orientation">
-          <enum>Qt::Horizontal</enum>
-         </property>
-        </widget>
-       </item>
-       <item>
         <widget class="QPushButton" name="btnCompile">
          <property name="minimumSize">
           <size>
-           <width>0</width>
+           <width>50</width>
            <height>40</height>
           </size>
          </property>
          <property name="maximumSize">
           <size>
-           <width>40</width>
+           <width>50</width>
            <height>40</height>
           </size>
          </property>
@@ -230,20 +226,15 @@ QPushButton:hover{
          </property>
          <property name="styleSheet">
           <string notr="true">QPushButton {
-    border: 1px solid #8f8f91;
-    border-radius: 6px;
-    background-color: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,
-                                      stop: 0 #f6f7fa, stop: 1 #dadbde);
+	border: 1px solid rgb(64, 66, 69);
 }
 
 QPushButton:pressed {
-    background-color: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,
-                                      stop: 0 #dadbde, stop: 1 #f6f7fa);
+		background-color: qlineargradient(spread:reflect, x1:0, y1:0, x2:0.488636, 				y2:0, stop:0 rgba(38, 40, 41, 255), stop:1 rgba(38, 40, 41, 255));
 }
 
 QPushButton:hover{
-    background-color: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,
-                                      stop: 0 #dadbde, stop: 1 #f6f7fa);
+	background-color: qlineargradient(spread:reflect, x1:0, y1:0, x2:0.517045, y2:0, stop:0 rgba(127, 131, 135, 255), stop:1 rgba(96, 99, 102, 255));
 }</string>
          </property>
          <property name="text">
@@ -266,15 +257,18 @@ QPushButton:hover{
        </item>
        <item>
         <widget class="QPushButton" name="btnRun">
+         <property name="enabled">
+          <bool>false</bool>
+         </property>
          <property name="minimumSize">
           <size>
-           <width>40</width>
+           <width>50</width>
            <height>40</height>
           </size>
          </property>
          <property name="maximumSize">
           <size>
-           <width>40</width>
+           <width>50</width>
            <height>40</height>
           </size>
          </property>
@@ -283,20 +277,15 @@ QPushButton:hover{
          </property>
          <property name="styleSheet">
           <string notr="true">QPushButton {
-    border: 1px solid #8f8f91;
-    border-radius: 6px;
-    background-color: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,
-                                      stop: 0 #f6f7fa, stop: 1 #dadbde);
+	border: 1px solid rgb(64, 66, 69);
 }
 
 QPushButton:pressed {
-    background-color: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,
-                                      stop: 0 #dadbde, stop: 1 #f6f7fa);
+		background-color: qlineargradient(spread:reflect, x1:0, y1:0, x2:0.488636, 				y2:0, stop:0 rgba(38, 40, 41, 255), stop:1 rgba(38, 40, 41, 255));
 }
 
 QPushButton:hover{
-    background-color: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,
-                                      stop: 0 #dadbde, stop: 1 #f6f7fa);
+	background-color: qlineargradient(spread:reflect, x1:0, y1:0, x2:0.517045, y2:0, stop:0 rgba(127, 131, 135, 255), stop:1 rgba(96, 99, 102, 255));
 }</string>
          </property>
          <property name="text">
@@ -319,15 +308,18 @@ QPushButton:hover{
        </item>
        <item>
         <widget class="QPushButton" name="btnNext">
+         <property name="enabled">
+          <bool>false</bool>
+         </property>
          <property name="minimumSize">
           <size>
-           <width>40</width>
+           <width>50</width>
            <height>40</height>
           </size>
          </property>
          <property name="maximumSize">
           <size>
-           <width>40</width>
+           <width>50</width>
            <height>40</height>
           </size>
          </property>
@@ -336,20 +328,15 @@ QPushButton:hover{
          </property>
          <property name="styleSheet">
           <string notr="true">QPushButton {
-    border: 1px solid #8f8f91;
-    border-radius: 6px;
-    background-color: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,
-                                      stop: 0 #f6f7fa, stop: 1 #dadbde);
+	border: 1px solid rgb(64, 66, 69);
 }
 
 QPushButton:pressed {
-    background-color: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,
-                                      stop: 0 #dadbde, stop: 1 #f6f7fa);
+		background-color: qlineargradient(spread:reflect, x1:0, y1:0, x2:0.488636, 				y2:0, stop:0 rgba(38, 40, 41, 255), stop:1 rgba(38, 40, 41, 255));
 }
 
 QPushButton:hover{
-    background-color: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,
-                                      stop: 0 #dadbde, stop: 1 #f6f7fa);
+	background-color: qlineargradient(spread:reflect, x1:0, y1:0, x2:0.517045, y2:0, stop:0 rgba(127, 131, 135, 255), stop:1 rgba(96, 99, 102, 255));
 }</string>
          </property>
          <property name="text">
@@ -404,6 +391,12 @@ QPushButton:hover{
        <number>0</number>
       </property>
       <widget class="QWidget" name="page">
+       <property name="styleSheet">
+        <string notr="true">background-color: rgb(30, 30, 39);
+color: rgb(231, 231, 231);
+border: 0px;
+font: 14pt &quot;Consolas&quot;;</string>
+       </property>
        <layout class="QVBoxLayout" name="verticalLayout_8">
         <property name="spacing">
          <number>0</number>
@@ -473,13 +466,13 @@ QPushButton:hover{
        <widget class="QWidget" name="widget_2" native="true">
         <property name="minimumSize">
          <size>
-          <width>510</width>
+          <width>600</width>
           <height>280</height>
          </size>
         </property>
         <property name="maximumSize">
          <size>
-          <width>510</width>
+          <width>600</width>
           <height>280</height>
          </size>
         </property>
@@ -503,15 +496,18 @@ QPushButton:hover{
           <widget class="QWidget" name="widget" native="true">
            <property name="minimumSize">
             <size>
-             <width>510</width>
+             <width>600</width>
              <height>280</height>
             </size>
            </property>
            <property name="maximumSize">
             <size>
-             <width>510</width>
+             <width>600</width>
              <height>280</height>
             </size>
+           </property>
+           <property name="styleSheet">
+            <string notr="true">border: 1px solid rgb(80, 80, 80);</string>
            </property>
            <layout class="QVBoxLayout" name="verticalLayout_4">
             <property name="spacing">
@@ -546,15 +542,44 @@ QPushButton:hover{
        <widget class="QTabWidget" name="tabRamConsole">
         <property name="minimumSize">
          <size>
-          <width>510</width>
+          <width>600</width>
           <height>0</height>
          </size>
         </property>
         <property name="maximumSize">
          <size>
-          <width>510</width>
+          <width>600</width>
           <height>16777215</height>
          </size>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">QTabWidget::pane { /* The tab widget frame */
+    border-top: 1px solid rgb(70, 70, 70);
+}
+
+QTabWidget::tab-bar {
+	border-top: 1px solid rgb(70, 70, 70);
+}
+
+/* Style the tab using the tab sub-control. Note that
+    it reads QTabBar _not_ QTabWidget */
+QTabBar::tab {
+	background-color: rgb(64, 66, 68);
+	padding: 2px;
+}
+
+QTabBar::tab:selected, QTabBar::tab:hover {
+background-color: rgb(38, 40, 41);
+}
+
+QTabBar::tab:selected {
+	
+	background-color: rgb(38, 40, 41);
+}
+
+QTabBar::tab:!selected {
+    margin-top: 0px; /* make non-selected tabs look smaller */
+}</string>
         </property>
         <property name="tabPosition">
          <enum>QTabWidget::South</enum>
@@ -655,6 +680,38 @@ QPushButton:hover{
     </item>
     <item>
      <widget class="QTabWidget" name="tabDevise">
+      <property name="layoutDirection">
+       <enum>Qt::LeftToRight</enum>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">QTabWidget::pane { /* The tab widget frame */
+    border-top: 1px solid rgb(70, 70, 70);
+}
+
+QTabWidget::tab-bar {
+	border-top: 1px solid rgb(70, 70, 70);
+}
+
+/* Style the tab using the tab sub-control. Note that
+    it reads QTabBar _not_ QTabWidget */
+QTabBar::tab {
+	background-color: rgb(64, 66, 68);
+	padding: 2px;
+}
+
+QTabBar::tab:selected, QTabBar::tab:hover {
+background-color: rgb(38, 40, 41);
+}
+
+QTabBar::tab:selected {
+	
+	background-color: rgb(38, 40, 41);
+}
+
+QTabBar::tab:!selected {
+    margin-top: 0px; /* make non-selected tabs look smaller */
+}</string>
+      </property>
       <property name="tabPosition">
        <enum>QTabWidget::North</enum>
       </property>
@@ -666,6 +723,9 @@ QPushButton:hover{
         <width>30</width>
         <height>30</height>
        </size>
+      </property>
+      <property name="usesScrollButtons">
+       <bool>false</bool>
       </property>
       <widget class="QWidget" name="tab_6">
        <attribute name="icon">
@@ -699,6 +759,9 @@ QPushButton:hover{
        <attribute name="title">
         <string/>
        </attribute>
+       <attribute name="toolTip">
+        <string>Кеш</string>
+       </attribute>
       </widget>
      </widget>
     </item>
@@ -710,8 +773,52 @@ QPushButton:hover{
      <x>0</x>
      <y>0</y>
      <width>1091</width>
-     <height>21</height>
+     <height>22</height>
     </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">QMenuBar {
+	color: rgb(231, 231, 231);
+	font: 12pt &quot;Consolas&quot;;
+	background-color: qlineargradient(spread:reflect, x1:0, y1:1, x2:0, y2:0.523, 			stop:0 rgba(60, 63, 64, 255), stop:1 rgba(55, 58, 59, 255));
+}
+
+QMenuBar::item {
+    spacing: 3px; /* spacing between menu bar items */
+    padding: 1px 4px;
+    background: transparent;
+    border-radius: 2px;
+}
+
+QMenuBar::item:selected { /* when selected using mouse or keyboard */
+    
+	background-color: qlineargradient(spread:reflect, x1:0, y1:0, x2:0.517045, y2:0, stop:0 rgba(127, 131, 135, 255), stop:1 rgba(96, 99, 102, 255));
+}
+
+QMenuBar::item:pressed {
+   
+	background-color: qlineargradient(spread:reflect, x1:0, y1:0, x2:0.517045, y2:0, stop:0 rgba(127, 131, 135, 255), stop:1 rgba(96, 99, 102, 255));
+}
+
+
+QMenu {
+	color: rgb(231, 231, 231);
+	font: 12pt &quot;Consolas&quot;;
+	
+	background-color: rgb(63, 65, 67);
+    margin: 2px; /* some spacing around the menu */
+}
+
+QMenu::item {
+    padding: 2px 25px 2px 20px;
+    border: 1px solid transparent; /* reserve space for selection border */
+}
+
+QMenu::item:selected {
+    border-color: darkblue;
+    background: rgba(100, 100, 100, 150);
+}
+</string>
    </property>
    <widget class="QMenu" name="menu">
     <property name="title">
@@ -767,7 +874,11 @@ QPushButton:hover{
    <addaction name="menu_6"/>
    <addaction name="menu_7"/>
   </widget>
-  <widget class="QStatusBar" name="statusBar"/>
+  <widget class="QStatusBar" name="statusBar">
+   <property name="styleSheet">
+    <string notr="true">background-color: qlineargradient(spread:reflect, x1:0, y1:1, x2:0, y2:0.523, stop:0 rgba(60, 63, 64, 255), stop:1 rgba(55, 58, 59, 255));</string>
+   </property>
+  </widget>
   <action name="actionCompiler">
    <property name="icon">
     <iconset resource="res.qrc">

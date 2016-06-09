@@ -3,10 +3,10 @@
 HightLighter::HightLighter(QTextDocument *parent)
   : QSyntaxHighlighter(parent)
 {
-  keyWordFormat.setForeground(Qt::darkBlue);
+  keyWordFormat.setForeground(QBrush(QColor(128, 139, 237)));
   keyWordFormat.setFontWeight(QFont::Bold);
 
-  labelFormat.setForeground(Qt::darkMagenta);
+  labelFormat.setForeground(QBrush(QColor(255, 139, 255)));
   labelFormat.setFontWeight(QFont::Bold);
 
   QStringList pattern = generator.getRules();
