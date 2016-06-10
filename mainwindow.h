@@ -2,6 +2,7 @@
 #define MAINWINDOW_H
 
 #include <QMainWindow>
+
 #include "gui/hightlighter.h"
 #include "gui/cpuwidget.h"
 #include "gui/memmorywidget.h"
@@ -14,6 +15,9 @@
 #include "runer.h"
 #include "gui/debugpanel.h"
 #include "gui/codeeditor.h"
+#include "gui/displaywidget.h"
+#include "gui/timerview.h"
+#include "gui/keyview.h"
 
 #include <QScopedPointer>
 #include <QProgressBar>
@@ -81,7 +85,11 @@ protected:
   QProgressBar *mProgressBar;
   CodeEditor *mCodeEdit;
   MicroCommandView *mMcmdView;
+  DisplayWidget *mDisplay;
+  TimerView *mTimerView;
+  KeyView *mKeyView;
 
+  bool isCompile;
   const QString autoLoadFileName = "autosave.asm";
   bool mIsMicroCmdOn = false;
 protected:

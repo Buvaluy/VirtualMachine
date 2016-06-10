@@ -26,7 +26,7 @@ public:
   void run();
   bool nextStep();
 
-  void setIsMicroCmd(bool value);
+  void setIsMicroCmd(bool value, bool isInitGui);
 };
 
 #endif // RUNER_H
