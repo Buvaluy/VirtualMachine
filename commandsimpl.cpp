@@ -8,9 +8,7 @@ void CommandImplIn::straight(QString arg)
     mCpu->setACC( ir );
     mCpu->setMDR( mMemory->get( mCpu->getPC().toInt() ) );
     QString mar = mCpu->getPC();
-    while(mar.size() < 3){
-        mar.push_front('0');
-    }
+    push3Times0( mar );
     mCpu->setMAR( mar );
     mCpu->setCR( mCpu->getMDR() );
     mCpu->incrPC();
@@ -51,9 +49,7 @@ void CommandImplRead::indirect(QString arg)
     mCpu->setMAR(operand);
     mCpu->setRA(operand);
     QString op2 = mMemory->get(operand.toInt());
-    while(op2.size() < 6){
-        op2.push_front('0');
-    }
+    push6Times0( op2 );
     mCpu->setMDR(op2);
     mCpu->setACC(op2);
     mCpu->incrPC();
@@ -64,12 +60,8 @@ void CommandImplRead::straight(QString arg)
   // если обыная '0'
     mCpu->setCR(mMemory->get(mCpu->getPC().toInt()));
     QString operand = mMemory->get(arg.toInt());//19
-    while(arg.size() < 3){
-        arg.push_front('0');
-    }
-    while(operand.size() < 6){
-        arg.push_front('0');
-    }
+    push3Times0( arg );
+    push6Times0( operand );
     mCpu->setMAR(arg);
     mCpu->setMDR(operand);
     mCpu->setACC(operand);
@@ -101,18 +93,14 @@ void CommandImplWrite::straight(QString arg)
 
 void CommandImplAdd::direct(QString arg)
 {//#
-    while(arg.size() < 6){
-        arg.push_front('0');
-    }
+    push6Times0( arg );
     QString acc = mCpu->getACC();
     int result = mCpu->convertRegToInt(acc) + mCpu->convertRegToInt(arg);
     mCpu->setACC( mCpu->convertIntToReg(result) );
     mCpu->setDR( arg );
     mCpu->setMDR( mMemory->get( mCpu->getPC().toInt() ) );
     QString mar = mCpu->getPC();
-    while(mar.size() < 3){
-        mar.push_front('0');
-    }
+    push3Times0( mar );
     mCpu->setMAR( mar );
     mCpu->setCR( mCpu->getMDR() );
     mCpu->incrPC();
@@ -151,9 +139,7 @@ void CommandImplAdd::straight(QString arg)
 
 void CommandImplSub::direct(QString arg)
 {//#
-    while(arg.size() < 6){
-        arg.push_front('0');
-    }
+    push6Times0( arg );
     QString acc = mCpu->getACC();
     int result = 0;
     if( mCpu->convertRegToInt( arg ) < 0 ){
@@ -165,9 +151,7 @@ void CommandImplSub::direct(QString arg)
     mCpu->setDR( arg );
     mCpu->setMDR( mMemory->get( mCpu->getPC().toInt() ) );
     QString mar = mCpu->getPC();
-    while(mar.size() < 3){
-        mar.push_front('0');
-    }
+    push3Times0( mar );
     mCpu->setMAR( mar );
     mCpu->setCR( mCpu->getMDR() );
     mCpu->incrPC();
@@ -216,18 +200,14 @@ void CommandImplSub::straight(QString arg)
 
 void CommandImplMul::direct(QString arg)
 {//#
-    while(arg.size() < 6){
-        arg.push_front('0');
-    }
+    push6Times0( arg );
     QString acc = mCpu->getACC();
     int result = mCpu->convertRegToInt(acc) * mCpu->convertRegToInt(arg);
     mCpu->setACC( mCpu->convertIntToReg(result) );
     mCpu->setDR( arg );
     mCpu->setMDR( mMemory->get( mCpu->getPC().toInt() ) );
     QString mar = mCpu->getPC();
-    while(mar.size() < 3){
-        mar.push_front('0');
-    }
+    push3Times0( mar );
     mCpu->setMAR( mar );
     mCpu->setCR( mCpu->getMDR() );
     mCpu->incrPC();
@@ -266,18 +246,14 @@ void CommandImplMul::straight(QString arg)
 
 void CommandImplDiv::direct(QString arg)
 {//#
-    while(arg.size() < 6){
-        arg.push_front('0');
-    }
+    push6Times0( arg );
     QString acc = mCpu->getACC();
     int result = mCpu->convertRegToInt(acc) / mCpu->convertRegToInt(arg);
     mCpu->setACC( mCpu->convertIntToReg(result) );
     mCpu->setDR( arg );
     mCpu->setMDR( mMemory->get( mCpu->getPC().toInt() ) );
     QString mar = mCpu->getPC();
-    while(mar.size() < 3){
-        mar.push_front('0');
-    }
+    push3Times0( mar );
     mCpu->setMAR( mar );
     mCpu->setCR( mCpu->getMDR() );
     mCpu->incrPC();
@@ -323,9 +299,7 @@ void CommandImplReadRegister::indirectRegister(QString arg)
     mCpu->setMAR(operand);
     mCpu->setRA(operand);
     QString op2 = mMemory->get(operand.toInt());
-    while(op2.size() < 6){
-        op2.push_front('0');
-    }
+    push6Times0( op2 );
     mCpu->setRAR( arg );
     mCpu->setMDR( op2 );
     mCpu->setACC( op2 );
@@ -340,9 +314,7 @@ void CommandImplReadRegister::straightRegister(QString arg)
     mCpu->setRAR( arg );
     QString operand = mCpu->getRegisterValue( arg.toInt() );//19
     QString mar = mCpu->getPC();
-    while(mar.size() < 3){
-        mar.push_front('0');
-    }
+    push3Times0( mar );
     mCpu->setMAR( mar );
     mCpu->setACC( operand );
     mCpu->setRDR( operand );
@@ -360,9 +332,7 @@ void CommandImplReadRegister::indexWithPostincrementRegister(QString arg)
     mCpu->setMAR(operand);
     mCpu->setRA(operand);
     QString op2 = mMemory->get(operand.toInt());
-    while(op2.size() < 6){
-        op2.push_front('0');
-    }
+    push6Times0( op2 );
     mCpu->setRAR( arg );
     mCpu->setMDR( op2 );
     mCpu->setACC( op2 );
@@ -381,9 +351,7 @@ void CommandImplReadRegister::indexWithPreddekrementomRegister(QString arg)
     mCpu->setMAR(operand);
     mCpu->setRA(operand);
     QString op2 = mMemory->get(operand.toInt());
-    while(op2.size() < 6){
-        op2.push_front('0');
-    }
+    push6Times0( op2 );
     mCpu->setRAR( arg );
     mCpu->setMDR( op2 );
     mCpu->setACC( op2 );
@@ -417,9 +385,7 @@ void CommandImplWriteRegister::straightRegister(QString arg)
     QString acc = mCpu->getACC();
     QString mar = mCpu->getPC();
     mCpu->setRegisterValue( arg.toInt(), acc);
-    while(mar.size() < 3){
-        mar.push_front('0');
-    }
+    push3Times0( mar );
     mCpu->setMAR( mar );
     mCpu->setRDR( acc );
     mCpu->incrPC();
@@ -483,9 +449,7 @@ void CommandImplAddRegister::straightRegister(QString arg)
     QString reg = mCpu->getRegisterValue( arg.toInt() );
     QString result = mCpu->convertIntToReg( mCpu->convertRegToInt( reg ) + mCpu->convertRegToInt( mCpu->getACC() ) );
     QString mar = mCpu->getPC();
-    while(mar.size() < 3)
-        mar.push_front( '0' );
-
+    push3Times0( mar );
     mCpu->setACC( result );
     mCpu->setDR( reg );
     mCpu->setRDR( reg );
@@ -566,8 +530,7 @@ void CommandImplSubRegister::straightRegister(QString arg)
     else
         result = mCpu->convertIntToReg( mCpu->convertRegToInt( mCpu->getACC() ) - regInt  );
     QString mar = mCpu->getPC();
-    while(mar.size() < 3)
-        mar.push_front( '0' );
+    push3Times0( mar );
     mCpu->setACC( result );
     mCpu->setDR( reg );
     mCpu->setRDR( reg );
@@ -648,9 +611,7 @@ void CommandImplMulRegister::straightRegister(QString arg)
     QString reg = mCpu->getRegisterValue( arg.toInt() );
     QString result = mCpu->convertIntToReg( mCpu->convertRegToInt( reg ) * mCpu->convertRegToInt( mCpu->getACC() ) );
     QString mar = mCpu->getPC();
-    while(mar.size() < 3)
-        mar.push_front( '0' );
-
+    push3Times0( mar );
     mCpu->setACC( result );
     mCpu->setDR( reg );
     mCpu->setRDR( reg );
@@ -723,9 +684,7 @@ void CommandImplDivRegister::straightRegister(QString arg)
     QString reg = mCpu->getRegisterValue( arg.toInt() );
     QString result = mCpu->convertIntToReg( mCpu->convertRegToInt( mCpu->getACC() ) / mCpu->convertRegToInt( reg ) );
     QString mar = mCpu->getPC();
-    while(mar.size() < 3)
-        mar.push_front( '0' );
-
+    push3Times0( mar );
     mCpu->setACC( result );
     mCpu->setDR( reg );
     mCpu->setRDR( reg );
@@ -777,8 +736,7 @@ void CommandImplDivRegister::indexWithPreddekrementomRegister(QString arg)
 void CommandImplJmp::straight(QString arg)
 {
     QString mar = mCpu->getPC();
-    while(mar.size() < 3)
-        mar.push_front( '0' );
+    push3Times0( mar );
     mCpu->setMDR( mMemory->get( mCpu->getPC().toInt() ) );
     mCpu->setMAR( mar );
     mCpu->setCR( mCpu->getMDR() );
@@ -788,8 +746,7 @@ void CommandImplJmp::straight(QString arg)
 void CommandImplJz::straight(QString arg)
 {
     QString mar = mCpu->getPC();
-    while(mar.size() < 3)
-        mar.push_front( '0' );
+    push3Times0( mar );
     mCpu->setMDR( mMemory->get( mCpu->getPC().toInt() ) );
     mCpu->setMAR( mar );
     mCpu->setCR( mCpu->getMDR() );
@@ -802,8 +759,7 @@ void CommandImplJz::straight(QString arg)
 void CommandImplJnz::straight(QString arg)
 {
     QString mar = mCpu->getPC();
-    while(mar.size() < 3)
-        mar.push_front( '0' );
+    push3Times0( mar );
     mCpu->setMDR( mMemory->get( mCpu->getPC().toInt() ) );
     mCpu->setMAR( mar );
     mCpu->setCR( mCpu->getMDR() );
@@ -816,8 +772,7 @@ void CommandImplJnz::straight(QString arg)
 void CommandImplJs::straight(QString arg)
 {
     QString mar = mCpu->getPC();
-    while(mar.size() < 3)
-        mar.push_front( '0' );
+    push3Times0( mar );
     mCpu->setMDR( mMemory->get( mCpu->getPC().toInt() ) );
     mCpu->setMAR( mar );
     mCpu->setCR( mCpu->getMDR() );
@@ -830,8 +785,7 @@ void CommandImplJs::straight(QString arg)
 void CommandImplJns::straight(QString arg)
 {
     QString mar = mCpu->getPC();
-    while(mar.size() < 3)
-        mar.push_front( '0' );
+    push3Times0( mar );
     mCpu->setMDR( mMemory->get( mCpu->getPC().toInt() ) );
     mCpu->setMAR( mar );
     mCpu->setCR( mCpu->getMDR() );
@@ -845,8 +799,7 @@ void CommandImplJns::straight(QString arg)
 void CommandImplJo::straight(QString arg)
 {
     QString mar = mCpu->getPC();
-    while(mar.size() < 3)
-        mar.push_front( '0' );
+    push3Times0( mar );
     mCpu->setMDR( mMemory->get( mCpu->getPC().toInt() ) );
     mCpu->setMAR( mar );
     mCpu->setCR( mCpu->getMDR() );
@@ -859,8 +812,7 @@ void CommandImplJo::straight(QString arg)
 void CommandImplJno::straight(QString arg)
 {
     QString mar = mCpu->getPC();
-    while(mar.size() < 3)
-        mar.push_front( '0' );
+    push3Times0( mar );
     mCpu->setMDR( mMemory->get( mCpu->getPC().toInt() ) );
     mCpu->setMAR( mar );
     mCpu->setCR( mCpu->getMDR() );
@@ -872,13 +824,13 @@ void CommandImplJno::straight(QString arg)
 
 void CommandImplJrnz::straight(QString arg)
 {
+    arg = arg;
     QString mar = mCpu->getPC();
     QString memory = mMemory->get( mCpu->getPC().toInt() );
     QString numberRegistr = (QString)memory[2];
     QString goToPC = (QString)memory[3] + (QString)memory[4] + (QString)memory[5];
     QString reg = mCpu->getRegisterValue( numberRegistr.toInt() );
-    while(mar.size() < 3)
-        mar.push_front( '0' );
+    push3Times0( mar );
     mCpu->setMDR( memory );
     mCpu->setMAR( mar );
     mCpu->setCR( mCpu->getMDR() );
@@ -940,10 +892,8 @@ void CommandImplCall::straight(QString arg)
         sp = "999";
     else
         sp = QString::number( sp.toInt() - 1 );
-    while( arg.size() < 6)
-        arg.push_front( '0' );
-    while( pc.size() < 6)
-        pc.push_front( '0' );
+    push6Times0( arg );
+    push6Times0( pc );
     mCpu->setMDR( arg );
     mCpu->setMAR( sp );
     mCpu->setCR( mdr );
@@ -961,8 +911,7 @@ void CommandImplRet::straight(QString arg)
         return;
     }
     QString pc = mMemory->get( sp.toInt() );
-    while( arg.size() < 6)
-        arg.push_front( '0' );
+    push6Times0( arg );
     mCpu->setMDR( arg );
     mCpu->setMAR( sp );
     mCpu->setCR( mdr );
