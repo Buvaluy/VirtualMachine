@@ -65,7 +65,7 @@ void Compiler::exec(QString &strSource)
   strSource = parseLabel(strSource);
   QStringList slCommandPair = strSource.split(" ");
 
-  mBar->setStyleSheet("QProgressBar::chunk {background-color: rgb(0, 255, 0);}");
+  mBar->setStyleSheet("QProgressBar {border: 1px solid rgb(83, 83, 83);background-color: rgb(38, 40, 41);border-radius: 5px;} QProgressBar::chunk {background-color: rgb(64, 66, 68);width: 20px; }");
   mBar->setMaximum(slCommandPair.size() - 1);
   mBar->setValue(0);
 
@@ -146,9 +146,10 @@ QString Compiler::getAddresType(QString str)
 
 void Compiler::fireError(QString str, int line)
 {
+  out->clear();
   QString outPutMsg = "Ошибка компиляции" + str +
       " в строке: " + QString::number(line);
-  mBar->setStyleSheet("QProgressBar::chunk {background-color: rgb(255, 0, 0);}");
+  mBar->setStyleSheet("QProgressBar {border: 1px solid rgb(83, 83, 83);background-color: rgb(38, 40, 41);border-radius: 5px;} QProgressBar::chunk {background-color: rgb(191, 0, 0);width: 20px; }");
   mBar->setValue(mBar->maximum());
   out->append(outPutMsg);
 }
@@ -211,6 +212,7 @@ void Compiler::updateLog(QTime &startTime)
         formatTime(min, 2) + ":" +
         formatTime(secnd, 2) + ':' +
         formatTime(msecnd, 3) ;
+    mBar->setValue(mBar->maximum());
     out->append(outPutMsg);
   }
 }

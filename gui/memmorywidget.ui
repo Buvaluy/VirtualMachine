@@ -14,8 +14,60 @@
    <string>Form</string>
   </property>
   <layout class="QVBoxLayout" name="verticalLayout">
+   <property name="spacing">
+    <number>0</number>
+   </property>
+   <property name="leftMargin">
+    <number>0</number>
+   </property>
+   <property name="topMargin">
+    <number>0</number>
+   </property>
+   <property name="rightMargin">
+    <number>0</number>
+   </property>
+   <property name="bottomMargin">
+    <number>0</number>
+   </property>
    <item>
-    <widget class="QTableWidget" name="tableMemory"/>
+    <widget class="QTableWidget" name="tableMemory">
+     <property name="styleSheet">
+      <string notr="true">QHeaderView::section {
+
+    
+	background-color: rgb(50, 51, 53);
+	color: rgb(239, 239, 239);
+	font: 11pt &quot;Consolas&quot;;
+    padding-left: 4px;
+    border: 1px solid #6c6c6c;
+}
+
+QHeaderView::section:checked
+{
+	
+	background-color: rgb(38, 40, 41);
+}
+
+/* style the sort indicator */
+QHeaderView::down-arrow {
+    image: url(down_arrow.png);
+}
+
+QHeaderView::up-arrow {
+    image: url(up_arrow.png);
+}
+
+QTableView {
+background-color: rgb(64, 66, 68);
+	color: rgb(243, 243, 243);
+	font: 11pt &quot;Consolas&quot;;
+}
+
+QTableView QTableCornerButton::section {
+	background-color: rgb(50, 51, 53);
+}</string>
+     </property>
+    </widget>
    </item>
   </layout>
  </widget>

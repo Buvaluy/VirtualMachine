@@ -28,7 +28,7 @@ void DebugPanel::updateCode(QStringList lCommand)
     ui->tableWidget->setItem(r, 1, new QTableWidgetItem(QString::number(r)));
     ui->tableWidget->setItem(r, 2, new QTableWidgetItem(lCommand.at(r)));
   }
-  ui->tableWidget->setItem(currentCommand, 0, new QTableWidgetItem("->"));
+  ui->tableWidget->setItem(currentCommand, 0, new QTableWidgetItem(">"));
 
   ui->tableWidget->blockSignals(false);
 }
@@ -51,7 +51,7 @@ void DebugPanel::initializeHeadr(int rowCount)
   ui->tableWidget->setColumnCount(3);
   ui->tableWidget->setRowCount(rowCount);
 
-  ui->tableWidget->setColumnWidth(0, 20);
+  ui->tableWidget->setColumnWidth(0, 25);
   ui->tableWidget->setColumnWidth(1, 50);
   ui->tableWidget->setColumnWidth(2, 160);
 

@@ -16,7 +16,6 @@ MainWindow::MainWindow(QWidget *parent) :
   mMemory = new Memory();
   mCpu = new CPU();
   mCodeEdit = new CodeEditor();
-  mCodeEdit->setStyleSheet("font: 16px consolas;");
   ui->vltextEdit->addWidget(mCodeEdit);
   mHightLighter = new HightLighter(mCodeEdit->document());
   mCpuWidget = new CpuWidget(mCpu);
@@ -29,8 +28,9 @@ MainWindow::MainWindow(QWidget *parent) :
   mRuner = new Runer(mCpu, mMemory, mFactory, mDpanel);
   ui->vlDebug->addWidget(mDpanel);
   mProgressBar = new QProgressBar();
-  mProgressBar->setMaximumSize(250, 20);
-  mProgressBar->setMinimumSize(250, 20);
+  mProgressBar->setStyleSheet("QProgressBar {border: 1px solid rgb(83, 83, 83);background-color: rgb(38, 40, 41);border-radius: 5px;} QProgressBar::chunk {background-color: rgb(64, 66, 68);width: 20px; }");
+  mProgressBar->setMaximumSize(300, 20);
+  mProgressBar->setMinimumSize(300, 20);
   mProgressBar->setFormat("");
   ui->statusBar->addWidget(mProgressBar);
   initializeGui();
@@ -57,6 +57,8 @@ void MainWindow::on_actionCompiler_triggered()
     mComp.setOutPutConsole(ui->consoleOut);
     mComp.exec(strSourse);
     ui->stackedWidget->setCurrentIndex(1);
+    ui->btnNext->setEnabled(true);
+    ui->btnRun->setEnabled(true);
   } catch(QException &exp) {
     qDebug() << exp.what();
   }
