@@ -44,7 +44,7 @@ void AbstactCommand::setTypeAddr(const QString &value)
 
 CPU *AbstactCommand::getCpu() const
 {
-    return mCpu;
+  return mCpu;
 }
 
 void AbstactCommand::setCpu(CPU *cpu)
@@ -54,19 +54,19 @@ void AbstactCommand::setCpu(CPU *cpu)
 
 void AbstactCommand::setMemory(Memory *memory)
 {
-    this->mMemory = memory;
+  this->mMemory = memory;
 }
 
 void AbstactCommand::push3Times0(QString &str)
 {
-    while(str.size() < 3)
-        str.push_front('0');
+  while(str.size() < 3)
+    str.push_front('0');
 }
 
 void AbstactCommand::push6Times0(QString &str)
 {
-    while(str.size() < 6)
-        str.push_front('0');
+  while(str.size() < 6)
+    str.push_front('0');
 }
 
 AbstactCommand::AbstactCommand()
@@ -92,7 +92,6 @@ bool AbstactCommand::execute(QString strArg, QString typeAddr)
     straightRegister(strArg);
     straight(strArg);
   }
-
   return true;
 }
 
@@ -134,4 +133,24 @@ void AbstactCommand::indexWithPostincrementRegister(QString strArg)
 void AbstactCommand::indexWithPreddekrementomRegister(QString strArg)
 {
   qDebug() << "Не использованная адресация" << strArg;
+}
+
+QStringList AbstactCommand::getMicroCommandList()
+{
+  QStringList list;
+  list << "Micro 1" << "Micro 2" << "Micro 3" << "MIcro 4";
+  return list;
+}
+// return  true if finish
+// false if have command for run
+bool AbstactCommand::executeMicroCommand(QString arg, QString addr, int currentMicroCommand)
+{
+  if(currentMicroCommand == 3) {
+    int ind = mCpu->getPC().toInt();
+    ind ++;
+    QString value = QString::number(ind);
+    mCpu->setPC(value);
+    return true;
+  }
+  return false;
 }

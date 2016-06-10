@@ -5,6 +5,7 @@
 #include "gui/hightlighter.h"
 #include "gui/cpuwidget.h"
 #include "gui/memmorywidget.h"
+#include "gui/microcommandview.h"
 
 #include "memory.h"
 #include "cpu.h"
@@ -25,6 +26,8 @@ class MainWindow;
 class MainWindow : public QMainWindow
 {
   Q_OBJECT
+
+  enum RightTab { Devise, MicroCommand ,Cache };
 
 public:
   explicit MainWindow(QWidget *parent = 0);
@@ -63,6 +66,8 @@ private slots:
 
   void on_btnNext_clicked();
 
+  void on_tabDevise_tabBarClicked(int index);
+
 protected:
   Ui::MainWindow *ui;
   Memory *mMemory;
@@ -75,8 +80,15 @@ protected:
   DebugPanel *mDpanel;
   QProgressBar *mProgressBar;
   CodeEditor *mCodeEdit;
+  MicroCommandView *mMcmdView;
+
+  const QString autoLoadFileName = "autosave.asm";
+  bool mIsMicroCmdOn = false;
 protected:
   void initializeGui();
+
+  void autoSave();
+  void autoLoad();
 };
 
 #endif // MAINWINDOW_H

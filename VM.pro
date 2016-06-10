@@ -28,7 +28,8 @@ SOURCES += main.cpp\
     codegenerator.cpp \
     runer.cpp \
     gui/debugpanel.cpp \
-    gui/codeeditor.cpp
+    gui/codeeditor.cpp \
+    gui/microcommandview.cpp
 
 HEADERS  += mainwindow.h \
     cpu.h \
@@ -46,12 +47,14 @@ HEADERS  += mainwindow.h \
     codegenerator.h \
     runer.h \
     gui/debugpanel.h \
-    gui/codeeditor.h
+    gui/codeeditor.h \
+    gui/microcommandview.h
 
 FORMS    += mainwindow.ui \
     gui/cpuwidget.ui \
     gui/memmorywidget.ui \
-    gui/debugpanel.ui
+    gui/debugpanel.ui \
+    gui/microcommandview.ui
 
 QMAKE_LFLAGS_RELEASE += -static -static-libgcc
 

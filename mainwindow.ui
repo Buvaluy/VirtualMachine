@@ -75,7 +75,7 @@ background-color: qlineargradient(spread:reflect, x1:0, y1:0, x2:0.517045, y2:0,
       </property>
       <layout class="QVBoxLayout" name="verticalLayout_9">
        <property name="spacing">
-        <number>2</number>
+        <number>0</number>
        </property>
        <property name="leftMargin">
         <number>0</number>
@@ -117,6 +117,10 @@ QPushButton:pressed {
 
 QPushButton:hover{
 	background-color: qlineargradient(spread:reflect, x1:0, y1:0, x2:0.517045, y2:0, stop:0 rgba(127, 131, 135, 255), stop:1 rgba(96, 99, 102, 255));
+}
+
+QPushButton:checked{
+		background-color: qlineargradient(spread:reflect, x1:0, y1:0, x2:0.488636, 				y2:0, stop:0 rgba(38, 40, 41, 255), stop:1 rgba(38, 40, 41, 255));
 }</string>
          </property>
          <property name="text">
@@ -133,6 +137,9 @@ QPushButton:hover{
           </size>
          </property>
          <property name="checkable">
+          <bool>true</bool>
+         </property>
+         <property name="checked">
           <bool>true</bool>
          </property>
          <property name="flat">
@@ -168,6 +175,10 @@ QPushButton:pressed {
 
 QPushButton:hover{
 	background-color: qlineargradient(spread:reflect, x1:0, y1:0, x2:0.517045, y2:0, stop:0 rgba(127, 131, 135, 255), stop:1 rgba(96, 99, 102, 255));
+}
+
+QPushButton:checked{
+		background-color: qlineargradient(spread:reflect, x1:0, y1:0, x2:0.488636, 				y2:0, stop:0 rgba(38, 40, 41, 255), stop:1 rgba(38, 40, 41, 255));
 }</string>
          </property>
          <property name="text">
@@ -680,6 +691,9 @@ QTabBar::tab:!selected {
     </item>
     <item>
      <widget class="QTabWidget" name="tabDevise">
+      <property name="enabled">
+       <bool>false</bool>
+      </property>
       <property name="layoutDirection">
        <enum>Qt::LeftToRight</enum>
       </property>
@@ -750,6 +764,30 @@ QTabBar::tab:!selected {
        <attribute name="toolTip">
         <string>Микрокоманды</string>
        </attribute>
+       <layout class="QVBoxLayout" name="verticalLayout_11">
+        <property name="spacing">
+         <number>0</number>
+        </property>
+        <property name="leftMargin">
+         <number>0</number>
+        </property>
+        <property name="topMargin">
+         <number>0</number>
+        </property>
+        <property name="rightMargin">
+         <number>0</number>
+        </property>
+        <property name="bottomMargin">
+         <number>0</number>
+        </property>
+        <item>
+         <layout class="QVBoxLayout" name="vlMicroCmdView">
+          <property name="spacing">
+           <number>0</number>
+          </property>
+         </layout>
+        </item>
+       </layout>
       </widget>
       <widget class="QWidget" name="tab_7">
        <attribute name="icon">
@@ -882,7 +920,7 @@ QMenu::item:selected {
   <action name="actionCompiler">
    <property name="icon">
     <iconset resource="res.qrc">
-     <normaloff>:/images/compile.png</normaloff>:/images/compile.png</iconset>
+     <normaloff>:/images/settings.png</normaloff>:/images/settings.png</iconset>
    </property>
    <property name="text">
     <string>Компилировать </string>
