@@ -75,8 +75,13 @@ protected:
   DebugPanel *mDpanel;
   QProgressBar *mProgressBar;
   CodeEditor *mCodeEdit;
+
+  const QString autoLoadFileName = "autosave.asm";
 protected:
   void initializeGui();
+
+  void autoSave();
+  void autoLoad();
 };
 
 #endif // MAINWINDOW_H

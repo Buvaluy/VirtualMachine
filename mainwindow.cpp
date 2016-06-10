@@ -34,6 +34,7 @@ MainWindow::MainWindow(QWidget *parent) :
   mProgressBar->setFormat("");
   ui->statusBar->addWidget(mProgressBar);
   initializeGui();
+  autoLoad();
 }
 
 MainWindow::~MainWindow()
@@ -48,6 +49,7 @@ MainWindow::~MainWindow()
 
 void MainWindow::on_actionCompiler_triggered()
 {
+  autoSave();
   QString strSourse = mCodeEdit->document()->toPlainText();
   mCpu->clearCPU();
   mCpu->clearRegister();
@@ -103,6 +105,27 @@ void MainWindow::on_actionSave_triggered()
 
 void MainWindow::initializeGui()
 {
+}
+
+void MainWindow::autoSave()
+{
+  QFile file(autoLoadFileName);
+  if(file.open(QIODevice::WriteOnly | QIODevice::Text)) {
+    QTextStream stream(&file);
+    stream << mCodeEdit->document()->toPlainText();
+  }
+  file.close();
+}
+
+void MainWindow::autoLoad()
+{
+  QFile file(autoLoadFileName);
+  if(file.open(QIODevice::ReadOnly | QIODevice::Text)) {
+    QTextStream stream(&file);
+    mCodeEdit->clear();
+    mCodeEdit->appendPlainText(stream.readAll());
+  }
+  file.close();
 }
 
 void MainWindow::on_actionRun_triggered()
@@ -170,11 +193,15 @@ void MainWindow::on_actionVersion_triggered()
 
 void MainWindow::on_btnCode_clicked()
 {
+  ui->btnCode->setChecked(true);
+  ui->btnDebug->setChecked(false);
   ui->stackedWidget->setCurrentIndex(0);
 }
 
 void MainWindow::on_btnDebug_clicked()
 {
+  ui->btnCode->setChecked(false);
+  ui->btnDebug->setChecked(true);
   ui->stackedWidget->setCurrentIndex(1);
 }
 

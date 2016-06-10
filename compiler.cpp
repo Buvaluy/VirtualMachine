@@ -82,7 +82,7 @@ void Compiler::exec(QString &strSource)
                                       i + 1 < slCommandPair.size() ?
                                       slCommandPair.at(i + 1) : " ",
                                       error);
-
+    qDebug() <<"ParseCmd: " << resParseCmd;
     if(resParseCmd != "-1" && error.isEmpty()) {
       mMemory->set(indexCmd, resParseCmd);
       debugList.append(strCmd);
@@ -91,9 +91,13 @@ void Compiler::exec(QString &strSource)
       fireError(error, indexCmd); return;
     } else {
       if(i < slCommandPair.size()) {
-        isRegistr = slCommandPair.at(i + 1);
-        strCode = isRegistr.contains('r') || isRegistr.contains('R') ?
-                  mGenCode->getCode(strCmd + "R") : mGenCode->getCode(strCmd);
+        if(i + 1 < slCommandPair.size()) {
+          isRegistr = slCommandPair.at(i + 1);
+          strCode = isRegistr.contains('r') || isRegistr.contains('R') ?
+                    mGenCode->getCode(strCmd + "R") : mGenCode->getCode(strCmd);
+        } else {
+          fireError("нет аргумента для команды: " +  strCmd, indexCmd); return;
+        }
       } else {
         fireError("нет аргумента для команды: " +  strCmd, indexCmd); return;
       }
@@ -147,8 +151,8 @@ QString Compiler::getAddresType(QString str)
 void Compiler::fireError(QString str, int line)
 {
   out->clear();
-  QString outPutMsg = "Ошибка компиляции" + str +
-      " в строке: " + QString::number(line);
+  QString outPutMsg = "Ошибка компиляции " + str +
+      " в строке: " + QString::number(line + 1);
   mBar->setStyleSheet("QProgressBar {border: 1px solid rgb(83, 83, 83);background-color: rgb(38, 40, 41);border-radius: 5px;} QProgressBar::chunk {background-color: rgb(191, 0, 0);width: 20px; }");
   mBar->setValue(mBar->maximum());
   out->append(outPutMsg);
