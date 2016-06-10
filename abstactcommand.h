@@ -12,10 +12,10 @@ private:
   QString code;
   QString arg;
   QString typeAddr;
-
 protected:
   CPU *mCpu;
   Memory *mMemory;
+  int currentMicroCmd;
 public:
   AbstactCommand();
 
@@ -31,6 +31,12 @@ public:
   virtual void indirectRegister(QString strArg);//Косвенно-регистровая
   virtual void indexWithPostincrementRegister(QString strArg);//Индексная с постинкрементом
   virtual void indexWithPreddekrementomRegister(QString strArg);//Индексная с преддекрементом
+
+  virtual QStringList getMicroCommandList();
+
+  // return  true if finish
+  // false if have command for run
+  virtual bool executeMicroCommand(QString arg, QString addr, int currentMicroCommand);
 
   QString getName() const;
   void setName(const QString &value);

@@ -7,6 +7,7 @@
 #include "commandsimpl.h"
 
 #include "gui/debugpanel.h"
+#include "gui/microcommandview.h"
 
 class Runer
 {
@@ -15,13 +16,17 @@ protected:
   Memory *mMemory;
   CommandFactory *mFactory;
   DebugPanel *mDpanel;
+  bool isMicroCmd = false;
+  int currentMicroCommand;
+  MicroCommandView *mView;
 public:
-  Runer(CPU *cpu, Memory *memory, CommandFactory *factory, DebugPanel* panel);
+  Runer(CPU *cpu, Memory *memory, CommandFactory *factory, DebugPanel* panel, MicroCommandView *view);
   ~Runer();
 
   void run();
   bool nextStep();
 
+  void setIsMicroCmd(bool value);
 };
 
 #endif // RUNER_H
