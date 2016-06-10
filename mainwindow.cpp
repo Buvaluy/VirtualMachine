@@ -16,6 +16,7 @@ MainWindow::MainWindow(QWidget *parent) :
   ui->setupUi(this);
   initializeGui();
   autoLoad();
+  isCompile = false;
 }
 
 MainWindow::~MainWindow()
@@ -25,6 +26,10 @@ MainWindow::~MainWindow()
   delete mHightLighter;
   delete mCodeEdit;
   delete mRuner;
+  delete mMcmdView;
+  delete mDisplay;
+  delete mTimerView;
+  delete mKeyView;
   delete ui;
 }
 
@@ -42,7 +47,7 @@ void MainWindow::on_actionCompiler_triggered()
     ui->stackedWidget->setCurrentIndex(1);
     ui->btnNext->setEnabled(true);
     ui->btnRun->setEnabled(true);
-    ui->tabDevise->setEnabled(true);
+    isCompile = true;
   } catch(QException &exp) {
     qDebug() << exp.what();
   }
@@ -109,6 +114,13 @@ void MainWindow::initializeGui()
   mMcmdView = new MicroCommandView();
   ui->vlMicroCmdView->addWidget(mMcmdView);
   mRuner = new Runer(mCpu, mMemory, mFactory, mDpanel, mMcmdView);
+
+  mDisplay = new DisplayWidget();
+  mTimerView = new TimerView();
+  mKeyView = new KeyView();
+  ui->vlDevice->addWidget(mDisplay);
+  ui->vlDevice->addWidget(mKeyView);
+  ui->vlDevice->addWidget(mTimerView);
 }
 
 void MainWindow::autoSave()
@@ -240,5 +252,5 @@ void MainWindow::on_tabDevise_tabBarClicked(int index)
     break;
   }
 
-  this->mRuner->setIsMicroCmd(mIsMicroCmdOn);
+  this->mRuner->setIsMicroCmd(mIsMicroCmdOn, isCompile);
 }

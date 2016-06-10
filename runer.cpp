@@ -2,11 +2,11 @@
 
 #include <QDebug>
 
-void Runer::setIsMicroCmd(bool value)
+void Runer::setIsMicroCmd(bool value, bool isInitGui)
 {
   isMicroCmd = value;
 
-  if(isMicroCmd) {
+  if(isMicroCmd && isInitGui) {
     int indx = mCpu->getPC().toInt();
     if(indx > 1000) return;
     QString cmd = mMemory->get(indx);
