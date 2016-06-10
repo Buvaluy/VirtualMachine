@@ -54,7 +54,19 @@ void AbstactCommand::setCpu(CPU *cpu)
 
 void AbstactCommand::setMemory(Memory *memory)
 {
-  this->mMemory = memory;
+    this->mMemory = memory;
+}
+
+void AbstactCommand::push3Times0(QString &str)
+{
+    while(str.size() < 3)
+        str.push_front('0');
+}
+
+void AbstactCommand::push6Times0(QString &str)
+{
+    while(str.size() < 6)
+        str.push_front('0');
 }
 
 AbstactCommand::AbstactCommand()

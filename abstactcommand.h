@@ -48,6 +48,9 @@ public:
   void setCpu(CPU *cpu);
 
   void setMemory(Memory *memory);
+
+  void push3Times0(QString &str);
+  void push6Times0(QString &str);
 };
 
 #endif // ABSTACTCOMMAND_H

@@ -90,7 +90,7 @@ void Compiler::exec(QString &strSource)
     } else if(!error.isEmpty()) {
       fireError(error, indexCmd); return;
     } else {
-      if(i < slCommandPair.size()) {
+      if(i < slCommandPair.size() - 1) {
         isRegistr = slCommandPair.at(i + 1);
         strCode = isRegistr.contains('r') || isRegistr.contains('R') ?
                   mGenCode->getCode(strCmd + "R") : mGenCode->getCode(strCmd);
