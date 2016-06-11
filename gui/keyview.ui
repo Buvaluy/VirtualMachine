@@ -112,7 +112,7 @@ QPushButton:hover{
       </widget>
      </item>
      <item>
-      <widget class="QLineEdit" name="lineEdit">
+      <widget class="QLineEdit" name="boxBuff">
        <property name="minimumSize">
         <size>
          <width>0</width>
@@ -146,7 +146,7 @@ QPushButton:hover{
           </widget>
          </item>
          <item>
-          <widget class="QLineEdit" name="lineEdit_2"/>
+          <widget class="QLineEdit" name="boxDr"/>
          </item>
         </layout>
        </item>
@@ -160,7 +160,7 @@ QPushButton:hover{
           </widget>
          </item>
          <item>
-          <widget class="QLineEdit" name="lineEdit_3"/>
+          <widget class="QLineEdit" name="boxCr"/>
          </item>
         </layout>
        </item>
@@ -174,7 +174,7 @@ QPushButton:hover{
           </widget>
          </item>
          <item>
-          <widget class="QLineEdit" name="lineEdit_4"/>
+          <widget class="QLineEdit" name="boxSr"/>
          </item>
         </layout>
        </item>
