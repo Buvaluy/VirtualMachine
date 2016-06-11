@@ -95,45 +95,21 @@ bool AbstactCommand::execute(QString strArg, QString typeAddr)
   return true;
 }
 
-void AbstactCommand::straight(QString strArg)
-{
-  qDebug() << "Не использованная адресация" << strArg;
-}
+void AbstactCommand::straight(QString strArg){}
 
-void AbstactCommand::straightRegister(QString strArg)
-{
-  qDebug() << "Не использованная адресация" << strArg;
-}
+void AbstactCommand::straightRegister(QString strArg){}
 
-void AbstactCommand::direct(QString strArg)
-{
-  qDebug() << "Не использованная адресация" << strArg;
-}
+void AbstactCommand::direct(QString strArg){}
 
-void AbstactCommand::indirect(QString strArg)
-{
-  qDebug() << "Не использованная адресация" << strArg;
-}
+void AbstactCommand::indirect(QString strArg){}
 
-void AbstactCommand::relative(QString strArg)
-{
-  qDebug() << "Не использованная адресация" << strArg;
-}
+void AbstactCommand::relative(QString strArg){}
 
-void AbstactCommand::indirectRegister(QString strArg)
-{
-  qDebug() << "Не использованная адресация" << strArg;
-}
+void AbstactCommand::indirectRegister(QString strArg){}
 
-void AbstactCommand::indexWithPostincrementRegister(QString strArg)
-{
-  qDebug() << "Не использованная адресация" << strArg;
-}
+void AbstactCommand::indexWithPostincrementRegister(QString strArg){}
 
-void AbstactCommand::indexWithPreddekrementomRegister(QString strArg)
-{
-  qDebug() << "Не использованная адресация" << strArg;
-}
+void AbstactCommand::indexWithPreddekrementomRegister(QString strArg){}
 
 QStringList AbstactCommand::getMicroCommandList()
 {
@@ -146,10 +122,11 @@ QStringList AbstactCommand::getMicroCommandList()
 bool AbstactCommand::executeMicroCommand(QString arg, QString addr, int currentMicroCommand)
 {
   if(currentMicroCommand == 3) {
-    int ind = mCpu->getPC().toInt();
+    this->execute(arg, addr);
+    /*int ind = mCpu->getPC().toInt();
     ind ++;
     QString value = QString::number(ind);
-    mCpu->setPC(value);
+    mCpu->setPC(value);*/
     return true;
   }
   return false;
