@@ -5,7 +5,6 @@
 
 #include <QTime>
 #include <cmath>
-
 Compiler::Compiler(Memory *mem, DebugPanel *panel, QProgressBar *mBar)
 {
   this->mMemory = mem;
@@ -24,7 +23,14 @@ void Compiler::setOutPutConsole(QTextEdit *ptr)
 {
   this->out = ptr;
 }
-
+/*
+ * Замена имен меток на числа(адреса их указаний)
+ * Пример: M: rd #10; jmp M
+ * Входные параметры: QString с исходным мнемокодом написанным
+ * на ассамблеры
+ * Выходные данные: Возврат QString с мнемокодом, но метки замененны
+ * на их фактические адреса (адреса указаний).
+ */
 QString Compiler::parseLabel(QString &strSource)
 {
   strSource = strSource.replace("\n", " ");
@@ -56,7 +62,16 @@ QString Compiler::parseLabel(QString &strSource)
   strSource = slCommandPair.join(" ");
   return strSource;
 }
-
+/* Функция компиляци
+ * Осуществляется как проверки, так и вызовв других
+ * функций для проверок или преобразваний.
+ * Проверки на правельность написания мнемокода ассамблера
+ * и заменна мнемокода на коды команд, так же замена символов
+ * адресации на коды адресации, и также меток на их дресса
+ * - Входные данные: исходные мнемокод ассамблера с виджета
+ * - Выходные данные: записать данных в ячейки ОЗУ сформированных
+ * во время выполнения функции
+ */
 void Compiler::exec(QString &strSource)
 {
   if(strSource.isEmpty()) return;
@@ -131,7 +146,8 @@ void Compiler::exec(QString &strSource)
   updateLog(startTime);
   mDpanel->updateCode(debugList);
 }
-
+//Входные данные символ адресации
+//Выходные данные код адресации
 QString Compiler::getAddresType(QString str)
 {
   if(str[0] == '#') {
@@ -147,7 +163,9 @@ QString Compiler::getAddresType(QString str)
   }
   return "0";
 }
-
+//Функция для оповещении в GUI о ошибки компиляции
+//Входные данные: строка с ошибкой, номер строки
+//Выходные данные: вывод информации в GUI
 void Compiler::fireError(QString str, int line)
 {
   out->clear();
@@ -157,7 +175,9 @@ void Compiler::fireError(QString str, int line)
   mBar->setValue(mBar->maximum());
   out->append(outPutMsg);
 }
-
+//Удалиние смиволов [] при индексной адресации
+//Входные данные(аргументы по ссылке): строка где есть число с символами ( [3] ), тип адресации
+//Выходные данные: изменненыя входные аргументы переданные по ссылке
 void Compiler::parseArguments(QString &strArg, QString &typeAdrr)
 {
   typeAdrr = getAddresType((QString)strArg[0] + (QString)strArg[1]);
@@ -180,7 +200,13 @@ void Compiler::parseArguments(QString &strArg, QString &typeAdrr)
     strArg = strArg.remove(0, 1);
   }
 }
-
+/*
+ * Проверка на комманды без операндов, для записи их кодов в память
+ * Входные данные: строка команды, стркоа с аргументом, строка для записи о ошибки
+ * Выходные данные: строка кода команды в соответсвии с мнемокодом команды, или же -1
+ * в качестве оповещение о том, что замены не произошло, и измененного аргумента
+ * error для оповещения ошибки.
+ */
 QString Compiler::parseSpecialCommand(const QString &strCmd, QString args, QString &error)
 {
   if(strCmd == "nop"){
@@ -204,6 +230,7 @@ QString Compiler::parseSpecialCommand(const QString &strCmd, QString args, QStri
   return "-1";
 }
 
+//Обновление консоли оповещени в GUI о начале и конце копиляции, её времени
 void Compiler::updateLog(QTime &startTime)
 {
   QTime endTime = QTime::currentTime();

@@ -2,6 +2,8 @@
 #include "commandsimpl.h"
 #include <QDebug>
 
+//Формирование фабрики команд, а так же получчение указателей
+//на обекты других классов
 CommandFactory::CommandFactory(CPU *cpu, Memory *memory)
 {
     this->impl = cpu;
@@ -44,7 +46,10 @@ void CommandFactory::addImpl(int code, FactoryItemInterface *impl)
 {
     mCommands.insert(code, impl);
 }
-
+//Возвращение указателя на обект, который был создан из фабрики
+//по ключу(номеру).
+//Входные: ключ
+//ВЫходные: указатель обекта
 AbstactCommand *CommandFactory::createCommand(int code)
 {
     FactoryItemInterface *cmd = mCommands.value(code, NULL);

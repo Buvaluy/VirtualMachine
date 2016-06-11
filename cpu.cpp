@@ -17,7 +17,7 @@ void CPU::updateGUI()
 {
   mCpuWdgt->updateGUI();
 }
-
+//Очистка регистров CPU в классе  обновление данных в GUI
 void CPU::clearCPU()
 {
   ACC = "000000";
@@ -43,7 +43,8 @@ void CPU::clearCPU()
     mCpuWdgt->updateGUI();
   }
 }
-
+//Конвертация QString в int с учотом того, что разрядная сетка
+// 6 знаков, где первый знак знаковый(+/-).
 int CPU::convertRegToInt(QString regValue)
 {
   QChar flg = regValue.at(0);
@@ -54,7 +55,8 @@ int CPU::convertRegToInt(QString regValue)
   }
   return rVal;
 }
-
+//Конвертация int в QString с учотом того, что разрядная сетка
+// 6 знаков, где первый знак знаковый(+/-).
 QString CPU::convertIntToReg(int value)
 {
     QString tempNumb = QString::number(value);
@@ -76,7 +78,8 @@ QString CPU::getACC() const
 {
   return ACC;
 }
-
+//Уставка значения в акамулятор, с проверкой числа и установкой
+//соответствующих флагов
 void CPU::setACC(const QString &value)
 {
   if(value.toInt() == 0){ //проверка на 0
@@ -284,7 +287,7 @@ void CPU::setZ(const QString &value)
   assert(value.toInt() <= 1);
   Z = value;
 }
-
+//Установка трех регистров: команлы, типа адресации, данных
 void CPU::setCR(const QString &value)
 {
     //qDebug() << "setCR " << value;
@@ -292,7 +295,7 @@ void CPU::setCR(const QString &value)
     setTA(value.at(2));
     setADR((QString)value.at(3) + (QString)value.at(4) + (QString)value.at(5));
 }
-
+//увечелечия счетчика команд(адрес выполняемой команды)
 void CPU::incrPC()
 {
     PC = QString::number( PC.toInt() + 1 );

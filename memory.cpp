@@ -6,7 +6,7 @@ Memory::Memory()
 {
   clear();
 }
-
+//получение данных с ячейки ОЗУ по её номеру
 const QString Memory::get(const int address)
 {
     if(address > 999 || address < 0){
@@ -15,7 +15,7 @@ const QString Memory::get(const int address)
     Cell *cell = cells.at(address);
     return cell->getCell();
 }
-
+//уставление данных в ячейку ОЗУ по её номеру
 void Memory::set(const int address, const QString &value)
 {
     if(address > 999 || address < 0){
@@ -24,7 +24,7 @@ void Memory::set(const int address, const QString &value)
     cells.at(address)->setCell(value);
     updateGUI();
 }
-
+//уставление данных в ячейку ОЗУ по её номеру
 void Memory::set(const int address, const int &value)
 {
     if(address > 999 || address < 0){

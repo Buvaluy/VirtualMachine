@@ -43,7 +43,8 @@ void Runer::run()
 {
   while(nextStep()) {}
 }
-
+//Выполнение одной команды из памяти ОЗУ по адресу текущей команды
+// (PC) при нажатии кнопки в GUI 'Шаг'
 bool Runer::nextStep()
 {
   int indx = mCpu->getPC().toInt();
