@@ -35,16 +35,43 @@ void CommandImplIn::straight(QString arg)
     mCpu->incrPC();
 }
 
-QStringList CommandImplIn::getMicroCommandList()
+void CommandImplIn::setMicroCommandList()
 {
     QStringList list;
     list << "MAR := PC" << "MRd" << "CR := MDR" << "PC := PC + 1"
          << "Acc := IR" << "EMD_COMMAND";
-    return list;
+    listMicroCommand = list;
 }
 
+void CommandImplIn::straightMC(QString arg, int currentMicroCommand)
+{
+  arg = arg;
+  setMicroCommandList();
+  switch (currentMicroCommand) {
+  case 0:{
+      QString mar = mCpu->getPC();
+      push3Times0( mar );
+      mCpu->setMAR( mar );
+      break;
+  }
+  case 1:
+      mCpu->setMDR( mMemory->get( mCpu->getPC().toInt() ) );
+      break;
+  case 2:
+      mCpu->setCR( mCpu->getMDR() );
+      break;
+  case 3:
+      mCpu->incrPC();
+      break;
+  case 4:
+      mCpu->setACC( mCpu->getIR() );
+      break;
+  }
+}
+/*
 bool CommandImplIn::executeMicroCommand(QString arg, QString addr, int currentMicroCommand)
 {
+    qDebug() << "exMC" << currentMicroCommand;
     arg = arg;
     addr = addr;
     switch (currentMicroCommand) {
@@ -52,7 +79,7 @@ bool CommandImplIn::executeMicroCommand(QString arg, QString addr, int currentMi
         QString mar = mCpu->getPC();
         push3Times0( mar );
         mCpu->setMAR( mar );
-        return true;
+        //return true;
         break;
     }
     case 1:
@@ -67,16 +94,16 @@ bool CommandImplIn::executeMicroCommand(QString arg, QString addr, int currentMi
     case 4:
         mCpu->setACC( mCpu->getIR() );
         break;
-    case 5:
+//    case 5:
 
-        break;
+//        break;
     default:
         return true;
         break;
     }
     return false;
 }
-
+*/
 void CommandImplOut::straight(QString arg)
 {
     arg = "0";
@@ -88,14 +115,40 @@ void CommandImplOut::straight(QString arg)
     mCpu->incrPC();
 }
 
-QStringList CommandImplOut::getMicroCommandList()
+void CommandImplOut::setMicroCommandList()
 {
     QStringList list;
     list << "MAR := PC" << "MRd" << "CR := MDR" << "PC := PC + 1"
          << "OR := Acc" << "EMD_COMMAND";
-    return list;
+    listMicroCommand = list;
 }
 
+void CommandImplOut::straightMC(QString arg, int currentMicroCommand)
+{
+  arg = arg;
+  setMicroCommandList();
+  switch (currentMicroCommand) {
+  case 0:{
+      QString mar = mCpu->getPC();
+      push3Times0( mar );
+      mCpu->setMAR( mar );
+      break;
+  }
+  case 1:
+      mCpu->setMDR( mMemory->get( mCpu->getPC().toInt() ) );
+      break;
+  case 2:
+      mCpu->setCR( mCpu->getMDR() );
+      break;
+  case 3:
+      mCpu->incrPC();
+      break;
+  case 4:
+      mCpu->setOR( mCpu->getACC() );
+      break;
+  }
+}
+/*
 bool CommandImplOut::executeMicroCommand(QString arg, QString addr, int currentMicroCommand)
 {
     arg = arg;
@@ -105,7 +158,7 @@ bool CommandImplOut::executeMicroCommand(QString arg, QString addr, int currentM
         QString mar = mCpu->getPC();
         push3Times0( mar );
         mCpu->setMAR( mar );
-        return true;
+        //return true;
         break;
     }
     case 1:
@@ -129,7 +182,7 @@ bool CommandImplOut::executeMicroCommand(QString arg, QString addr, int currentM
     }
     return false;
 }
-
+*/
 void CommandImplRead::direct(QString arg)
 {//#
   while(arg.count() < 6){
@@ -173,7 +226,7 @@ void CommandImplRead::straight(QString arg)
     mCpu->incrPC();
 }
 
-QStringList CommandImplRead::getMicroCommandList()
+void CommandImplRead::setMicroCommandList()
 {
     QStringList list;
     if(getTypeAddr() == "0")
@@ -186,19 +239,22 @@ QStringList CommandImplRead::getMicroCommandList()
         list << "MAR := PC" << "MRd" << "CR := MDR" << "PC := PC + 1"
              << "MAR := ADR" << "MRd" << "RA := MDR" << "MAR := RA"
              << "MRd" << "Acc := MDR" << "EMD_COMMAND";
-    return list;
-}
 
+    listMicroCommand = list;
+}
+/*
 bool CommandImplRead::executeMicroCommand(QString arg, QString addr, int currentMicroCommand)
 {
+    //qDebug() << addr;
     arg = arg;
+    setTypeAddr(addr);
     if(addr == "0"){
         switch (currentMicroCommand) {
         case 0:{
             QString mar = mCpu->getPC();
             push3Times0( mar );
             mCpu->setMAR( mar );
-            return true;
+            //return true;
             break;
         }
         case 1:
@@ -231,7 +287,7 @@ bool CommandImplRead::executeMicroCommand(QString arg, QString addr, int current
             QString mar = mCpu->getPC();
             push3Times0( mar );
             mCpu->setMAR( mar );
-            return true;
+            //return true;
             break;
         }
         case 1:
@@ -258,7 +314,7 @@ bool CommandImplRead::executeMicroCommand(QString arg, QString addr, int current
             QString mar = mCpu->getPC();
             push3Times0( mar );
             mCpu->setMAR( mar );
-            return true;
+            //return true;
             break;
         }
         case 1:
@@ -298,7 +354,7 @@ bool CommandImplRead::executeMicroCommand(QString arg, QString addr, int current
     }
     return false;
 }
-
+*/
 void CommandImplWrite::indirect(QString arg)
 {//@
     QString acc = mCpu->getACC();

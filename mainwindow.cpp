@@ -48,6 +48,7 @@ void MainWindow::on_actionCompiler_triggered()
     ui->btnNext->setEnabled(true);
     ui->btnRun->setEnabled(true);
     isCompile = true;
+    mRuner->clearIndx();
   } catch(QException &exp) {
     qDebug() << exp.what();
   }

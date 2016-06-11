@@ -15,8 +15,8 @@ public:
   }
 
   void straight(QString arg) override;
-  QStringList getMicroCommandList() override;
-  bool executeMicroCommand(QString arg, QString addr, int currentMicroCommand);
+  void setMicroCommandList();
+  void straightMC(QString arg, int currentMicroCommand) override;
 };
 
 class CommandImplOut : public AbstactCommand
@@ -30,8 +30,8 @@ public:
   }
 
   void straight(QString arg) override;
-  QStringList getMicroCommandList() override;
-  bool executeMicroCommand(QString arg, QString addr, int currentMicroCommand);
+  void setMicroCommandList();
+  void straightMC(QString arg, int currentMicroCommand) override;
 };
 
 
@@ -52,8 +52,7 @@ public:
 
   void straight(QString arg) override;
 
-  QStringList getMicroCommandList() override;
-  bool executeMicroCommand(QString arg, QString addr, int currentMicroCommand);
+  void setMicroCommandList();
 };
 
 class CommandImplWrite : public AbstactCommand

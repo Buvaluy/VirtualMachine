@@ -25,8 +25,10 @@ public:
 
   void run();
   bool nextStep();
+  void clearIndx();
 
   void setIsMicroCmd(bool value, bool isInitGui);
+private: int indx;
 };
 
 #endif // RUNER_H

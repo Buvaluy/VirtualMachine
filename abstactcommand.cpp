@@ -78,6 +78,11 @@ void AbstactCommand::push6Times0(QString &str)
     str.push_front('0');
 }
 
+QStringList AbstactCommand::getListMicroCommand() const
+{
+  return listMicroCommand;
+}
+
 AbstactCommand::AbstactCommand()
 {
 
@@ -132,31 +137,62 @@ void AbstactCommand::indexWithPostincrementRegister(QString strArg){strArg = str
 
 void AbstactCommand::indexWithPreddekrementomRegister(QString strArg){strArg = strArg;}
 
+void AbstactCommand::straightMC(QString strArg, int currentMicroCommand)
+{strArg = strArg; currentMicroCommand = currentMicroCommand;}
+
+void AbstactCommand::straightRegisterMC(QString strArg, int currentMicroCommand)
+{strArg = strArg; currentMicroCommand = currentMicroCommand;}
+
+void AbstactCommand::directMC(QString strArg, int currentMicroCommand)
+{strArg = strArg; currentMicroCommand = currentMicroCommand;}
+
+void AbstactCommand::indirectMC(QString strArg, int currentMicroCommand)
+{strArg = strArg; currentMicroCommand = currentMicroCommand;}
+
+void AbstactCommand::relativeMC(QString strArg, int currentMicroCommand)
+{strArg = strArg; currentMicroCommand = currentMicroCommand;}
+
+void AbstactCommand::indirectRegisterMC(QString strArg, int currentMicroCommand)
+{strArg = strArg; currentMicroCommand = currentMicroCommand;}
+
+void AbstactCommand::indexWithPostincrementRegisterMC(QString strArg, int currentMicroCommand)
+{strArg = strArg; currentMicroCommand = currentMicroCommand;}
+
+void AbstactCommand::indexWithPreddekrementomRegisterMC(QString strArg, int currentMicroCommand)
+{strArg = strArg; currentMicroCommand = currentMicroCommand;}
+
 /*
  * После реализации будет описание
  *
  */
-QStringList AbstactCommand::getMicroCommandList()
-{
-  QStringList list;
-  list << "Micro 1" << "Micro 2" << "Micro 3" << "Micro 4";
-  return list;
-}
+//QStringList AbstactCommand::getMicroCommandList()
+//{
+//  QStringList list;
+//  list << "Micro 1" << "Micro 2" << "Micro 3" << "Micro 4";
+//  return list;
+//}
 // return  true if finish
 // false if have command for run
 bool AbstactCommand::executeMicroCommand(QString arg, QString addr, int currentMicroCommand)
 {
-    arg = arg;
-    addr = addr;
-    currentMicroCommand = currentMicroCommand;
-//  if(currentMicroCommand == 3) {
-//    this->execute(arg, addr);
-//    /*int ind = mCpu->getPC().toInt();
-//    ind ++;
-//    QString value = QString::number(ind);
-//    mCpu->setPC(value);*/
-//    return true;
-//  }
-//  return false;
+  setTypeAddr( addr );//возможно потом удалить
+  if(addr == "6") {// -@R
+    indexWithPreddekrementomRegisterMC(arg, currentMicroCommand);
+  } else if(addr == "1") { //#
+    directMC(arg, currentMicroCommand);
+  } else if(addr == "2") { //@
+    indirectMC(arg, currentMicroCommand);
+  } else if(addr == "3") { // []
+    relativeMC(arg, currentMicroCommand);
+  } else if(addr == "5") {// @R+
+    indexWithPostincrementRegisterMC(arg, currentMicroCommand);
+  } else if(addr == "4"){ // @R
+    indirectRegisterMC(arg, currentMicroCommand);
+  } else {
+    straightRegisterMC(arg, currentMicroCommand);
+    straightMC(arg, currentMicroCommand);
+  }
+  if(listMicroCommand.size() == currentMicroCommand && listMicroCommand.size() != 0)
     return true;
+  return false;
 }

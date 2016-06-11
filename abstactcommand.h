@@ -16,6 +16,7 @@ protected:
   CPU *mCpu;
   Memory *mMemory;
   int currentMicroCmd;
+  QStringList listMicroCommand;
 public:
   AbstactCommand();
 
@@ -32,7 +33,16 @@ public:
   virtual void indexWithPostincrementRegister(QString strArg);//Индексная с постинкрементом
   virtual void indexWithPreddekrementomRegister(QString strArg);//Индексная с преддекрементом
 
-  virtual QStringList getMicroCommandList();
+  virtual void straightMC(QString strArg, int currentMicroCommand); // Прямая
+  virtual void straightRegisterMC(QString strArg, int currentMicroCommand);// Прямая регистровая
+  virtual void directMC(QString strArg, int currentMicroCommand); //Непосредственная
+  virtual void indirectMC(QString strArg, int currentMicroCommand);// Косвенная
+  virtual void relativeMC(QString strArg, int currentMicroCommand); //Относительная
+  virtual void indirectRegisterMC(QString strArg, int currentMicroCommand);//Косвенно-регистровая
+  virtual void indexWithPostincrementRegisterMC(QString strArg, int currentMicroCommand);//Индексная с постинкрементом
+  virtual void indexWithPreddekrementomRegisterMC(QString strArg, int currentMicroCommand);//Индексная с преддекрементом
+
+  //virtual QStringList getMicroCommandList();
 
   // return  true if finish
   // false if have command for run
@@ -57,6 +67,7 @@ public:
 
   void push3Times0(QString &str);
   void push6Times0(QString &str);
+  QStringList getListMicroCommand() const;
 };
 
 #endif // ABSTACTCOMMAND_H
