@@ -93,6 +93,7 @@ AbstactCommand::AbstactCommand()
  */
 bool AbstactCommand::execute(QString strArg, QString typeAddr)
 {
+  setTypeAddr( typeAddr );
   if(typeAddr == "6") {// -@R
     indexWithPreddekrementomRegister(strArg);
   } else if(typeAddr == "1") { //#
@@ -115,21 +116,21 @@ bool AbstactCommand::execute(QString strArg, QString typeAddr)
 /*
  * Методы перегружаеммые в классах своих команд
  */
-void AbstactCommand::straight(QString strArg){}
+void AbstactCommand::straight(QString strArg){strArg = strArg;}
 
-void AbstactCommand::straightRegister(QString strArg){}
+void AbstactCommand::straightRegister(QString strArg){strArg = strArg;}
 
-void AbstactCommand::direct(QString strArg){}
+void AbstactCommand::direct(QString strArg){strArg = strArg;}
 
-void AbstactCommand::indirect(QString strArg){}
+void AbstactCommand::indirect(QString strArg){strArg = strArg;}
 
-void AbstactCommand::relative(QString strArg){}
+void AbstactCommand::relative(QString strArg){strArg = strArg;}
 
-void AbstactCommand::indirectRegister(QString strArg){}
+void AbstactCommand::indirectRegister(QString strArg){strArg = strArg;}
 
-void AbstactCommand::indexWithPostincrementRegister(QString strArg){}
+void AbstactCommand::indexWithPostincrementRegister(QString strArg){strArg = strArg;}
 
-void AbstactCommand::indexWithPreddekrementomRegister(QString strArg){}
+void AbstactCommand::indexWithPreddekrementomRegister(QString strArg){strArg = strArg;}
 
 /*
  * После реализации будет описание
@@ -138,20 +139,24 @@ void AbstactCommand::indexWithPreddekrementomRegister(QString strArg){}
 QStringList AbstactCommand::getMicroCommandList()
 {
   QStringList list;
-  list << "Micro 1" << "Micro 2" << "Micro 3" << "MIcro 4";
+  list << "Micro 1" << "Micro 2" << "Micro 3" << "Micro 4";
   return list;
 }
 // return  true if finish
 // false if have command for run
 bool AbstactCommand::executeMicroCommand(QString arg, QString addr, int currentMicroCommand)
 {
-  if(currentMicroCommand == 3) {
-    this->execute(arg, addr);
-    /*int ind = mCpu->getPC().toInt();
-    ind ++;
-    QString value = QString::number(ind);
-    mCpu->setPC(value);*/
+    arg = arg;
+    addr = addr;
+    currentMicroCommand = currentMicroCommand;
+//  if(currentMicroCommand == 3) {
+//    this->execute(arg, addr);
+//    /*int ind = mCpu->getPC().toInt();
+//    ind ++;
+//    QString value = QString::number(ind);
+//    mCpu->setPC(value);*/
+//    return true;
+//  }
+//  return false;
     return true;
-  }
-  return false;
 }
