@@ -53,6 +53,12 @@ public:
   void straight(QString arg) override;
 
   void setMicroCommandList();
+
+  void directMC(QString arg, int currentMicroCommand) override;
+
+  void indirectMC(QString arg, int currentMicroCommand) override;
+
+  void straightMC(QString arg, int currentMicroCommand) override;
 };
 
 class CommandImplWrite : public AbstactCommand
@@ -68,6 +74,12 @@ public:
   void indirect(QString arg) override;
 
   void straight(QString arg) override;
+
+  void setMicroCommandList();
+
+  void indirectMC(QString arg, int currentMicroCommand) override;
+
+  void straightMC(QString arg, int currentMicroCommand) override;
 };
 
 class CommandImplAdd : public AbstactCommand
@@ -85,6 +97,14 @@ public:
   void indirect(QString arg) override;
 
   void straight(QString arg) override;
+
+  void setMicroCommandList();
+
+  void directMC(QString arg, int currentMicroCommand) override;
+
+  void indirectMC(QString arg, int currentMicroCommand) override;
+
+  void straightMC(QString arg, int currentMicroCommand) override;
 };
 
 class CommandImplSub : public AbstactCommand
@@ -102,6 +122,14 @@ public:
   void indirect(QString arg) override;
 
   void straight(QString arg) override;
+
+  void setMicroCommandList();
+
+  void directMC(QString arg, int currentMicroCommand) override;
+
+  void indirectMC(QString arg, int currentMicroCommand) override;
+
+  void straightMC(QString arg, int currentMicroCommand) override;
 };
 
 class CommandImplMul : public AbstactCommand

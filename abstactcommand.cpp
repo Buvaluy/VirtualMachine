@@ -83,6 +83,27 @@ QStringList AbstactCommand::getListMicroCommand() const
   return listMicroCommand;
 }
 
+void AbstactCommand::duplicateMicroCommand(int currentMicroCommand)
+{
+  switch (currentMicroCommand) {
+  case 0:{
+    QString mar = mCpu->getPC();
+    push3Times0( mar );
+    mCpu->setMAR( mar );
+    break;
+  }
+  case 1:
+    mCpu->setMDR( mMemory->get( mCpu->getPC().toInt() ) );
+    break;
+  case 2:
+    mCpu->setCR( mCpu->getMDR() );
+    break;
+  case 3:
+    mCpu->incrPC();
+    break;
+  }
+}
+
 AbstactCommand::AbstactCommand()
 {
 

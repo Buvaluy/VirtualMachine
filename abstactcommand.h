@@ -68,6 +68,8 @@ public:
   void push3Times0(QString &str);
   void push6Times0(QString &str);
   QStringList getListMicroCommand() const;
+
+  void duplicateMicroCommand(int currentMicroCommand);
 };
 
 #endif // ABSTACTCOMMAND_H
