@@ -4,7 +4,7 @@
 #
 #-------------------------------------------------
 
-QT       += core gui testlib
+QT       += core gui
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
@@ -32,9 +32,7 @@ SOURCES += main.cpp\
     gui/microcommandview.cpp \
     gui/displaywidget.cpp \
     gui/timerview.cpp \
-    gui/keyview.cpp \
-    tst_main.cpp \
-    tst_cpu.cpp
+    gui/keyview.cpp
 
 HEADERS  += mainwindow.h \
     cpu.h \

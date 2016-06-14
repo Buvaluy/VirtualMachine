@@ -147,6 +147,14 @@ public:
   void indirect(QString arg) override;
 
   void straight(QString arg) override;
+
+  void setMicroCommandList();
+
+  void directMC(QString arg, int currentMicroCommand) override;
+
+  void indirectMC(QString arg, int currentMicroCommand) override;
+
+  void straightMC(QString arg, int currentMicroCommand) override;
 };
 
 class CommandImplDiv : public AbstactCommand
@@ -164,6 +172,14 @@ public:
   void indirect(QString arg) override;
 
   void straight(QString arg) override;
+
+  void setMicroCommandList();
+
+  void directMC(QString arg, int currentMicroCommand) override;
+
+  void indirectMC(QString arg, int currentMicroCommand) override;
+
+  void straightMC(QString arg, int currentMicroCommand) override;
 };
 
 class CommandImplReadRegister : public AbstactCommand
@@ -183,6 +199,16 @@ public:
   void indexWithPostincrementRegister(QString arg) override;
 
   void indexWithPreddekrementomRegister(QString arg) override;
+
+  void setMicroCommandList();
+
+  void indirectRegisterMC(QString arg, int currentMicroCommand) override;
+
+  void straightRegisterMC(QString arg, int currentMicroCommand) override;
+
+  void indexWithPostincrementRegisterMC(QString arg, int currentMicroCommand) override;
+
+  void indexWithPreddekrementomRegisterMC(QString arg, int currentMicroCommand) override;
 };
 
 
@@ -203,6 +229,16 @@ public:
   void indexWithPostincrementRegister(QString arg) override;
 
   void indexWithPreddekrementomRegister(QString arg) override;
+
+  void setMicroCommandList();
+
+  void indirectRegisterMC(QString arg, int currentMicroCommand) override;
+
+  void straightRegisterMC(QString arg, int currentMicroCommand) override;
+
+  void indexWithPostincrementRegisterMC(QString arg, int currentMicroCommand) override;
+
+  void indexWithPreddekrementomRegisterMC(QString arg, int currentMicroCommand) override;
 };
 
 class CommandImplAddRegister : public AbstactCommand

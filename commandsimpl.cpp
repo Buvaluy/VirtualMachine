@@ -170,9 +170,11 @@ void CommandImplRead::indirectMC(QString arg, int currentMicroCommand)
   case 5:
     mCpu->setMDR( mMemory->get( mCpu->getMAR().toInt() ) );
     break;
-  case 6:
-    mCpu->setRA( mCpu->getMDR() );
-    break;
+  case 6:{
+    QString mdr = mCpu->getMDR();
+    QString ra = (QString)mdr[3] + (QString)mdr[4] + (QString)mdr[5];
+    mCpu->setRA( ra );
+    break;}
   case 7:
     mCpu->setMAR( mCpu->getRA() );
     break;
@@ -262,9 +264,11 @@ void CommandImplWrite::indirectMC(QString arg, int currentMicroCommand)
   case 5:
     mCpu->setMDR( mMemory->get( mCpu->getMAR().toInt() ) );
     break;
-  case 6:
-    mCpu->setRA( mCpu->getMDR() );
-    break;
+  case 6:{
+    QString mdr = mCpu->getMDR();
+    QString ra = (QString)mdr[3] + (QString)mdr[4] + (QString)mdr[5];
+    mCpu->setRA( ra );
+    break;}
   case 7:
     mCpu->setMAR( mCpu->getRA() );
     break;
@@ -405,9 +409,11 @@ void CommandImplAdd::indirectMC(QString arg, int currentMicroCommand)
   case 5:
     mCpu->setMDR( mMemory->get( mCpu->getMAR().toInt() ) );
     break;
-  case 6:
-    mCpu->setRA( mCpu->getMDR() );
-    break;
+  case 6:{
+    QString mdr = mCpu->getMDR();
+    QString ra = (QString)mdr[3] + (QString)mdr[4] + (QString)mdr[5];
+    mCpu->setRA( ra );
+    break;}
   case 7:
     mCpu->setMAR( mCpu->getRA() );
     break;
@@ -579,9 +585,11 @@ void CommandImplSub::indirectMC(QString arg, int currentMicroCommand)
     case 5:
       mCpu->setMDR( mMemory->get( mCpu->getMAR().toInt() ) );
       break;
-    case 6:
-      mCpu->setRA( mCpu->getMDR() );
-      break;
+    case 6:{
+      QString mdr = mCpu->getMDR();
+      QString ra = (QString)mdr[3] + (QString)mdr[4] + (QString)mdr[5];
+      mCpu->setRA( ra );
+      break;}
     case 7:
       mCpu->setMAR( mCpu->getRA() );
       break;
@@ -686,6 +694,117 @@ void CommandImplMul::straight(QString arg)
   mCpu->incrPC();
 }
 
+void CommandImplMul::setMicroCommandList()
+{
+  QStringList list;
+  if(getTypeAddr() == "0")
+    list << "MAR := PC" << "MRd" << "CR := MDR" << "PC := PC + 1"
+         << "MAR := ADR" << "MRd" << "DR := MDR" << "ALU <- COP"
+         << "Start ALU" << "EMD_COMMAND";
+  else if(getTypeAddr() == "1")
+    list << "MAR := PC" << "MRd" << "CR := MDR" << "PC := PC + 1"
+         << "DR := ADR" << "ALU <- COP" << "Start ALU" << "EMD_COMMAND";
+  else if(getTypeAddr() == "2")
+    list << "MAR := PC" << "MRd" << "CR := MDR" << "PC := PC + 1"
+         << "MAR := ADR" << "MRd" << "RA := MDR" << "MAR := RA"
+         << "MRd" << "DR := MDR" << "ALU <- COP" << "Start ALU"
+         << "EMD_COMMAND";
+
+  listMicroCommand = list;
+}
+
+void CommandImplMul::directMC(QString arg, int currentMicroCommand)
+{
+  arg = arg;
+  if(currentMicroCommand >= 0 && currentMicroCommand <= 3){
+    duplicateMicroCommand(currentMicroCommand);
+    return;
+  }
+  switch (currentMicroCommand) {
+  case 4:
+    mCpu->setDR( mCpu->getADR() );
+    break;
+  case 5:
+    break;
+  case 6:
+      mCpu->setACC( mCpu->convertIntToReg( mCpu->convertRegToInt( mCpu->getACC() ) *
+                                         mCpu->convertRegToInt( mCpu->getDR() ) ) );
+    break;
+  default:
+    break;
+  }
+}
+
+void CommandImplMul::indirectMC(QString arg, int currentMicroCommand)
+{
+  //@
+    arg = arg;
+    if(currentMicroCommand >= 0 && currentMicroCommand <= 3){
+      duplicateMicroCommand(currentMicroCommand);
+      return;
+    }
+    switch (currentMicroCommand) {
+    case 4:
+      mCpu->setMAR( mCpu->getADR() );
+      break;
+    case 5:
+      mCpu->setMDR( mMemory->get( mCpu->getMAR().toInt() ) );
+      break;
+    case 6:{
+      QString mdr = mCpu->getMDR();
+      QString ra = (QString)mdr[3] + (QString)mdr[4] + (QString)mdr[5];
+      mCpu->setRA( ra );
+      break;}
+    case 7:
+      mCpu->setMAR( mCpu->getRA() );
+      break;
+    case 8:
+      mCpu->setMDR( mMemory->get( mCpu->getMAR().toInt() ) );
+      break;
+    case 9:
+      mCpu->setDR( mCpu->getMDR() );
+      break;
+    case 10:
+
+      break;
+    case 11:
+        mCpu->setACC( mCpu->convertIntToReg( mCpu->convertRegToInt( mCpu->getACC() ) *
+                                           mCpu->convertRegToInt( mCpu->getDR() ) ) );
+      break;
+    default:
+      break;
+    }
+}
+
+void CommandImplMul::straightMC(QString arg, int currentMicroCommand)
+{
+  //0
+    arg = arg;
+    if(currentMicroCommand >= 0 && currentMicroCommand <= 3){
+      duplicateMicroCommand(currentMicroCommand);
+      return;
+    }
+    switch (currentMicroCommand) {
+    case 4:
+      mCpu->setMAR( mCpu->getADR() );
+      break;
+    case 5:
+      mCpu->setMDR( mMemory->get( mCpu->getMAR().toInt() ) );
+      break;
+    case 6:
+      mCpu->setDR( mCpu->getMDR() );
+      break;
+    case 7:
+      break;
+    case 8:
+        mCpu->setACC( mCpu->convertIntToReg( mCpu->convertRegToInt( mCpu->getACC() ) *
+                                           mCpu->convertRegToInt( mCpu->getDR() ) ) );
+      break;
+    default:
+      break;
+    }
+}
+
 void CommandImplDiv::direct(QString arg)
 {//#
   push6Times0( arg );
@@ -730,6 +849,117 @@ void CommandImplDiv::straight(QString arg)
   mCpu->setDR( mem );
   mCpu->setCR( mMemory->get( mCpu->getPC().toInt() ) );
   mCpu->incrPC();
+}
+
+void CommandImplDiv::setMicroCommandList()
+{
+  QStringList list;
+  if(getTypeAddr() == "0")
+    list << "MAR := PC" << "MRd" << "CR := MDR" << "PC := PC + 1"
+         << "MAR := ADR" << "MRd" << "DR := MDR" << "ALU <- COP"
+         << "Start ALU" << "EMD_COMMAND";
+  else if(getTypeAddr() == "1")
+    list << "MAR := PC" << "MRd" << "CR := MDR" << "PC := PC + 1"
+         << "DR := ADR" << "ALU <- COP" << "Start ALU" << "EMD_COMMAND";
+  else if(getTypeAddr() == "2")
+    list << "MAR := PC" << "MRd" << "CR := MDR" << "PC := PC + 1"
+         << "MAR := ADR" << "MRd" << "RA := MDR" << "MAR := RA"
+         << "MRd" << "DR := MDR" << "ALU <- COP" << "Start ALU"
+         << "EMD_COMMAND";
+
+  listMicroCommand = list;
+}
+
+void CommandImplDiv::directMC(QString arg, int currentMicroCommand)
+{
+  arg = arg;
+  if(currentMicroCommand >= 0 && currentMicroCommand <= 3){
+    duplicateMicroCommand(currentMicroCommand);
+    return;
+  }
+  switch (currentMicroCommand) {
+  case 4:
+    mCpu->setDR( mCpu->getADR() );
+    break;
+  case 5:
+    break;
+  case 6:
+      mCpu->setACC( mCpu->convertIntToReg( mCpu->convertRegToInt( mCpu->getACC() ) /
+                                         mCpu->convertRegToInt( mCpu->getDR() ) ) );
+    break;
+  default:
+    break;
+  }
+}
+
+void CommandImplDiv::indirectMC(QString arg, int currentMicroCommand)
+{
+  //@
+    arg = arg;
+    if(currentMicroCommand >= 0 && currentMicroCommand <= 3){
+      duplicateMicroCommand(currentMicroCommand);
+      return;
+    }
+    switch (currentMicroCommand) {
+    case 4:
+      mCpu->setMAR( mCpu->getADR() );
+      break;
+    case 5:
+      mCpu->setMDR( mMemory->get( mCpu->getMAR().toInt() ) );
+      break;
+    case 6:{
+      QString mdr = mCpu->getMDR();
+      QString ra = (QString)mdr[3] + (QString)mdr[4] + (QString)mdr[5];
+      mCpu->setRA( ra );
+      break;}
+    case 7:
+      mCpu->setMAR( mCpu->getRA() );
+      break;
+    case 8:
+      mCpu->setMDR( mMemory->get( mCpu->getMAR().toInt() ) );
+      break;
+    case 9:
+      mCpu->setDR( mCpu->getMDR() );
+      break;
+    case 10:
+
+      break;
+    case 11:
+        mCpu->setACC( mCpu->convertIntToReg( mCpu->convertRegToInt( mCpu->getACC() ) /
+                                           mCpu->convertRegToInt( mCpu->getDR() ) ) );
+      break;
+    default:
+      break;
+    }
+}
+
+void CommandImplDiv::straightMC(QString arg, int currentMicroCommand)
+{
+  //0
+    arg = arg;
+    if(currentMicroCommand >= 0 && currentMicroCommand <= 3){
+      duplicateMicroCommand(currentMicroCommand);
+      return;
+    }
+    switch (currentMicroCommand) {
+    case 4:
+      mCpu->setMAR( mCpu->getADR() );
+      break;
+    case 5:
+      mCpu->setMDR( mMemory->get( mCpu->getMAR().toInt() ) );
+      break;
+    case 6:
+      mCpu->setDR( mCpu->getMDR() );
+      break;
+    case 7:
+      break;
+    case 8:
+        mCpu->setACC( mCpu->convertIntToReg( mCpu->convertRegToInt( mCpu->getACC() ) /
+                                           mCpu->convertRegToInt( mCpu->getDR() ) ) );
+      break;
+    default:
+      break;
+    }
 }
 
 void CommandImplReadRegister::indirectRegister(QString arg)
@@ -801,6 +1031,167 @@ void CommandImplReadRegister::indexWithPreddekrementomRegister(QString arg)
   mCpu->incrPC();
 }
 
+void CommandImplReadRegister::setMicroCommandList()
+{
+  QStringList list;
+  if(getTypeAddr() == "0")
+    list << "MAR := PC" << "MRd" << "CR := MDR" << "PC := PC + 1"
+         << "RAR := CR5" << "RRd" << "Acc := RDR" << "EMD_COMMAND";
+  else if(getTypeAddr() == "4")
+    list << "MAR := PC" << "MRd" << "CR := MDR" << "PC := PC + 1"
+         << "RAR := CR5" << "RRd" << "RA := RDR" << "MAR := RA"
+         << "MRd" << "Acc := MDR" << "EMD_COMMAND";
+  else if(getTypeAddr() == "5")
+    list << "MAR := PC" << "MRd" << "CR := MDR" << "PC := PC + 1"
+         << "RAR := CR5" << "RRd" << "RA := RDR" << "MAR := RA"
+         << "MRd" << "Acc := MDR" << "INC_GR" << "EMD_COMMAND";
+  else if(getTypeAddr() == "6")
+    list << "MAR := PC" << "MRd" << "CR := MDR" << "PC := PC + 1"
+         << "RAR := CR5" << "DEC_GR" << "RRd" << "RA := RDR"
+         << "MAR := RA" << "MRd" << "Acc := MDR" << "EMD_COMMAND";
+
+  listMicroCommand = list;
+}
+
+void CommandImplReadRegister::indirectRegisterMC(QString arg, int currentMicroCommand)
+{
+  //@
+    arg = arg;
+    setMicroCommandList();
+    if(currentMicroCommand >= 0 && currentMicroCommand <= 3){
+      duplicateMicroCommand(currentMicroCommand);
+      return;
+    }
+    switch (currentMicroCommand) {
+    case 4:
+      mCpu->setRAR( (QString)mCpu->getADR()[2] );
+      break;
+    case 5:
+      mCpu->setRDR( mCpu->getRegisterValue( mCpu->getRAR().toInt() ) );
+      break;
+    case 6:{
+      QString rdr = mCpu->getRDR();
+      QString ra = (QString)rdr[3] + (QString)rdr[4] + (QString)rdr[5];
+      mCpu->setRA( ra );
+      break;}
+    case 7:
+      mCpu->setMAR( mCpu->getRA() );
+      break;
+    case 8:
+      mCpu->setMDR( mMemory->get( mCpu->getMAR().toInt() ) );
+      break;
+    case 9:
+      mCpu->setACC( mCpu->getMDR() );
+      break;
+    default:
+      break;
+    }
+}
+
+void CommandImplReadRegister::straightRegisterMC(QString arg, int currentMicroCommand)
+{
+  // 0
+    arg = arg;
+    setMicroCommandList();
+    if(currentMicroCommand >= 0 && currentMicroCommand <= 3){
+      duplicateMicroCommand(currentMicroCommand);
+      return;
+    }
+    switch (currentMicroCommand) {
+    case 4:
+      mCpu->setRAR( (QString)mCpu->getADR()[2] );
+      break;
+    case 5:
+      mCpu->setRDR( mCpu->getRegisterValue( mCpu->getRAR().toInt() ) );
+      break;
+    case 6:
+      mCpu->setACC( mCpu->getRDR() );
+      break;
+    default:
+      break;
+    }
+}
+
+void CommandImplReadRegister::indexWithPostincrementRegisterMC(QString arg, int currentMicroCommand)
+{
+  //@+
+    arg = arg;
+    setMicroCommandList();
+    if(currentMicroCommand >= 0 && currentMicroCommand <= 3){
+      duplicateMicroCommand(currentMicroCommand);
+      return;
+    }
+    switch (currentMicroCommand) {
+    case 4:
+      mCpu->setRAR( (QString)mCpu->getADR()[2] );
+      break;
+    case 5:
+      mCpu->setRDR( mCpu->getRegisterValue( mCpu->getRAR().toInt() ) );
+      break;
+    case 6:{
+      QString rdr = mCpu->getRDR();
+      QString ra = (QString)rdr[3] + (QString)rdr[4] + (QString)rdr[5];
+      mCpu->setRA( ra );
+      break;}
+    case 7:
+      mCpu->setMAR( mCpu->getRA() );
+      break;
+    case 8:
+      mCpu->setMDR( mMemory->get( mCpu->getMAR().toInt() ) );
+      break;
+    case 9:
+      mCpu->setACC( mCpu->getMDR() );
+      break;
+    case 10:
+      mCpu->setRegisterValue( mCpu->getRAR().toInt(),
+            mCpu->convertIntToReg( mCpu->convertRegToInt(
+                                     mCpu->getRegisterValue( mCpu->getRAR().toInt() ) ) +1 ) );
+      break;
+    default:
+      break;
+    }
+}
+
+void CommandImplReadRegister::indexWithPreddekrementomRegisterMC(QString arg, int currentMicroCommand)
+{
+  //-@
+    arg = arg;
+    setMicroCommandList();
+    if(currentMicroCommand >= 0 && currentMicroCommand <= 3){
+      duplicateMicroCommand(currentMicroCommand);
+      return;
+    }
+    switch (currentMicroCommand) {
+    case 4:
+      mCpu->setRAR( (QString)mCpu->getADR()[2] );
+      break;
+    case 5:
+      mCpu->setRegisterValue( mCpu->getRAR().toInt(),
+            mCpu->convertIntToReg( mCpu->convertRegToInt(
+                                     mCpu->getRegisterValue( mCpu->getRAR().toInt() ) ) - 1 ) );
+      break;
+    case 6:
+      mCpu->setRDR( mCpu->getRegisterValue( mCpu->getRAR().toInt() ) );
+      break;
+    case 7:{
+      QString rdr = mCpu->getRDR();
+      QString ra = (QString)rdr[3] + (QString)rdr[4] + (QString)rdr[5];
+      mCpu->setRA( ra );
+      break;}
+    case 8:
+      mCpu->setMAR( mCpu->getRA() );
+      break;
+    case 9:
+      mCpu->setMDR( mMemory->get( mCpu->getMAR().toInt() ) );
+      break;
+    case 10:
+      mCpu->setACC( mCpu->getMDR() );
+      break;
+    default:
+      break;
+    }
+}
+
 
 
 void CommandImplWriteRegister::indirectRegister(QString arg)
@@ -867,6 +1258,171 @@ void CommandImplWriteRegister::indexWithPreddekrementomRegister(QString arg)
   mCpu->setMDR( acc );
   mCpu->setRDR( incrReg );
   mCpu->incrPC();
+}
+
+void CommandImplWriteRegister::setMicroCommandList()
+{
+  QStringList list;
+  if(getTypeAddr() == "0")
+    list << "MAR := PC" << "MRd" << "CR := MDR" << "PC := PC + 1"
+         << "RAR := CR5" << "RDR := Acc" << "RWr" << "EMD_COMMAND";
+  else if(getTypeAddr() == "4")
+    list << "MAR := PC" << "MRd" << "CR := MDR" << "PC := PC + 1"
+         << "RAR := CR5" << "RRd" << "RA := RDR" << "MAR := RA"
+         << "MDR := Acc" << "MWr" << "EMD_COMMAND";
+  else if(getTypeAddr() == "5")
+    list << "MAR := PC" << "MRd" << "CR := MDR" << "PC := PC + 1"
+         << "RAR := CR5" << "RRd" << "RA := RDR" << "MAR := RA"
+         << "MDR := Acc" << "MWr" << "INC_GR" << "EMD_COMMAND";
+  else if(getTypeAddr() == "6")
+    list << "MAR := PC" << "MRd" << "CR := MDR" << "PC := PC + 1"
+         << "RAR := CR5" << "DEC_GR" << "RRd" << "RA := RDR"
+         << "MAR := RA" << "MDR := Acc" << "MWr" << "EMD_COMMAND";
+
+  listMicroCommand = list;
+}
+
+void CommandImplWriteRegister::indirectRegisterMC(QString arg, int currentMicroCommand)
+{
+  //@
+    arg = arg;
+    setMicroCommandList();
+    if(currentMicroCommand >= 0 && currentMicroCommand <= 3){
+      duplicateMicroCommand(currentMicroCommand);
+      return;
+    }
+    switch (currentMicroCommand) {
+    case 4:
+      mCpu->setRAR( (QString)mCpu->getADR()[2] );
+      break;
+    case 5:
+      mCpu->setRDR( mCpu->getRegisterValue( mCpu->getRAR().toInt() ) );
+      break;
+    case 6:{
+      QString rdr = mCpu->getRDR();
+      QString ra = (QString)rdr[3] + (QString)rdr[4] + (QString)rdr[5];
+      mCpu->setRA( ra );
+      break;}
+    case 7:
+      mCpu->setMAR( mCpu->getRA() );
+      break;
+    case 8:
+      mCpu->setMDR( mCpu->getACC() );
+      break;
+    case 9:
+      mCpu->setRegisterValue( mCpu->getRAR().toInt(),
+                              mCpu->getRDR() );
+      break;
+    default:
+      break;
+    }
+}
+
+void CommandImplWriteRegister::straightRegisterMC(QString arg, int currentMicroCommand)
+{
+  // 0
+    arg = arg;
+    setMicroCommandList();
+    if(currentMicroCommand >= 0 && currentMicroCommand <= 3){
+      duplicateMicroCommand(currentMicroCommand);
+      return;
+    }
+    switch (currentMicroCommand) {
+    case 4:
+      mCpu->setRAR( (QString)mCpu->getADR()[2] );
+      break;
+    case 5:
+      mCpu->setRDR( mCpu->getACC() );
+      break;
+    case 6:
+      mCpu->setRegisterValue( mCpu->getRAR().toInt(),
+                              mCpu->getRDR() );
+      break;
+    default:
+      break;
+    }
+}
+
+void CommandImplWriteRegister::indexWithPostincrementRegisterMC(QString arg, int currentMicroCommand)
+{
+  //@+
+    arg = arg;
+    setMicroCommandList();
+    if(currentMicroCommand >= 0 && currentMicroCommand <= 3){
+      duplicateMicroCommand(currentMicroCommand);
+      return;
+    }
+    switch (currentMicroCommand) {
+    case 4:
+      mCpu->setRAR( (QString)mCpu->getADR()[2] );
+      break;
+    case 5:
+      mCpu->setRDR( mCpu->getRegisterValue( mCpu->getRAR().toInt() ) );
+      break;
+    case 6:{
+      QString rdr = mCpu->getRDR();
+      QString ra = (QString)rdr[3] + (QString)rdr[4] + (QString)rdr[5];
+      mCpu->setRA( ra );
+      break;}
+    case 7:
+      mCpu->setMAR( mCpu->getRA() );
+      break;
+    case 8:
+      mCpu->setMDR( mCpu->getACC() );
+      break;
+    case 9:
+      mCpu->setRegisterValue( mCpu->getRAR().toInt(),
+                              mCpu->getMDR());
+      break;
+    case 10:
+      mMemory->set( mCpu->getRAR().toInt(),
+            mCpu->convertIntToReg( mCpu->convertRegToInt(
+                                     mCpu->getRegisterValue( mCpu->getRAR().toInt() ) ) +1 ) );
+      break;
+    default:
+      break;
+    }
+}
+
+void CommandImplWriteRegister::indexWithPreddekrementomRegisterMC(QString arg, int currentMicroCommand)
+{
+  //-@
+    arg = arg;
+    setMicroCommandList();
+    if(currentMicroCommand >= 0 && currentMicroCommand <= 3){
+      duplicateMicroCommand(currentMicroCommand);
+      return;
+    }
+    switch (currentMicroCommand) {
+    case 4:
+      mCpu->setRAR( (QString)mCpu->getADR()[2] );
+      break;
+    case 5:
+      mCpu->setRegisterValue( mCpu->getRAR().toInt(),
+            mCpu->convertIntToReg( mCpu->convertRegToInt(
+                                     mCpu->getRegisterValue( mCpu->getRAR().toInt() ) ) - 1 ) );
+      break;
+    case 6:
+      mCpu->setRDR( mCpu->getRegisterValue( mCpu->getRAR().toInt() ) );
+      break;
+    case 7:{
+      QString rdr = mCpu->getRDR();
+      QString ra = (QString)rdr[3] + (QString)rdr[4] + (QString)rdr[5];
+      mCpu->setRA( ra );
+      break;}
+    case 8:
+      mCpu->setMAR( mCpu->getRA() );
+      break;
+    case 9:
+      mCpu->setMDR( mCpu->getACC() );
+      break;
+    case 10: mMemory->set( mCpu->getRAR().toInt(),
+                           mCpu->convertIntToReg( mCpu->convertRegToInt(
+                                                    mCpu->getRegisterValue( mCpu->getRAR().toInt() ) ) +1 ) );
+                     break;
+    default:
+      break;
+    }
 }
 
 void CommandImplAddRegister::indirectRegister(QString arg)
