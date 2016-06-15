@@ -44,6 +44,8 @@ void MainWindow::on_actionCompiler_triggered()
     Compiler mComp(mMemory, mDpanel, mProgressBar);
     mComp.setOutPutConsole(ui->consoleOut);
     mComp.exec(strSourse);
+    ui->btnCode->setChecked(false);
+    ui->btnDebug->setChecked(true);
     ui->stackedWidget->setCurrentIndex(1);
     ui->btnNext->setEnabled(true);
     ui->btnRun->setEnabled(true);
@@ -172,7 +174,7 @@ void MainWindow::on_actionSaveMemory_triggered()
     if(file.open(QIODevice::WriteOnly | QIODevice::Text)) {
       QTextStream stream(&file);
       for(int i = 0; i < 1000; i ++) {
-        stream << mMemory->get(i);
+        stream << mMemory->get(i) << "\n";
       }
     }
     file.close();
@@ -189,10 +191,12 @@ void MainWindow::on_actionLoadMemory_triggered()
     QFile file(fileName);
     if(file.open(QIODevice::ReadOnly | QIODevice::Text)) {
       QTextStream stream(&file);
-      for(int i = 0; i < 1000; i ++) {
-        stream >> strBuffer;
+      mMemory->clear();
+      for(int i = 0; i < 10; i ++) {
+        strBuffer = stream.readLine();
         mMemory->set(i, strBuffer);
       }
+      mMemory->updateGUI();
     }
     file.close();
   }
@@ -200,7 +204,7 @@ void MainWindow::on_actionLoadMemory_triggered()
 
 void MainWindow::on_actionDeveloper_triggered()
 {
-  QMessageBox::about(NULL, "Разработчики", "Борисов Дмитрий Юрьевич\nШульга Александр Евгеньевич");
+  QMessageBox::about(NULL, "Разработчики", "");
 }
 
 void MainWindow::on_actionVersion_triggered()
@@ -254,4 +258,9 @@ void MainWindow::on_tabDevise_tabBarClicked(int index)
   }
 
   this->mRuner->setIsMicroCmd(mIsMicroCmdOn, isCompile);
+}
+
+void MainWindow::on_actionNew_triggered()
+{
+  mCodeEdit->clear();
 }

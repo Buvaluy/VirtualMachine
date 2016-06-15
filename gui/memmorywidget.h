@@ -2,7 +2,7 @@
 #define MEMMORYWIDGET_H
 
 #include <QWidget>
-#include "memory.h"
+#include "devise/memory.h"
 
 #include <QTableWidgetItem>
 

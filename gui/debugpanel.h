@@ -2,7 +2,7 @@
 #define DEBUGPANEL_H
 
 #include <QWidget>
-#include "cpu.h"
+#include "devise/cpu.h"
 
 namespace Ui {
 class DebugPanel;

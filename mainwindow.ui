@@ -944,6 +944,7 @@ QMenu::item:selected {
     <property name="title">
      <string>Файл</string>
     </property>
+    <addaction name="actionNew"/>
     <addaction name="actionOpen"/>
     <addaction name="actionSave"/>
    </widget>
@@ -1084,6 +1085,15 @@ QMenu::item:selected {
   <action name="actionVersion">
    <property name="text">
     <string>Версия</string>
+   </property>
+  </action>
+  <action name="actionNew">
+   <property name="icon">
+    <iconset resource="res.qrc">
+     <normaloff>:/images/new.png</normaloff>:/images/new.png</iconset>
+   </property>
+   <property name="text">
+    <string>Создать </string>
    </property>
   </action>
  </widget>

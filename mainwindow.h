@@ -9,10 +9,10 @@
 #include "gui/microcommandview.h"
 
 #include "memory.h"
-#include "cpu.h"
-#include "compiler.h"
-#include "commandfactory.h"
-#include "runer.h"
+#include "devise/cpu.h"
+#include "builder/compiler.h"
+#include "commands/commandfactory.h"
+#include "builder/runer.h"
 #include "gui/debugpanel.h"
 #include "gui/codeeditor.h"
 #include "gui/displaywidget.h"
@@ -71,6 +71,8 @@ private slots:
   void on_btnNext_clicked();
 
   void on_tabDevise_tabBarClicked(int index);
+
+  void on_actionNew_triggered();
 
 protected:
   Ui::MainWindow *ui;
